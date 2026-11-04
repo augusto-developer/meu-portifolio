@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { magicAudio } from '../utils/audio'
 
 interface VoidOverlayProps {
   visible: boolean
   onOrbClick: () => void
 }
 
-/** Floating particle data */
+/** Floating mystical particle */
 interface Particle {
   id: number
   x: number
@@ -28,21 +27,14 @@ function generateParticles(count: number): Particle[] {
   }))
 }
 
-const PARTICLES = generateParticles(55)
+const PARTICLES = generateParticles(45)
 
 export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
   const [hovered, setHovered] = useState(false)
-  const [muted, setMuted] = useState(false)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animFrameRef = useRef<number>(0)
 
-  const toggleSound = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    const isM = magicAudio.toggleMute()
-    setMuted(isM)
-  }
-
-  // Subtle star-field on canvas
+  // Star-field ambient dust
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -50,7 +42,7 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
     let w = (canvas.width = window.innerWidth)
     let h = (canvas.height = window.innerHeight)
 
-    const stars = Array.from({ length: 160 }, () => ({
+    const stars = Array.from({ length: 140 }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
       r: Math.random() * 1.1 + 0.2,
@@ -66,7 +58,7 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
         if (s.alpha > 1 || s.alpha < 0.05) s.dir *= -1
         ctx.beginPath()
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(197, 154, 63, ${s.alpha * 0.6})`
+        ctx.fillStyle = `rgba(197, 154, 63, ${s.alpha * 0.55})`
         ctx.fill()
       })
       animFrameRef.current = requestAnimationFrame(draw)
@@ -86,50 +78,28 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
     }
   }, [])
 
-  const handleOrbHover = () => {
-    setHovered(true)
-    magicAudio.playLumosChime()
-  }
-
-  const handleOrbClick = () => {
-    magicAudio.playLumosChime()
-    onOrbClick()
-  }
-
   return (
     <AnimatePresence>
       {visible && (
         <motion.div
           key="void"
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0c0d12] overflow-hidden select-none"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0a0a0f] overflow-hidden select-none"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.9, ease: 'easeInOut' }}
+          transition={{ duration: 1.0, ease: 'easeInOut' }}
         >
-          {/* Sound toggle in top right */}
-          <button
-            onClick={toggleSound}
-            className="absolute top-6 right-6 z-20 text-xs px-3.5 py-1.5 rounded-full border border-accent-gold/20 text-accent-gold/60 hover:text-accent-gold hover:border-accent-gold/50 transition-all font-serif flex items-center gap-2 cursor-pointer"
-            aria-label={muted ? 'Ativar som mágico' : 'Desativar som'}
-          >
-            <span>{muted ? '🔇' : '🔊'}</span>
-            <span style={{ fontFamily: '"Cinzel", serif', fontSize: '0.65rem' }}>
-              {muted ? 'Som Desativado' : 'Som Ativado'}
-            </span>
-          </button>
-
-          {/* Star-field canvas */}
+          {/* Subtle star-field canvas */}
           <canvas
             ref={canvasRef}
             className="absolute inset-0 w-full h-full pointer-events-none"
             aria-hidden="true"
           />
 
-          {/* Floating dust particles */}
+          {/* Floating golden dust particles */}
           {PARTICLES.map((p) => (
             <motion.div
               key={p.id}
-              className="absolute rounded-full bg-accent-gold/40 pointer-events-none"
+              className="absolute rounded-full bg-accent-gold/30 pointer-events-none"
               style={{
                 left: `${p.x}%`,
                 top: `${p.y}%`,
@@ -138,7 +108,7 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
               }}
               animate={{
                 y: [0, -18, 0],
-                opacity: [0.2, 0.8, 0.2],
+                opacity: [0.15, 0.7, 0.15],
               }}
               transition={{
                 duration: p.duration,
@@ -149,74 +119,74 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
             />
           ))}
 
-          {/* Atmospheric outer ring */}
+          {/* Concentric mystical rings */}
           <motion.div
-            className="absolute rounded-full border border-accent-gold/10"
-            style={{ width: 320, height: 320 }}
-            animate={{ scale: [1, 1.12, 1], opacity: [0.3, 0.1, 0.3] }}
+            className="absolute rounded-full border border-accent-gold/10 pointer-events-none"
+            style={{ width: 280, height: 280 }}
+            animate={{ scale: [1, 1.1, 1], opacity: [0.25, 0.1, 0.25] }}
             transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
           />
           <motion.div
-            className="absolute rounded-full border border-accent-amber/8"
-            style={{ width: 480, height: 480 }}
-            animate={{ scale: [1, 1.08, 1], opacity: [0.15, 0.05, 0.15] }}
+            className="absolute rounded-full border border-accent-amber/8 pointer-events-none"
+            style={{ width: 440, height: 440 }}
+            animate={{ scale: [1, 1.06, 1], opacity: [0.15, 0.05, 0.15] }}
             transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           />
 
           {/* The Lumos Orb */}
           <motion.button
             className="relative z-10 rounded-full cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-gold/50"
-            style={{ width: 96, height: 96 }}
+            style={{ width: 92, height: 92 }}
             animate={{
               boxShadow: hovered
                 ? [
-                    '0 0 40px 14px rgba(223,155,50,0.85), 0 0 100px 40px rgba(255,215,120,0.6)',
-                    '0 0 55px 20px rgba(223,155,50,1), 0 0 130px 60px rgba(255,215,120,0.75)',
-                    '0 0 40px 14px rgba(223,155,50,0.85), 0 0 100px 40px rgba(255,215,120,0.6)',
+                    '0 0 35px 12px rgba(223,155,50,0.8), 0 0 90px 35px rgba(255,215,120,0.55)',
+                    '0 0 50px 18px rgba(223,155,50,0.95), 0 0 120px 50px rgba(255,215,120,0.7)',
+                    '0 0 35px 12px rgba(223,155,50,0.8), 0 0 90px 35px rgba(255,215,120,0.55)',
                   ]
                 : [
-                    '0 0 20px 5px rgba(223,155,50,0.5), 0 0 60px 15px rgba(255,215,120,0.3)',
-                    '0 0 35px 12px rgba(223,155,50,0.75), 0 0 90px 30px rgba(255,215,120,0.5)',
-                    '0 0 20px 5px rgba(223,155,50,0.5), 0 0 60px 15px rgba(255,215,120,0.3)',
+                    '0 0 18px 4px rgba(223,155,50,0.45), 0 0 55px 12px rgba(255,215,120,0.25)',
+                    '0 0 30px 10px rgba(223,155,50,0.7), 0 0 80px 25px rgba(255,215,120,0.45)',
+                    '0 0 18px 4px rgba(223,155,50,0.45), 0 0 55px 12px rgba(255,215,120,0.25)',
                   ],
-              scale: hovered ? 1.15 : 1,
+              scale: hovered ? 1.12 : 1,
             }}
-            transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-            onClick={handleOrbClick}
-            onMouseEnter={handleOrbHover}
+            transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+            onClick={onOrbClick}
+            onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-            aria-label="Revelar o portfólio"
+            aria-label="Revelar o mapa"
           >
             {/* Orb core */}
             <div
               className="w-full h-full rounded-full"
               style={{
                 background:
-                  'radial-gradient(circle at 38% 38%, #ffd778 0%, #df9b32 45%, #c59a3f 70%, #8b6914 100%)',
+                  'radial-gradient(circle at 38% 38%, #fff4cf 0%, #df9b32 40%, #c59a3f 70%, #6e4e08 100%)',
               }}
             />
-            {/* Inner sparkle */}
+            {/* Intense light center */}
             <div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
               style={{
-                width: 28,
-                height: 28,
-                background: 'radial-gradient(circle, rgba(255,255,220,0.95) 0%, transparent 70%)',
+                width: 24,
+                height: 24,
+                background: 'radial-gradient(circle, rgba(255,255,240,0.95) 0%, transparent 70%)',
               }}
             />
           </motion.button>
 
           {/* Caption */}
           <motion.p
-            className="mt-10 z-10 text-center select-none"
+            className="mt-9 z-10 text-center select-none"
             style={{
-              fontFamily: '"Cormorant Garamond", serif',
-              fontSize: '1.25rem',
+              fontFamily: '"Cormorant Garamond", Georgia, serif',
+              fontSize: '1.2rem',
               letterSpacing: '0.14em',
-              color: 'rgba(197,154,63,0.85)',
+              color: 'rgba(215, 178, 105, 0.85)',
             }}
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            animate={{ opacity: [0.45, 0.95, 0.45] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
           >
             {hovered ? '— toque para revelar —' : 'Clique para revelar'}
           </motion.p>

@@ -41,7 +41,7 @@ const ROVER_4 = generateCorridor(680, 2350, 8, -32, 45, 1.8)
 export default function MarauderMapBackground() {
   return (
     <div
-      className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none opacity-45"
+      className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none opacity-25"
       aria-hidden="true"
     >
       <svg
