@@ -16,7 +16,7 @@ export interface Project {
 
 export interface Skill {
   name: string
-  level: 'Arcano' | 'Proficiente' | 'Aprendiz'
+  level: 'Junior'
 }
 
 export interface SkillGroup {

@@ -14,7 +14,7 @@ export default function AboutView({ onNavigate }: AboutViewProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.3 }}
-      className="max-w-4xl mx-auto w-full pt-28 pb-16 px-4 font-sans"
+      className="max-w-4xl mx-auto w-full my-auto px-4 pt-20 pb-12 sm:pt-24 sm:pb-16 font-sans"
     >
       {/* Folio Card */}
       <div

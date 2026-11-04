@@ -14,11 +14,11 @@ export default function SkillsView({}: SkillsViewProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.3 }}
-      className="max-w-5xl mx-auto w-full pt-28 pb-16 px-4 font-sans"
+      className="max-w-5xl mx-auto w-full my-auto px-4 pt-20 pb-12 sm:pt-24 sm:pb-16 font-sans"
     >
       {/* Header */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded border border-[#d4a738]/35 bg-[#3d0d16]/60 text-[#ffd778] text-xs font-semibold mb-2 shadow-sm">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded border border-[#d4a738]/35 bg-[#3d0d16]/60 text-[#ffd778] text-xs font-semibold mb-2.5 shadow-sm">
           <Layers size={12} className="text-[#e5ba48]" />
           <span>Competências Técnicas</span>
         </div>
@@ -28,7 +28,7 @@ export default function SkillsView({}: SkillsViewProps) {
       </div>
 
       {/* Grid of Skill Shelves */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
         {SKILL_GROUPS.map((group) => (
           <div
             key={group.category}
@@ -43,17 +43,17 @@ export default function SkillsView({}: SkillsViewProps) {
             <BrassCorner position="tl" size={20} />
             <BrassCorner position="tr" size={20} />
 
-            <div className="p-4 sm:p-5">
+            <div className="p-5">
               {/* Category Header */}
               <div
-                className="rounded p-2 mb-4 border border-[#d4a738]/40 text-center relative"
+                className="rounded p-2.5 mb-4 border border-[#d4a738]/40 text-center relative"
                 style={{
                   background:
                     'linear-gradient(180deg, #321820 0%, #1a0b10 100%)',
                 }}
               >
                 <div className="flex items-center justify-center gap-2">
-                  <span className="text-sm">{group.icon}</span>
+                  <span className="text-base">{group.icon}</span>
                   <h3 className="font-bold text-xs text-[#ffe8a3] uppercase tracking-wider">
                     {group.category}
                   </h3>
@@ -61,35 +61,20 @@ export default function SkillsView({}: SkillsViewProps) {
               </div>
 
               {/* Skills List */}
-              <ul className="space-y-2">
-                {group.skills.map((skill) => {
-                  const levelLabel =
-                    skill.level === 'Arcano'
-                      ? 'Sênior'
-                      : skill.level === 'Proficiente'
-                      ? 'Avançado'
-                      : 'Prático'
-
-                  return (
-                    <li
-                      key={skill.name}
-                      className="flex items-center justify-between text-xs py-1.5 px-2 rounded border border-[#d4a738]/15 bg-[#12070c]/80"
-                    >
-                      <span className="text-[#f6efe2] font-medium">
-                        {skill.name}
-                      </span>
-                      <span
-                        className="text-[10px] px-2 py-0.5 rounded border border-[#ffd778]/30 font-semibold text-[#ffd778]"
-                        style={{
-                          background:
-                            'linear-gradient(180deg, #5c1421 0%, #300810 100%)',
-                        }}
-                      >
-                        {levelLabel}
-                      </span>
-                    </li>
-                  )
-                })}
+              <ul className="space-y-2.5">
+                {group.skills.map((skill) => (
+                  <li
+                    key={skill.name}
+                    className="group/item flex items-center gap-2.5 text-xs py-2 px-3 rounded border border-[#d4a738]/15 bg-[#12070c]/75 hover:border-[#ffd778]/40 hover:bg-[#1f0d16]/80 transition-all duration-150"
+                  >
+                    <span className="text-[#e5ba48] text-[9px] group-hover/item:text-[#ffd778] transition-colors">
+                      ✦
+                    </span>
+                    <span className="text-[#f6efe2] font-medium tracking-wide">
+                      {skill.name}
+                    </span>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

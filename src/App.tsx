@@ -80,7 +80,7 @@ export default function App() {
           />
 
           {/* Active View Content with Framer Motion transitions */}
-          <main className="relative z-10 flex-1 flex flex-col">
+          <main className="relative z-10 flex-1 flex flex-col justify-center">
             <AnimatePresence mode="wait">
               {activeTab === 'sobre' && <AboutView key="sobre" onNavigate={handleNavigate} />}
               {activeTab === 'projetos' && <ProjectsView key="projetos" onNavigate={handleNavigate} />}

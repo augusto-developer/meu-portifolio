@@ -8,13 +8,12 @@ export const OWNER = {
   tagline:
     'Conjuro interfaces responsivas, APIs robustas e experiências que fazem os utilizadores sorrirem.',
   bio: `Acredito que o bom software é como uma carta bem escrita —
-  claro, cuidadoso e construído para durar. Trabalho com tecnologias
-  modernas da web para transformar ideias complexas em produtos elegantes
+  claro, cuidadoso e construído para durar. Trabalho com automações para transformar ideias complexas em produtos elegantes
   e acessíveis. Cada projeto é uma nova aventura.`,
-  github: 'https://github.com/seu-usuario',
-  linkedin: 'https://linkedin.com/in/seu-usuario',
-  email: 'seuemail@example.com',
-  location: 'Brasil 🇧🇷',
+  github: 'https://github.com/augusto-developer',
+  linkedin: 'https://www.linkedin.com/in/augusto-developer/',
+  email: 'augustolopez2897@outlook.com',
+  location: 'Vitória / ES, Brasil',
   avatarPlaceholder: '🧙‍♂️',
 }
 
@@ -23,44 +22,44 @@ export const SKILL_GROUPS: SkillGroup[] = [
     category: 'Frontend',
     icon: '🪄',
     skills: [
-      { name: 'React / Next.js', level: 'Arcano' },
-      { name: 'TypeScript', level: 'Arcano' },
-      { name: 'Tailwind CSS', level: 'Arcano' },
-      { name: 'Framer Motion', level: 'Proficiente' },
-      { name: 'HTML & CSS', level: 'Arcano' },
+      { name: 'React / Next.js', level: 'Junior' },
+      { name: 'TypeScript', level: 'Junior' },
+      { name: 'Tailwind CSS', level: 'Junior' },
+      { name: 'Framer Motion', level: 'Junior' },
+      { name: 'HTML & CSS', level: 'Junior' },
     ],
   },
   {
     category: 'Backend',
     icon: '⚗️',
     skills: [
-      { name: 'Node.js', level: 'Arcano' },
-      { name: 'Python / FastAPI', level: 'Proficiente' },
-      { name: 'REST APIs', level: 'Arcano' },
-      { name: 'PostgreSQL', level: 'Proficiente' },
-      { name: 'Prisma ORM', level: 'Proficiente' },
+      { name: 'Node.js', level: 'Junior' },
+      { name: 'Python / FastAPI', level: 'Junior' },
+      { name: 'REST APIs', level: 'Junior' },
+      { name: 'PostgreSQL', level: 'Junior' },
+      { name: 'Prisma ORM', level: 'Junior' },
     ],
   },
   {
     category: 'Ferramentas & DevOps',
     icon: '🔭',
     skills: [
-      { name: 'Git & GitHub', level: 'Arcano' },
-      { name: 'Docker', level: 'Proficiente' },
-      { name: 'CI / CD', level: 'Proficiente' },
-      { name: 'Linux', level: 'Proficiente' },
-      { name: 'Vercel / Netlify', level: 'Arcano' },
+      { name: 'Git & GitHub', level: 'Junior' },
+      { name: 'Docker', level: 'Junior' },
+      { name: 'CI / CD', level: 'Junior' },
+      { name: 'Linux', level: 'Junior' },
+      { name: 'Vercel / Netlify', level: 'Junior' },
     ],
   },
   {
     category: 'Arquitetura & Craft',
     icon: '📜',
     skills: [
-      { name: 'DDD / Clean Arch.', level: 'Proficiente' },
-      { name: 'TDD', level: 'Proficiente' },
-      { name: 'Design Systems', level: 'Proficiente' },
-      { name: 'UX / Acessibilidade', level: 'Proficiente' },
-      { name: 'AI-Assisted Dev', level: 'Arcano' },
+      { name: 'DDD / Clean Arch.', level: 'Junior' },
+      { name: 'TDD', level: 'Junior' },
+      { name: 'Design Systems', level: 'Junior' },
+      { name: 'UX / Acessibilidade', level: 'Junior' },
+      { name: 'AI-Assisted Dev', level: 'Junior' },
     ],
   },
 ]
