@@ -98,21 +98,5 @@ export const PROJECTS: Project[] = [
       'Arquitetura autoral privada com regras de proteção de cookies, mitigação anti-ban e conversão automatizada de links monetizados.',
     demoType: 'interactive-flow',
   },
-  {
-    id: 'pdf-auditor',
-    title: 'PDF Auditor & Extração de Dados',
-    description:
-      'Aplicações desktop voltadas à ingestão, auditoria, tratamento e extração estruturada de dados em documentos PDF e tabelas não estruturadas, com foco em produtividade administrativa.',
-    tags: ['Python', 'Pandas', 'Extração de PDFs', 'PostgreSQL', 'Automação'],
-    repoUrl: 'https://github.com/augusto-developer',
-  },
-  {
-    id: 'ia-extracao',
-    title: 'IA Generativa & Extração Estruturada',
-    description:
-      'Estudos aplicados com APIs de LLMs (OpenAI, Anthropic e Gemini) para escrita e iteração de prompts, extração de dados estruturados e apoio à análise e refatoração de código.',
-    tags: ['Python', 'APIs LLM', 'Prompt Engineering', 'LangChain', 'FastAPI'],
-    repoUrl: 'https://github.com/augusto-developer',
-  },
 ]
 
