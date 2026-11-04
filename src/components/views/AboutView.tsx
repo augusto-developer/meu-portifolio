@@ -83,18 +83,14 @@ export default function AboutView({ onNavigate }: AboutViewProps) {
             </p>
 
             {/* Metrics */}
-            <div className="grid grid-cols-3 gap-2.5 pt-1">
+            <div className="grid grid-cols-2 gap-3 pt-1">
               <div className="p-3 rounded border border-[#d4a738]/25 bg-[#140a0e] text-center">
-                <span className="block text-xl font-bold text-[#ffd778]">3+</span>
+                <span className="block text-xl font-bold text-[#ffd778]">2+</span>
                 <span className="text-[11px] text-[#c7b8a5]">Anos de Experiência</span>
               </div>
               <div className="p-3 rounded border border-[#d4a738]/25 bg-[#140a0e] text-center">
-                <span className="block text-xl font-bold text-[#ffd778]">20+</span>
-                <span className="text-[11px] text-[#c7b8a5]">Projetos Entregues</span>
-              </div>
-              <div className="p-3 rounded border border-[#d4a738]/25 bg-[#140a0e] text-center">
-                <span className="block text-xl font-bold text-[#ffd778]">100%</span>
-                <span className="text-[11px] text-[#c7b8a5]">Código Autoral</span>
+                <span className="block text-xl font-bold text-[#ffd778]">Júnior</span>
+                <span className="text-[11px] text-[#c7b8a5]">Senioridade</span>
               </div>
             </div>
 
