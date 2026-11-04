@@ -133,16 +133,15 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
             transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           />
 
-          {/* Golden Snitch (Pomo de Ouro Realista) */}
+          {/* Golden Snitch (Vídeo Cinemático Realista em Loop) */}
           <motion.div
-            className="relative z-10 flex items-center justify-center cursor-pointer select-none"
+            className="relative z-10 flex flex-col items-center justify-center cursor-pointer select-none group"
             animate={{
-              y: hovered ? [-3, 3, -3] : [-10, 10, -10],
-              x: hovered ? [-2, 2, -2] : [0, 0, 0],
-              rotate: hovered ? [-1.5, 1.5, -1.5] : [-3, 3, -3],
+              y: hovered ? [-4, 4, -4] : [-8, 8, -8],
+              scale: hovered ? 1.05 : 1,
             }}
             transition={{
-              duration: hovered ? 1.2 : 3.0,
+              duration: hovered ? 1.4 : 3.0,
               repeat: Infinity,
               ease: 'easeInOut',
             }}
@@ -153,266 +152,41 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
             tabIndex={0}
             aria-label="Capturar o Pomo de Ouro para entrar no portfólio"
           >
-            {/* Ambient Warm Golden Aura */}
+            {/* Ambient Warm Golden Lumos Aura */}
             <div
-              className="absolute rounded-full pointer-events-none transition-all duration-500"
+              className="absolute rounded-full pointer-events-none transition-all duration-700"
               style={{
-                width: hovered ? 240 : 180,
-                height: hovered ? 240 : 180,
+                width: hovered ? 380 : 300,
+                height: hovered ? 380 : 300,
                 background:
-                  'radial-gradient(circle, rgba(255, 215, 120, 0.35) 0%, rgba(212, 167, 56, 0.15) 45%, transparent 70%)',
-                filter: 'blur(16px)',
+                  'radial-gradient(circle, rgba(255, 215, 120, 0.45) 0%, rgba(212, 167, 56, 0.2) 40%, transparent 70%)',
+                filter: 'blur(30px)',
               }}
             />
 
-            {/* Left Wing (Realistic Articulated Snitch Wing) */}
-            <motion.div
-              className="absolute right-[65%] top-[18%] origin-bottom-right pointer-events-none z-0"
-              style={{ width: 175, height: 75 }}
-              animate={{
-                rotateZ: hovered ? [-28, 28, -28] : [-18, 18, -18],
-                scaleY: hovered ? [0.75, 1.2, 0.75] : [0.88, 1.12, 0.88],
-                skewX: hovered ? [-8, 8, -8] : [-4, 4, -4],
-              }}
-              transition={{
-                duration: hovered ? 0.14 : 0.48,
-                repeat: Infinity,
-                ease: 'easeInOut',
+            {/* Video Container with Screen Blend (Elimina fundo preto perfeitamente) */}
+            <div
+              className="relative rounded-full flex items-center justify-center overflow-hidden transition-all duration-300"
+              style={{
+                width: 320,
+                height: 320,
               }}
             >
-              <svg
-                viewBox="0 0 200 85"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-full h-full drop-shadow-[0_0_15px_rgba(255,235,160,0.7)]"
-              >
-                <defs>
-                  <linearGradient id="leftWingMembrane" x1="200" y1="45" x2="0" y2="15" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#ffffff" stopOpacity="0.95" />
-                    <stop offset="25%" stopColor="#fff2be" stopOpacity="0.85" />
-                    <stop offset="60%" stopColor="#dfb75c" stopOpacity="0.6" />
-                    <stop offset="90%" stopColor="#96742a" stopOpacity="0.3" />
-                    <stop offset="100%" stopColor="#ffd778" stopOpacity="0.05" />
-                  </linearGradient>
-                  <linearGradient id="leftSpineGrad" x1="200" y1="50" x2="10" y2="15" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#ffffff" />
-                    <stop offset="40%" stopColor="#ffe699" />
-                    <stop offset="100%" stopColor="#c59837" />
-                  </linearGradient>
-                </defs>
-
-                {/* Primary Feather Layer */}
-                <path
-                  d="M200 48 C 170 25, 110 5, 5 18 C 30 32, 65 38, 95 48 C 135 60, 175 58, 200 48 Z"
-                  fill="url(#leftWingMembrane)"
-                  stroke="#ffd778"
-                  strokeWidth="1.2"
-                  strokeOpacity="0.85"
-                />
-
-                {/* Secondary Feather Overlap (Feather Plumes) */}
-                <path
-                  d="M190 52 C 160 38, 105 22, 25 32 C 55 45, 95 52, 130 58 C 160 62, 180 58, 190 52 Z"
-                  fill="url(#leftWingMembrane)"
-                  fillOpacity="0.75"
-                />
-
-                {/* Mechanical/Filigree Feather Quills (Rachis) */}
-                <path d="M200 48 C 150 25, 90 18, 10 18" stroke="url(#leftSpineGrad)" strokeWidth="2" strokeLinecap="round" />
-                <path d="M175 46 C 140 32, 85 28, 35 32" stroke="#fff8dc" strokeWidth="1.2" strokeOpacity="0.8" />
-                <path d="M150 48 C 120 40, 80 38, 50 42" stroke="#fff8dc" strokeWidth="1" strokeOpacity="0.7" />
-                <path d="M125 50 C 100 46, 75 46, 60 50" stroke="#fff8dc" strokeWidth="0.8" strokeOpacity="0.6" />
-
-                {/* Feather Barbs & Fine Details */}
-                <path d="M160 30 L 140 45" stroke="#ffffff" strokeWidth="0.7" strokeOpacity="0.5" />
-                <path d="M130 24 L 110 42" stroke="#ffffff" strokeWidth="0.7" strokeOpacity="0.5" />
-                <path d="M100 20 L 80 40" stroke="#ffffff" strokeWidth="0.7" strokeOpacity="0.5" />
-                <path d="M70 18 L 55 35" stroke="#ffffff" strokeWidth="0.7" strokeOpacity="0.5" />
-                <path d="M40 18 L 30 30" stroke="#ffffff" strokeWidth="0.7" strokeOpacity="0.5" />
-              </svg>
-            </motion.div>
-
-            {/* Right Wing (Realistic Articulated Snitch Wing) */}
-            <motion.div
-              className="absolute left-[65%] top-[18%] origin-bottom-left pointer-events-none z-0"
-              style={{ width: 175, height: 75 }}
-              animate={{
-                rotateZ: hovered ? [28, -28, 28] : [18, -18, 18],
-                scaleY: hovered ? [0.75, 1.2, 0.75] : [0.88, 1.12, 0.88],
-                skewX: hovered ? [8, -8, 8] : [4, -4, 4],
-              }}
-              transition={{
-                duration: hovered ? 0.14 : 0.48,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            >
-              <svg
-                viewBox="0 0 200 85"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-full h-full drop-shadow-[0_0_15px_rgba(255,235,160,0.7)]"
-              >
-                <defs>
-                  <linearGradient id="rightWingMembrane" x1="0" y1="45" x2="200" y2="15" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#ffffff" stopOpacity="0.95" />
-                    <stop offset="25%" stopColor="#fff2be" stopOpacity="0.85" />
-                    <stop offset="60%" stopColor="#dfb75c" stopOpacity="0.6" />
-                    <stop offset="90%" stopColor="#96742a" stopOpacity="0.3" />
-                    <stop offset="100%" stopColor="#ffd778" stopOpacity="0.05" />
-                  </linearGradient>
-                  <linearGradient id="rightSpineGrad" x1="0" y1="50" x2="190" y2="15" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#ffffff" />
-                    <stop offset="40%" stopColor="#ffe699" />
-                    <stop offset="100%" stopColor="#c59837" />
-                  </linearGradient>
-                </defs>
-
-                {/* Primary Feather Layer */}
-                <path
-                  d="M0 48 C 30 25, 90 5, 195 18 C 170 32, 135 38, 105 48 C 65 60, 25 58, 0 48 Z"
-                  fill="url(#rightWingMembrane)"
-                  stroke="#ffd778"
-                  strokeWidth="1.2"
-                  strokeOpacity="0.85"
-                />
-
-                {/* Secondary Feather Overlap */}
-                <path
-                  d="M10 52 C 40 38, 95 22, 175 32 C 145 45, 105 52, 70 58 C 40 62, 20 58, 10 52 Z"
-                  fill="url(#rightWingMembrane)"
-                  fillOpacity="0.75"
-                />
-
-                {/* Mechanical/Filigree Feather Quills */}
-                <path d="M0 48 C 50 25, 110 18, 190 18" stroke="url(#rightSpineGrad)" strokeWidth="2" strokeLinecap="round" />
-                <path d="M25 46 C 60 32, 115 28, 165 32" stroke="#fff8dc" strokeWidth="1.2" strokeOpacity="0.8" />
-                <path d="M50 48 C 80 40, 120 38, 150 42" stroke="#fff8dc" strokeWidth="1" strokeOpacity="0.7" />
-                <path d="M75 50 C 100 46, 125 46, 140 50" stroke="#fff8dc" strokeWidth="0.8" strokeOpacity="0.6" />
-
-                {/* Feather Barbs */}
-                <path d="M40 30 L 60 45" stroke="#ffffff" strokeWidth="0.7" strokeOpacity="0.5" />
-                <path d="M70 24 L 90 42" stroke="#ffffff" strokeWidth="0.7" strokeOpacity="0.5" />
-                <path d="M100 20 L 120 40" stroke="#ffffff" strokeWidth="0.7" strokeOpacity="0.5" />
-                <path d="M130 18 L 145 35" stroke="#ffffff" strokeWidth="0.7" strokeOpacity="0.5" />
-                <path d="M160 18 L 170 30" stroke="#ffffff" strokeWidth="0.7" strokeOpacity="0.5" />
-              </svg>
-            </motion.div>
-
-            {/* The Golden Snitch Core Sphere (3D Burnished Gold with Movie Filigree) */}
-            <motion.div
-              className="relative z-10 rounded-full focus:outline-none"
-              style={{ width: 88, height: 88 }}
-              animate={{
-                boxShadow: hovered
-                  ? [
-                      '0 0 35px 10px rgba(255,215,100,0.85), 0 0 85px 30px rgba(212,167,56,0.6), inset 0 2px 4px rgba(255,255,255,0.8), inset 0 -4px 10px rgba(70,40,5,0.9)',
-                      '0 0 55px 16px rgba(255,230,130,0.95), 0 0 115px 45px rgba(235,185,55,0.75), inset 0 2px 6px rgba(255,255,255,0.9), inset 0 -4px 12px rgba(70,40,5,0.9)',
-                      '0 0 35px 10px rgba(255,215,100,0.85), 0 0 85px 30px rgba(212,167,56,0.6), inset 0 2px 4px rgba(255,255,255,0.8), inset 0 -4px 10px rgba(70,40,5,0.9)',
-                    ]
-                  : [
-                      '0 0 22px 5px rgba(212,167,56,0.6), 0 0 50px 15px rgba(160,115,25,0.35), inset 0 2px 4px rgba(255,255,255,0.7), inset 0 -4px 10px rgba(60,35,5,0.85)',
-                      '0 0 32px 8px rgba(240,195,75,0.75), 0 0 70px 22px rgba(212,167,56,0.5), inset 0 2px 4px rgba(255,255,255,0.8), inset 0 -4px 10px rgba(60,35,5,0.85)',
-                      '0 0 22px 5px rgba(212,167,56,0.6), 0 0 50px 15px rgba(160,115,25,0.35), inset 0 2px 4px rgba(255,255,255,0.7), inset 0 -4px 10px rgba(60,35,5,0.85)',
-                    ],
-                scale: hovered ? 1.08 : 1,
-              }}
-              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              {/* Photorealistic 3D Metallic Sphere */}
-              <div
-                className="w-full h-full rounded-full relative overflow-hidden border border-[#ffeaa8]/80"
+              <video
+                src="./snitch.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-contain pointer-events-none transition-transform duration-300 group-hover:scale-105"
                 style={{
-                  background:
-                    'radial-gradient(circle at 32% 28%, #ffffff 0%, #fff0b8 16%, #f3c348 38%, #c99327 65%, #7a500f 88%, #361f03 100%)',
+                  mixBlendMode: 'screen',
+                  filter: hovered
+                    ? 'brightness(1.15) contrast(1.1) drop-shadow(0 0 25px rgba(255, 215, 120, 0.8))'
+                    : 'brightness(1.0) contrast(1.05) drop-shadow(0 0 15px rgba(212, 167, 56, 0.5))',
                 }}
-              >
-                {/* Movie-Accurate Filigree & Grooves Pattern */}
-                <svg
-                  viewBox="0 0 100 100"
-                  className="absolute inset-0 w-full h-full pointer-events-none"
-                  fill="none"
-                >
-                  <defs>
-                    <linearGradient id="grooveShadow" x1="0" y1="0" x2="0" y2="100" gradientUnits="userSpaceOnUse">
-                      <stop offset="0%" stopColor="#4a2c04" stopOpacity="0.9" />
-                      <stop offset="100%" stopColor="#221201" stopOpacity="0.95" />
-                    </linearGradient>
-                    <linearGradient id="grooveHighlight" x1="0" y1="0" x2="0" y2="100" gradientUnits="userSpaceOnUse">
-                      <stop offset="0%" stopColor="#fff8e0" stopOpacity="0.8" />
-                      <stop offset="100%" stopColor="#f3c348" stopOpacity="0.4" />
-                    </linearGradient>
-                  </defs>
-
-                  {/* Left & Right Wing Socket Joint Rings */}
-                  <circle cx="12" cy="50" r="7" stroke="url(#grooveShadow)" strokeWidth="1.6" />
-                  <circle cx="12" cy="50" r="5" stroke="url(#grooveHighlight)" strokeWidth="0.8" fill="#523205" />
-                  <circle cx="88" cy="50" r="7" stroke="url(#grooveShadow)" strokeWidth="1.6" />
-                  <circle cx="88" cy="50" r="5" stroke="url(#grooveHighlight)" strokeWidth="0.8" fill="#523205" />
-
-                  {/* Upper Curving Swirl (I Open at the Close) */}
-                  <path
-                    d="M 16 46 C 28 32, 45 28, 50 28 C 55 28, 72 32, 84 46"
-                    stroke="url(#grooveShadow)"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M 16 45 C 28 31, 45 27, 50 27 C 55 27, 72 31, 84 45"
-                    stroke="url(#grooveHighlight)"
-                    strokeWidth="0.9"
-                    strokeLinecap="round"
-                  />
-
-                  {/* Lower Curving Swirl */}
-                  <path
-                    d="M 16 54 C 28 68, 45 72, 50 72 C 55 72, 72 68, 84 54"
-                    stroke="url(#grooveShadow)"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M 16 55 C 28 69, 45 73, 50 73 C 55 73, 72 69, 84 55"
-                    stroke="url(#grooveHighlight)"
-                    strokeWidth="0.9"
-                    strokeLinecap="round"
-                  />
-
-                  {/* Central Geometric Medallion */}
-                  <circle cx="50" cy="50" r="13" stroke="url(#grooveShadow)" strokeWidth="1.6" />
-                  <circle cx="50" cy="50" r="12" stroke="url(#grooveHighlight)" strokeWidth="0.8" />
-                  <circle cx="50" cy="50" r="6" fill="#fff5d0" fillOpacity="0.85" />
-                  <circle cx="50" cy="50" r="3" fill="#ffffff" />
-                  <path d="M 40 50 L 60 50" stroke="url(#grooveShadow)" strokeWidth="1.2" />
-                  <path d="M 50 40 L 50 60" stroke="url(#grooveShadow)" strokeWidth="1.2" />
-                </svg>
-
-                {/* Primary Specular Glint (Reflexo de Luz Realista) */}
-                <div
-                  className="absolute top-2 left-3 rounded-full pointer-events-none"
-                  style={{
-                    width: 26,
-                    height: 16,
-                    transform: 'rotate(-35deg)',
-                    background:
-                      'radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,240,0.7) 45%, transparent 85%)',
-                    filter: 'blur(0.5px)',
-                  }}
-                />
-
-                {/* Secondary Edge Glint (Bounce Light) */}
-                <div
-                  className="absolute bottom-2 right-3 rounded-full pointer-events-none opacity-60"
-                  style={{
-                    width: 20,
-                    height: 10,
-                    transform: 'rotate(-40deg)',
-                    background:
-                      'radial-gradient(ellipse at center, rgba(255,240,180,0.8) 0%, transparent 80%)',
-                  }}
-                />
-              </div>
-            </motion.div>
+              />
+            </div>
           </motion.div>
 
           {/* Caption */}
