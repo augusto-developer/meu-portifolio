@@ -16,7 +16,7 @@ export interface Project {
 
 export interface Skill {
   name: string
-  level: 'Junior'
+  level?: string
 }
 
 export interface SkillGroup {

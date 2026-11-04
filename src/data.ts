@@ -3,64 +3,62 @@ import type { Project, SkillGroup } from './types'
 /** ── Customize these with your real information ── */
 
 export const OWNER = {
-  name: 'augusto-developer',
-  title: 'Engenheiro de Software & Artesão Digital',
+  name: 'Caio Augusto',
+  title: 'Desenvolvedor de Software | Python, React e IA',
   tagline:
-    'Conjuro interfaces responsivas, APIs robustas e experiências que fazem os utilizadores sorrirem.',
-  bio: `Acredito que o bom software é como uma carta bem escrita —
-  claro, cuidadoso e construído para durar. Trabalho com automações para transformar ideias complexas em produtos elegantes
-  e acessíveis. Cada projeto é uma nova aventura.`,
+    'Desenvolvimento de software, automações resilientes e extração de dados estruturados com IA.',
+  bio: `Estudante de Ciência da Computação e formado em Gestão da TI. Experiência técnica em desenvolvimento de software, automação web e integração de sistemas, com foco em ingestão e indexação de documentos, tratamento de dados estruturados e aplicações com APIs de LLMs (OpenAI, Anthropic e Gemini).`,
   github: 'https://github.com/augusto-developer',
   linkedin: 'https://www.linkedin.com/in/augusto-developer/',
-  email: 'augustolopez2897@outlook.com',
-  location: 'Vitória / ES, Brasil',
+  email: 'caiohg_94@hotmail.com',
+  location: 'Vila Velha / ES, Brasil',
   avatarPlaceholder: '🧙‍♂️',
   avatarUrl: '/avatar.png',
 }
 
 export const SKILL_GROUPS: SkillGroup[] = [
   {
-    category: 'Frontend',
+    category: 'Desenvolvimento Web',
     icon: '🪄',
     skills: [
-      { name: 'React / Next.js', level: 'Junior' },
-      { name: 'TypeScript', level: 'Junior' },
-      { name: 'Tailwind CSS', level: 'Junior' },
-      { name: 'Framer Motion', level: 'Junior' },
-      { name: 'HTML & CSS', level: 'Junior' },
+      { name: 'Python' },
+      { name: 'JavaScript / TypeScript' },
+      { name: 'React & Angular' },
+      { name: 'FastAPI & Spring Boot' },
+      { name: 'HTML5 & CSS3' },
     ],
   },
   {
-    category: 'Backend',
-    icon: '⚗️',
-    skills: [
-      { name: 'Node.js', level: 'Junior' },
-      { name: 'Python / FastAPI', level: 'Junior' },
-      { name: 'REST APIs', level: 'Junior' },
-      { name: 'PostgreSQL', level: 'Junior' },
-      { name: 'Prisma ORM', level: 'Junior' },
-    ],
-  },
-  {
-    category: 'Ferramentas & DevOps',
-    icon: '🔭',
-    skills: [
-      { name: 'Git & GitHub', level: 'Junior' },
-      { name: 'Docker', level: 'Junior' },
-      { name: 'CI / CD', level: 'Junior' },
-      { name: 'Linux', level: 'Junior' },
-      { name: 'Vercel / Netlify', level: 'Junior' },
-    ],
-  },
-  {
-    category: 'Arquitetura & Craft',
+    category: 'Documentos & Dados',
     icon: '📜',
     skills: [
-      { name: 'DDD / Clean Arch.', level: 'Junior' },
-      { name: 'TDD', level: 'Junior' },
-      { name: 'Design Systems', level: 'Junior' },
-      { name: 'UX / Acessibilidade', level: 'Junior' },
-      { name: 'AI-Assisted Dev', level: 'Junior' },
+      { name: 'Ingestão & Extração de PDFs' },
+      { name: 'PostgreSQL & MySQL' },
+      { name: 'Oracle DB & SQL' },
+      { name: 'Pandas & Dados Não Estruturados' },
+      { name: 'APIs REST (JSON / XML)' },
+    ],
+  },
+  {
+    category: 'IA & Automação',
+    icon: '⚡',
+    skills: [
+      { name: 'APIs LLM (OpenAI, Gemini, Claude)' },
+      { name: 'Prompts & Dados Estruturados' },
+      { name: 'Patchright & Selenium (RPA)' },
+      { name: 'Playwright & Web Scraping' },
+      { name: 'Orquestração de Fluxos no n8n' },
+    ],
+  },
+  {
+    category: 'Qualidade & DevOps',
+    icon: '🔭',
+    skills: [
+      { name: 'Git & GitHub' },
+      { name: 'Docker & CI/CD' },
+      { name: 'Testes Funcionais & Cenários' },
+      { name: 'Cypress & Playwright' },
+      { name: 'Linux' },
     ],
   },
 ]
