@@ -67,14 +67,17 @@ export const SKILL_GROUPS: SkillGroup[] = [
 
 export const PROJECTS: Project[] = [
   {
-    id: '1',
-    title: 'Grimório Digital',
+    id: 'automacao-dp',
+    title: 'Automação de Documentos do DP',
     description:
-      'Portfólio interativo com tema de cartografia mágica. Experiência de revelação, animações de tinta e jornada guiada pelo pergaminho.',
-    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
-    liveUrl: '#',
-    repoUrl: 'https://github.com/seu-usuario',
+      'Sistema de automação em Python e Patchright para orquestração e homologação de documentos da empresa e colaboradores terceirizados. Gerencia tráfego de pendências urgentes e realiza uploads autônomos em plataformas externas com regras customizadas.',
+    tags: ['Python', 'Patchright', 'Automação RPA', 'Asyncio', 'Playwright', 'Web Scraping'],
     featured: true,
+    isPrivate: true,
+    metrics: 'Redução de 80% nos atrasos e reprovações',
+    confidentialityNotice:
+      'Desenvolvido para ambiente corporativo sob termo de confidencialidade (NDA). O repositório e infraestrutura são proprietários da empresa.',
+    demoType: 'interactive-flow',
   },
   {
     id: '2',

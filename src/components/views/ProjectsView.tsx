@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ExternalLink, ArrowRight, Book } from 'lucide-react'
+import { ExternalLink, ArrowRight, Book, Play, Lock } from 'lucide-react'
 import { PROJECTS } from '../../data'
 import { BrassCorner } from '../ui/BookOrnaments'
+import AutomationFlowDemo from '../AutomationFlowDemo'
 
 interface ProjectsViewProps {
   onNavigate: (tab: 'sobre' | 'habilidades' | 'contato') => void
@@ -16,6 +18,8 @@ function GithubIcon({ size = 14 }: { size?: number }) {
 }
 
 export default function ProjectsView({ onNavigate }: ProjectsViewProps) {
+  const [isFlowDemoOpen, setIsFlowDemoOpen] = useState(false)
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
@@ -24,7 +28,7 @@ export default function ProjectsView({ onNavigate }: ProjectsViewProps) {
       transition={{ duration: 0.35 }}
       className="max-w-5xl mx-auto w-full pt-28 pb-16 px-4"
     >
-      {/* Wooden Section Header Header */}
+      {/* Wooden Section Header */}
       <div className="text-center mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded border border-[#d4a738]/40 bg-[#3d0d16]/60 text-[#ffd778] text-xs font-bold tracking-widest uppercase mb-2 shadow-md">
           <Book size={12} className="text-[#e5ba48]" />
@@ -94,13 +98,22 @@ export default function ProjectsView({ onNavigate }: ProjectsViewProps) {
 
             {/* Book Body */}
             <div className="p-6 pl-8 relative z-10">
-              <div className="mb-2 pt-1 flex items-center justify-between">
+              <div className="mb-2 pt-1 flex flex-wrap items-center gap-2">
                 <span
                   className="text-[10px] font-bold text-[#e5ba48] tracking-widest uppercase bg-[#3a1520]/60 px-2 py-0.5 rounded border border-[#d4a738]/20"
                   style={{ fontFamily: '"Cinzel", serif' }}
                 >
                   Tomo de Produção
                 </span>
+
+                {proj.metrics && (
+                  <span
+                    className="text-[10px] font-bold text-[#ffd778] bg-[#6e1624]/60 px-2 py-0.5 rounded border border-[#ffd778]/30"
+                    style={{ fontFamily: '"Cinzel", serif' }}
+                  >
+                    ⚡ {proj.metrics}
+                  </span>
+                )}
               </div>
 
               {/* Stamped Book Title */}
@@ -114,9 +127,19 @@ export default function ProjectsView({ onNavigate }: ProjectsViewProps) {
                 {proj.title}
               </h3>
 
-              <p className="text-sm text-[#c7b8a5] leading-relaxed mb-6 font-sans">
+              <p className="text-sm text-[#c7b8a5] leading-relaxed mb-4 font-sans">
                 {proj.description}
               </p>
+
+              {/* Confidentiality Notice Banner if applicable */}
+              {proj.confidentialityNotice && (
+                <div className="mb-5 p-2.5 rounded border border-amber-600/30 bg-amber-950/30 flex items-start gap-2 text-[11px] text-[#ffd778]">
+                  <Lock size={13} className="text-amber-400 shrink-0 mt-0.5" />
+                  <span className="font-sans leading-tight">
+                    {proj.confidentialityNotice}
+                  </span>
+                </div>
+              )}
             </div>
 
             {/* Bottom Book Section: Tags & Clasps */}
@@ -135,37 +158,70 @@ export default function ProjectsView({ onNavigate }: ProjectsViewProps) {
               </div>
 
               {/* Brass Book Clasp Action Buttons */}
-              <div className="flex items-center gap-3 pt-3 border-t border-[#d4a738]/20">
-                {proj.liveUrl && (
-                  <a
-                    href={proj.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded border border-[#d4a738] text-xs font-bold tracking-wider text-[#ffe8a3] transition-all cursor-pointer hover:border-[#ffd778] hover:shadow-lg hover:shadow-[#801b2b]/40"
-                    style={{
-                      background:
-                        'linear-gradient(180deg, #7a1626 0%, #4a0d17 100%)',
-                      boxShadow:
-                        '0 3px 8px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,225,140,0.3)',
-                      fontFamily: '"Cinzel", serif',
-                    }}
-                  >
-                    <span>Abrir Tomo (Demo)</span>
-                    <ExternalLink size={12} className="text-[#ffd778]" />
-                  </a>
-                )}
+              <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-[#d4a738]/20">
+                {/* 1. If it's an Interactive Animated Flow Demo */}
+                {proj.demoType === 'interactive-flow' ? (
+                  <>
+                    <button
+                      onClick={() => setIsFlowDemoOpen(true)}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded border border-[#d4a738] text-xs font-bold tracking-wider text-[#ffe8a3] transition-all cursor-pointer hover:border-[#ffd778] hover:shadow-lg hover:shadow-[#801b2b]/40"
+                      style={{
+                        background:
+                          'linear-gradient(180deg, #7a1626 0%, #4a0d17 100%)',
+                        boxShadow:
+                          '0 3px 8px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,225,140,0.3)',
+                        fontFamily: '"Cinzel", serif',
+                      }}
+                    >
+                      <Play size={12} className="text-[#ffd778] fill-[#ffd778]" />
+                      <span>Ver Demonstração do Fluxo</span>
+                    </button>
 
-                {proj.repoUrl && (
-                  <a
-                    href={proj.repoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded border border-[#d4a738]/35 text-xs font-bold tracking-wider text-[#c7b8a5] hover:text-[#f6efe2] hover:bg-[#801b2b]/25 transition-all cursor-pointer"
-                    style={{ fontFamily: '"Cinzel", serif' }}
-                  >
-                    <GithubIcon size={13} />
-                    <span>Pergaminho de Código</span>
-                  </a>
+                    <button
+                      onClick={() => onNavigate('contato')}
+                      className="inline-flex items-center gap-1.5 px-3 py-2 rounded border border-[#d4a738]/30 text-xs font-bold tracking-wider text-[#c7b8a5] hover:text-[#ffd778] hover:bg-[#801b2b]/20 transition-all cursor-pointer"
+                      style={{ fontFamily: '"Cinzel", serif' }}
+                      title="Repositório sob sigilo. Clique para conversar sobre a arquitetura."
+                    >
+                      <Lock size={12} className="text-amber-400" />
+                      <span>Repositório sob NDA</span>
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    {/* Standard Links for other projects */}
+                    {proj.liveUrl && (
+                      <a
+                        href={proj.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded border border-[#d4a738] text-xs font-bold tracking-wider text-[#ffe8a3] transition-all cursor-pointer hover:border-[#ffd778] hover:shadow-lg hover:shadow-[#801b2b]/40"
+                        style={{
+                          background:
+                            'linear-gradient(180deg, #7a1626 0%, #4a0d17 100%)',
+                          boxShadow:
+                            '0 3px 8px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,225,140,0.3)',
+                          fontFamily: '"Cinzel", serif',
+                        }}
+                      >
+                        <span>Abrir Tomo (Demo)</span>
+                        <ExternalLink size={12} className="text-[#ffd778]" />
+                      </a>
+                    )}
+
+                    {proj.repoUrl && (
+                      <a
+                        href={proj.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded border border-[#d4a738]/35 text-xs font-bold tracking-wider text-[#c7b8a5] hover:text-[#f6efe2] hover:bg-[#801b2b]/25 transition-all cursor-pointer"
+                        style={{ fontFamily: '"Cinzel", serif' }}
+                      >
+                        <GithubIcon size={13} />
+                        <span>Pergaminho de Código</span>
+                      </a>
+                    )}
+                  </>
                 )}
               </div>
             </div>
@@ -184,6 +240,13 @@ export default function ProjectsView({ onNavigate }: ProjectsViewProps) {
           <ArrowRight size={13} />
         </button>
       </div>
+
+      {/* Interactive Modal Demo */}
+      <AutomationFlowDemo
+        isOpen={isFlowDemoOpen}
+        onClose={() => setIsFlowDemoOpen(false)}
+        onContactClick={() => onNavigate('contato')}
+      />
     </motion.div>
   )
 }

@@ -8,6 +8,10 @@ export interface Project {
   liveUrl?: string
   repoUrl?: string
   featured?: boolean
+  isPrivate?: boolean
+  metrics?: string
+  confidentialityNotice?: string
+  demoType?: 'external' | 'interactive-flow'
 }
 
 export interface Skill {
