@@ -73,7 +73,7 @@ export default function InteractiveFootsteps() {
         targetX: clickX,
         targetY: clickY,
         steps: newSteps,
-        name: 'Visitante',
+        name: 'VISITANTE',
       }
 
       setTrails((prev) => [...prev.slice(-3), newTrail])
@@ -84,7 +84,7 @@ export default function InteractiveFootsteps() {
     return () => window.removeEventListener('click', handleClick)
   }, [lastPos])
 
-  // Clean up old trails after 8 seconds
+  // Clean up old trails after 7 seconds
   useEffect(() => {
     if (trails.length === 0) return
     const interval = setInterval(() => {
@@ -160,7 +160,7 @@ export default function InteractiveFootsteps() {
                   fontWeight="600"
                   letterSpacing="0.08em"
                 >
-                  VISITANTE
+                  {trail.name}
                 </text>
               </motion.g>
             </g>
