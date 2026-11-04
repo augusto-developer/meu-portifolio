@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import VoidOverlay from './components/VoidOverlay'
 import MapReveal from './components/MapReveal'
-import Portfolio from './components/Portfolio'
+import MapPortfolio from './components/MapPortfolio'
 
 type AppState = 'void' | 'revealing' | 'revealed'
 
@@ -14,22 +14,21 @@ export default function App() {
 
   return (
     <>
-      {/* The dark mystical void — always mounted for smooth transitions */}
+      {/* 1. O Vazio Noturno com o Orbe de Luz */}
       <VoidOverlay
         visible={state === 'void'}
         onOrbClick={handleOrbClick}
       />
 
-      {/* The ink-bleed reveal transition */}
+      {/* 2. A Revelação do Mapa com a Tinta se Espalhando & Frase Solene */}
       {state === 'revealing' && (
         <MapReveal onComplete={handleRevealComplete} />
       )}
 
-      {/* The parchment portfolio — mounted after reveal */}
+      {/* 3. O Portfólio DENTRO DO MAPA (Navegação Cômodo a Cômodo com Pezinhos) */}
       {state === 'revealed' && (
-        <Portfolio onHideMap={handleHideMap} />
+        <MapPortfolio onHideMap={handleHideMap} />
       )}
     </>
   )
 }
-
