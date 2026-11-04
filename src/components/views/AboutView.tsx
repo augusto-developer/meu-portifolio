@@ -40,15 +40,29 @@ export default function AboutView({ onNavigate }: AboutViewProps) {
             </div>
 
             <div
-              className="w-24 h-24 rounded-full flex items-center justify-center text-4xl mb-3.5 relative"
+              className="w-28 h-28 rounded-full overflow-hidden mb-3.5 relative border-2 border-[#d4a738] p-0.5 bg-[#2b060c]"
               style={{
-                background:
-                  'radial-gradient(circle at 35% 35%, #5e111d 0%, #2b060c 60%, #100205 100%)',
-                border: '2px solid #d4a738',
-                boxShadow: '0 0 20px rgba(128, 27, 43, 0.5)',
+                boxShadow:
+                  '0 0 22px rgba(212, 167, 56, 0.45), 0 0 15px rgba(128, 27, 43, 0.6)',
               }}
             >
-              {OWNER.avatarPlaceholder}
+              {OWNER.avatarUrl ? (
+                <img
+                  src={OWNER.avatarUrl}
+                  alt={OWNER.name}
+                  className="w-full h-full rounded-full object-cover"
+                />
+              ) : (
+                <div
+                  className="w-full h-full rounded-full flex items-center justify-center text-4xl"
+                  style={{
+                    background:
+                      'radial-gradient(circle at 35% 35%, #5e111d 0%, #2b060c 60%, #100205 100%)',
+                  }}
+                >
+                  {OWNER.avatarPlaceholder}
+                </div>
+              )}
             </div>
 
             <h2 className="text-lg font-bold text-[#f6efe2] tracking-tight">

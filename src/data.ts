@@ -3,7 +3,7 @@ import type { Project, SkillGroup } from './types'
 /** ── Customize these with your real information ── */
 
 export const OWNER = {
-  name: 'Seu Nome',
+  name: 'augusto-developer',
   title: 'Engenheiro de Software & Artesão Digital',
   tagline:
     'Conjuro interfaces responsivas, APIs robustas e experiências que fazem os utilizadores sorrirem.',
@@ -15,6 +15,7 @@ export const OWNER = {
   email: 'augustolopez2897@outlook.com',
   location: 'Vitória / ES, Brasil',
   avatarPlaceholder: '🧙‍♂️',
+  avatarUrl: '/avatar.png',
 }
 
 export const SKILL_GROUPS: SkillGroup[] = [
