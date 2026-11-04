@@ -18,7 +18,7 @@ function GithubIcon({ size = 14 }: { size?: number }) {
 }
 
 export default function ProjectsView({ onNavigate }: ProjectsViewProps) {
-  const [isFlowDemoOpen, setIsFlowDemoOpen] = useState(false)
+  const [activeFlowProjectId, setActiveFlowProjectId] = useState<string | null>(null)
 
   return (
     <motion.div
@@ -128,7 +128,7 @@ export default function ProjectsView({ onNavigate }: ProjectsViewProps) {
                 {proj.demoType === 'interactive-flow' ? (
                   <>
                     <button
-                      onClick={() => setIsFlowDemoOpen(true)}
+                      onClick={() => setActiveFlowProjectId(proj.id)}
                       className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded border border-[#d4a738] text-xs font-semibold text-[#ffe8a3] transition-all cursor-pointer hover:border-[#ffd778] hover:shadow-lg hover:shadow-[#801b2b]/40"
                       style={{
                         background: 'linear-gradient(180deg, #7a1626 0%, #4a0d17 100%)',
@@ -143,7 +143,11 @@ export default function ProjectsView({ onNavigate }: ProjectsViewProps) {
                       className="inline-flex items-center gap-1.5 px-3 py-2 rounded border border-[#d4a738]/30 text-xs font-medium text-[#c7b8a5] hover:text-[#ffd778] hover:bg-[#801b2b]/20 transition-all cursor-pointer"
                     >
                       <Lock size={12} className="text-amber-400" />
-                      <span>Repositório sob NDA</span>
+                      <span>
+                        {proj.id === 'bot-ofertas'
+                          ? 'Arquitetura Privada'
+                          : 'Repositório sob NDA'}
+                      </span>
                     </button>
                   </>
                 ) : (
@@ -184,8 +188,9 @@ export default function ProjectsView({ onNavigate }: ProjectsViewProps) {
 
       {/* Interactive Modal */}
       <AutomationFlowDemo
-        isOpen={isFlowDemoOpen}
-        onClose={() => setIsFlowDemoOpen(false)}
+        isOpen={Boolean(activeFlowProjectId)}
+        projectId={activeFlowProjectId}
+        onClose={() => setActiveFlowProjectId(null)}
         onContactClick={() => onNavigate('contato')}
       />
     </motion.div>

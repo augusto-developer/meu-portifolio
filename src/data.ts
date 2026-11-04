@@ -4,13 +4,13 @@ import type { Project, SkillGroup } from './types'
 
 export const OWNER = {
   name: 'Caio Augusto',
-  title: 'Desenvolvedor de Software | Python, React e IA',
+  title: 'Desenvolvedor de Software | Fullstack',
   tagline:
     'Desenvolvimento de software, automações resilientes e extração de dados estruturados com IA.',
   bio: `Estudante de Ciência da Computação e formado em Gestão da TI. Experiência técnica em desenvolvimento de software, automação web e integração de sistemas, com foco em ingestão e indexação de documentos, tratamento de dados estruturados e aplicações com APIs de LLMs (OpenAI, Anthropic e Gemini).`,
   github: 'https://github.com/augusto-developer',
   linkedin: 'https://www.linkedin.com/in/augusto-developer/',
-  email: 'caiohg_94@hotmail.com',
+  email: 'augustolopez2897@outlook.com',
   location: 'Vila Velha / ES, Brasil',
   avatarPlaceholder: '🧙‍♂️',
   avatarUrl: '/avatar.png',
@@ -78,30 +78,41 @@ export const PROJECTS: Project[] = [
     demoType: 'interactive-flow',
   },
   {
-    id: '2',
-    title: 'Projeto Alpha',
+    id: 'bot-ofertas',
+    title: 'Bot de Ofertas & Inteligência de Afiliados',
     description:
-      'Descreva aqui seu projeto mais impressionante. Use verbos de ação e destaque o impacto real gerado.',
-    tags: ['Node.js', 'PostgreSQL', 'REST API'],
-    liveUrl: '#',
-    repoUrl: '#',
+      'Agregador autônomo multithreading construído sob Arquitetura Hexagonal (Ports & Adapters). Minera promoções em grandes marketplaces com TLS Fingerprinting anti-bot, audita quedas de preço em tempo real e dispara mensagens com imagens e links de afiliados via WhatsApp Web com proteção anti-spam e ciclo noturno.',
+    tags: [
+      'Python',
+      'Arquitetura Hexagonal',
+      'PostgreSQL',
+      'TLS Fingerprinting',
+      'Patchright',
+      'WhatsApp Automation',
+      'Docker',
+    ],
     featured: true,
+    isPrivate: true,
+    metrics: 'Mineração Multiloja & Disparo Anti-Spam',
+    confidentialityNotice:
+      'Arquitetura autoral privada com regras de proteção de cookies, mitigação anti-ban e conversão automatizada de links monetizados.',
+    demoType: 'interactive-flow',
   },
   {
-    id: '3',
-    title: 'Projeto Beta',
+    id: 'pdf-auditor',
+    title: 'PDF Auditor & Extração de Dados',
     description:
-      'Mais um projeto relevante. Mencione problema resolvido, tecnologias usadas e resultado mensurável.',
-    tags: ['React', 'Next.js', 'Prisma'],
-    repoUrl: '#',
+      'Aplicações desktop voltadas à ingestão, auditoria, tratamento e extração estruturada de dados em documentos PDF e tabelas não estruturadas, com foco em produtividade administrativa.',
+    tags: ['Python', 'Pandas', 'Extração de PDFs', 'PostgreSQL', 'Automação'],
+    repoUrl: 'https://github.com/augusto-developer',
   },
   {
-    id: '4',
-    title: 'Projeto Gamma',
+    id: 'ia-extracao',
+    title: 'IA Generativa & Extração Estruturada',
     description:
-      'Ferramenta open-source, biblioteca, CLI ou qualquer contribuição técnica de destaque.',
-    tags: ['Python', 'FastAPI', 'Docker'],
-    repoUrl: '#',
+      'Estudos aplicados com APIs de LLMs (OpenAI, Anthropic e Gemini) para escrita e iteração de prompts, extração de dados estruturados e apoio à análise e refatoração de código.',
+    tags: ['Python', 'APIs LLM', 'Prompt Engineering', 'LangChain', 'FastAPI'],
+    repoUrl: 'https://github.com/augusto-developer',
   },
 ]
 

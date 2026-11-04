@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   X,
@@ -11,11 +11,15 @@ import {
   TrendingDown,
   ChevronRight,
   ExternalLink,
+  Globe,
+  Tag,
+  MessageCircle,
 } from 'lucide-react'
 import { BrassCorner } from './ui/BookOrnaments'
 
 interface AutomationFlowDemoProps {
   isOpen: boolean
+  projectId?: string | null
   onClose: () => void
   onContactClick: () => void
 }
@@ -27,69 +31,155 @@ interface FlowStep {
   title: string
   tech: string
   description: string
-  icon: typeof Cpu
+  icon: any
 }
 
-const FLOW_STEPS: FlowStep[] = [
-  {
-    id: 1,
-    code: '01',
-    tag: 'Vigilância Contínua',
-    title: 'Multiprocessing & Watchdog',
-    tech: 'Python Multiprocessing',
-    description:
-      'Orquestração de workers independentes a operar em paralelo. O sistema watchdog monitoriza a saúde dos processos e reinicia-os automaticamente em caso de falhas críticas ou timeouts de rede, garantindo alta disponibilidade.',
-    icon: Cpu,
+interface FlowDefinition {
+  tag: string
+  title: string
+  metrics: string
+  notice: string
+  footerNotice: string
+  steps: FlowStep[]
+}
+
+const FLOW_REGISTRY: Record<string, FlowDefinition> = {
+  'automacao-dp': {
+    tag: 'Automação Corporativa',
+    title: 'Automação de Documentos do DP · Fluxo Sequencial',
+    metrics: 'Redução de 80% nos atrasos e reprovações',
+    notice: 'Projeto sob NDA',
+    footerNotice: 'Repositório privado por sigilo corporativo (NDA).',
+    steps: [
+      {
+        id: 1,
+        code: '01',
+        tag: 'Vigilância Contínua',
+        title: 'Multiprocessing & Watchdog',
+        tech: 'Python Multiprocessing',
+        description:
+          'Orquestração de workers independentes a operar em paralelo. O sistema watchdog monitoriza a saúde dos processos e reinicia-os automaticamente em caso de falhas críticas ou timeouts de rede, garantindo alta disponibilidade.',
+        icon: Cpu,
+      },
+      {
+        id: 2,
+        code: '02',
+        tag: 'Integridade & Hashes',
+        title: 'PostgreSQL & Hashes SHA-256',
+        tech: 'PostgreSQL + SHA-256',
+        description:
+          'Registo do estado transacional dos documentos numa base de dados relacional (PostgreSQL). O robô calcula o hash criptográfico (SHA-256) de cada ficheiro processado, garantindo que apenas versões novas ou corrigidas avançam no fluxo, evitando envios duplicados.',
+        icon: Database,
+      },
+      {
+        id: 3,
+        code: '03',
+        tag: 'Árvore Dinâmica',
+        title: 'Pastas no SharePoint / Factorial',
+        tech: 'SharePoint & FactorialHR',
+        description:
+          'Sincronização bidirecional e criação de hierarquias de armazenamento. O robô lê as pendências no painel, cruza os dados organizacionais do FactorialHR e constrói dinamicamente os diretórios no SharePoint (Ano > Contrato > Empresa/Colaborador > Documento).',
+        icon: FolderTree,
+      },
+      {
+        id: 4,
+        code: '04',
+        tag: 'Expurgo Preventivo',
+        title: 'Pré-Limpeza Inteligente (API)',
+        tech: 'REST API DELETE + Patchright',
+        description:
+          'Rotina de DELETE via API no SaaS para purgar versões antigas reprovadas antes do novo upload, evitando duplicidades e erros de submissão. Inclui tratamento avançado de exceções HTTP (ex: rate limits, 503) para manter o fluxo contínuo.',
+        icon: Trash2,
+      },
+      {
+        id: 5,
+        code: '05',
+        tag: 'Disparo Inteligente',
+        title: 'Notificações & Trava Anti-Spam',
+        tech: 'Jinja2 + Graph API / SMTP',
+        description:
+          'Motor de comunicação que renderiza alertas em HTML dinâmico (Jinja2) categorizando a urgência das cobranças. Possui uma trava local na base de dados que impede o envio de e-mails duplicados para o mesmo gestor ou colaborador no mesmo dia.',
+        icon: Mail,
+      },
+    ],
   },
-  {
-    id: 2,
-    code: '02',
-    tag: 'Integridade & Hashes',
-    title: 'PostgreSQL & Hashes SHA-256',
-    tech: 'PostgreSQL + SHA-256',
-    description:
-      'Registo do estado transacional dos documentos numa base de dados relacional (PostgreSQL). O robô calcula o hash criptográfico (SHA-256) de cada ficheiro processado, garantindo que apenas versões novas ou corrigidas avançam no fluxo, evitando envios duplicados.',
-    icon: Database,
+  'bot-ofertas': {
+    tag: 'E-commerce & Afiliados',
+    title: 'Bot de Ofertas & Inteligência de Afiliados · Fluxo da Arquitetura',
+    metrics: 'Mineração Multiloja & Disparo Anti-Spam',
+    notice: 'Arquitetura Hexagonal & Resiliente',
+    footerNotice: 'Arquitetura autoral privada com mitigação anti-ban e monetização.',
+    steps: [
+      {
+        id: 1,
+        code: '01',
+        tag: 'Coleta Resiliente',
+        title: 'Scraping Multiloja & Evasão Anti-Bot',
+        tech: 'Python + TLS Fingerprinting + Patchright',
+        description:
+          'Varredura autônoma em múltiplos marketplaces com emulação de handshake TLS (JA3) e browser automatizado para transpor proteções de rede. Inclui filtros de reputação de vendedores (lojas oficiais e termômetros máximos) para capturar apenas ofertas confiáveis.',
+        icon: Globe,
+      },
+      {
+        id: 2,
+        code: '02',
+        tag: 'Price Drop Engine',
+        title: 'Auditoria & Quedas de Preço',
+        tech: 'Algoritmo de Variação + APIs de Consulta',
+        description:
+          'Monitoramento contínuo dos produtos já catalogados na base. Quando o preço sofre uma redução real, o motor calcula automaticamente a porcentagem de desconto, gera alertas de oportunidade urgente ("Baixou!") e eleva a prioridade do item na esteira.',
+        icon: TrendingDown,
+      },
+      {
+        id: 3,
+        code: '03',
+        tag: 'Conversão em Tempo Real',
+        title: 'Links de Afiliados & Mídia',
+        tech: 'APIs de Afiliados + Pipeline de Mídia',
+        description:
+          'Conversão autônoma das URLs dos produtos em links comissionados parametrizados. Coleta e sanitização de imagens em alta definição e montagem dinâmica de mensagens persuasivas com badges da loja e cálculo de economia.',
+        icon: Tag,
+      },
+      {
+        id: 4,
+        code: '04',
+        tag: 'Estado Transacional',
+        title: 'PostgreSQL & Ports & Adapters',
+        tech: 'PostgreSQL + Hexagonal Architecture',
+        description:
+          'Estrutura desacoplada que permite plugar novos canais de e-commerce sem alterar as regras de negócio centrais. Gestão transacional de status com ordenação inteligente: despacha a "oferta campeã" de imediato e administra o backlog de forma ordenada.',
+        icon: Database,
+      },
+      {
+        id: 5,
+        code: '05',
+        tag: 'Mensageria Segura',
+        title: 'Disparo Humanizado & Ciclo Noturno',
+        tech: 'WhatsApp Web Automation + Modo Noturno',
+        description:
+          'Envio de imagem e texto formatado respeitando intervalos randômicos estendidos para blindagem contra bloqueios e spam. Conta com modo noturno inteligente que silencia envios na madrugada e executa limpeza automática de arquivos temporários, acordando zerado no dia seguinte.',
+        icon: MessageCircle,
+      },
+    ],
   },
-  {
-    id: 3,
-    code: '03',
-    tag: 'Árvore Dinâmica',
-    title: 'Pastas no SharePoint / Factorial',
-    tech: 'SharePoint & FactorialHR',
-    description:
-      'Sincronização bidirecional e criação de hierarquias de armazenamento. O robô lê as pendências no painel, cruza os dados organizacionais do FactorialHR e constrói dinamicamente os diretórios no SharePoint (Ano > Contrato > Empresa/Colaborador > Documento).',
-    icon: FolderTree,
-  },
-  {
-    id: 4,
-    code: '04',
-    tag: 'Expurgo Preventivo',
-    title: 'Pré-Limpeza Inteligente (API)',
-    tech: 'REST API DELETE + Patchright',
-    description:
-      'Rotina de DELETE via API no SaaS para purgar versões antigas reprovadas antes do novo upload, evitando duplicidades e erros de submissão. Inclui tratamento avançado de exceções HTTP (ex: rate limits, 503) para manter o fluxo contínuo.',
-    icon: Trash2,
-  },
-  {
-    id: 5,
-    code: '05',
-    tag: 'Disparo Inteligente',
-    title: 'Notificações & Trava Anti-Spam',
-    tech: 'Jinja2 + Graph API / SMTP',
-    description:
-      'Motor de comunicação que renderiza alertas em HTML dinâmico (Jinja2) categorizando a urgência das cobranças. Possui uma trava local na base de dados que impede o envio de e-mails duplicados para o mesmo gestor ou colaborador no mesmo dia.',
-    icon: Mail,
-  },
-]
+}
 
 export default function AutomationFlowDemo({
   isOpen,
+  projectId,
   onClose,
   onContactClick,
 }: AutomationFlowDemoProps) {
   const [hoveredStep, setHoveredStep] = useState<number | null>(null)
   const [activeStep, setActiveStep] = useState<number>(1)
+
+  const activeFlow =
+    (projectId && FLOW_REGISTRY[projectId]) || FLOW_REGISTRY['automacao-dp']
+
+  useEffect(() => {
+    setActiveStep(1)
+    setHoveredStep(null)
+  }, [projectId])
 
   if (!isOpen) return null
 
@@ -140,16 +230,16 @@ export default function AutomationFlowDemo({
               <div className="flex flex-wrap items-center gap-2 mb-1.5">
                 <span className="flex items-center gap-1 px-2.5 py-0.5 rounded border border-[#ffd778]/30 bg-[#6e1624]/60 text-[#ffd778] text-[11px] font-semibold">
                   <TrendingDown size={12} />
-                  <span>Redução de 80% nos atrasos e reprovações</span>
+                  <span>{activeFlow.metrics}</span>
                 </span>
                 <span className="flex items-center gap-1 text-[11px] text-[#c7b8a5]">
                   <Lock size={11} className="text-amber-400" />
-                  <span>Projeto sob NDA</span>
+                  <span>{activeFlow.notice}</span>
                 </span>
               </div>
 
               <h2 className="text-xl sm:text-2xl font-bold text-[#f6efe2] tracking-tight">
-                Automação de Documentos do DP · Fluxo Sequencial
+                {activeFlow.title}
               </h2>
             </div>
 
@@ -160,8 +250,9 @@ export default function AutomationFlowDemo({
 
           {/* 5 SEQUENTIAL HORIZONTAL CARDS WITH HOVER REVEAL */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 relative mb-6">
-            {FLOW_STEPS.map((step, idx) => {
-              const isRevealed = hoveredStep === step.id || activeStep === step.id
+            {activeFlow.steps.map((step, idx) => {
+              const isRevealed =
+                hoveredStep === step.id || activeStep === step.id
 
               return (
                 <div key={step.id} className="relative flex items-center">
@@ -269,7 +360,7 @@ export default function AutomationFlowDemo({
           {/* Minimal Clean Footer */}
           <div className="pt-4 border-t border-[#d4a738]/20 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
             <span className="text-[#c7b8a5]">
-              🔒 Repositório privado por sigilo contratual (NDA).
+              🔒 {activeFlow.footerNotice}
             </span>
 
             <button
