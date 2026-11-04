@@ -83,7 +83,7 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
       {visible && (
         <motion.div
           key="void"
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0a0a0f] overflow-hidden select-none"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#000000] overflow-hidden select-none"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1.0, ease: 'easeInOut' }}
@@ -133,7 +133,7 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
             transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           />
 
-          {/* Golden Snitch (Vídeo Cinemático Realista em Loop) */}
+          {/* Golden Snitch (Vídeo Cinemático Realista em Loop com Fusão Perfeita) */}
           <motion.div
             className="relative z-10 flex flex-col items-center justify-center cursor-pointer select-none group"
             animate={{
@@ -152,24 +152,28 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
             tabIndex={0}
             aria-label="Capturar o Pomo de Ouro para entrar no portfólio"
           >
-            {/* Ambient Warm Golden Lumos Aura */}
+            {/* Ambient Warm Golden Lumos Aura (Sutilmente integrado ao preto) */}
             <div
               className="absolute rounded-full pointer-events-none transition-all duration-700"
               style={{
-                width: hovered ? 380 : 300,
-                height: hovered ? 380 : 300,
+                width: hovered ? 450 : 360,
+                height: hovered ? 450 : 360,
                 background:
-                  'radial-gradient(circle, rgba(255, 215, 120, 0.45) 0%, rgba(212, 167, 56, 0.2) 40%, transparent 70%)',
-                filter: 'blur(30px)',
+                  'radial-gradient(circle, rgba(235, 185, 55, 0.3) 0%, rgba(180, 130, 30, 0.12) 40%, transparent 70%)',
+                filter: 'blur(35px)',
               }}
             />
 
-            {/* Video Container with Screen Blend (Elimina fundo preto perfeitamente) */}
+            {/* Video Container: Fundo transparente integrado com Screen Blend & Curva de Contraste */}
             <div
-              className="relative rounded-full flex items-center justify-center overflow-hidden transition-all duration-300"
+              className="relative flex items-center justify-center transition-all duration-300"
               style={{
-                width: 320,
+                width: 620,
                 height: 320,
+                WebkitMaskImage:
+                  'radial-gradient(ellipse 50% 48% at 50% 50%, #000 0%, #000 45%, rgba(0,0,0,0.5) 70%, transparent 95%)',
+                maskImage:
+                  'radial-gradient(ellipse 50% 48% at 50% 50%, #000 0%, #000 45%, rgba(0,0,0,0.5) 70%, transparent 95%)',
               }}
             >
               <video
@@ -178,12 +182,12 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-contain pointer-events-none transition-transform duration-300 group-hover:scale-105"
+                className="w-full h-full object-cover pointer-events-none transition-transform duration-300 group-hover:scale-105"
                 style={{
                   mixBlendMode: 'screen',
                   filter: hovered
-                    ? 'brightness(1.15) contrast(1.1) drop-shadow(0 0 25px rgba(255, 215, 120, 0.8))'
-                    : 'brightness(1.0) contrast(1.05) drop-shadow(0 0 15px rgba(212, 167, 56, 0.5))',
+                    ? 'brightness(1.15) contrast(1.3) drop-shadow(0 0 30px rgba(255, 215, 120, 0.85))'
+                    : 'brightness(1.05) contrast(1.2) drop-shadow(0 0 15px rgba(212, 167, 56, 0.5))',
                 }}
               />
             </div>

@@ -7,7 +7,7 @@ export const OWNER = {
   title: 'Desenvolvedor de Software | Fullstack',
   tagline:
     'Desenvolvimento de software, automações resilientes e extração de dados estruturados com IA.',
-  bio: `Estudante de Ciência da Computação e formado em Gestão da TI. Experiência técnica em desenvolvimento de software, automação web e integração de sistemas, com foco em ingestão e indexação de documentos, tratamento de dados estruturados e aplicações com APIs de LLMs (OpenAI, Anthropic e Gemini).`,
+  bio: `Focado em resolver problemas reais: crio automações web, fluxos de extração, tratamento de dados e soluções integradas com LLMs. Experiência prática em automação de sistemas e engenharia de software, unindo Python, JavaScript e inteligência artificial para entregar não só eficiência nos bastidores, mas uma experiência fluida e sólida para o usuário.`,
   github: 'https://github.com/augusto-developer',
   linkedin: 'https://www.linkedin.com/in/augusto-developer/',
   email: 'augustolopez2897@outlook.com',

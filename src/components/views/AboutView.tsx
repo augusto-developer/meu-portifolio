@@ -88,7 +88,7 @@ export default function AboutView({ onNavigate }: AboutViewProps) {
               </div>
 
               <h1 className="text-xl sm:text-2xl font-bold text-[#f6efe2] tracking-tight">
-                Engenharia de Software & Arquitetura de Sistemas
+                Desenvolvedor de Software | Fullstack
               </h1>
             </div>
 
