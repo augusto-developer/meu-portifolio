@@ -5,12 +5,16 @@ import {
   Play,
   Pause,
   Lock,
-  Cpu,
-  FileCheck,
+  Globe,
+  Search,
+  Database,
+  Bell,
+  FolderTree,
+  Sparkles,
   UploadCloud,
-  Clock,
-  TrendingDown,
   ExternalLink,
+  ChevronRight,
+  TrendingDown,
 } from 'lucide-react'
 import { BrassCorner } from './ui/BookOrnaments'
 
@@ -20,65 +24,87 @@ interface AutomationFlowDemoProps {
   onContactClick: () => void
 }
 
-interface Step {
+interface FlowNode {
   id: number
   title: string
-  subtitle: string
+  category: string
   description: string
-  detail: string
-  logMessage: string
-  icon: typeof FileCheck
+  subtext: string
+  icon: typeof Globe
   badge: string
+  platformHint?: string
 }
 
-const FLOW_STEPS: Step[] = [
+const FLOW_NODES: FlowNode[] = [
   {
     id: 1,
-    title: 'Monitoramento & Ingestão',
-    subtitle: 'Coleta contínua de arquivos',
-    description:
-      'O robô em Python monitora os canais de recebimento de documentações da empresa e de colaboradores terceirizados.',
-    detail:
-      'Identifica certidões negativas (CNDs), exames ASO, contratos e guias de recolhimento assim que disponibilizados, eliminando a espera passiva do DP.',
-    logMessage: '[PYTHON] Ingestão ativada: 18 documentos de colaboradores e empresa indexados.',
-    icon: FileCheck,
-    badge: 'Varredura Contínua',
+    title: 'Acessa Plataforma do Cliente',
+    category: 'Ingresso & Autenticação',
+    description: 'O daemon em Python e Patchright acessa os portais de clientes externos com proteção antidetect.',
+    subtext: 'Bypass de bloqueios de bots e autenticação segura automatizada.',
+    icon: Globe,
+    badge: 'Patchright + Python',
+    platformHint: 'Portais de Terceiros',
   },
   {
     id: 2,
-    title: 'Triagem & Validação de Urgência',
-    subtitle: 'Filtro de integridade e prazos',
-    description:
-      'Classificação algorítmica por criticidade e validação prévia de metadados para evitar reprovações.',
-    detail:
-      'Analisa validade dos arquivos, nomes e conformidade antes de qualquer tentativa de envio, impedindo que documentos incorretos fossem submetidos na pressa.',
-    logMessage: '[VALIDATION] 18/18 arquivos validados com sucesso. 4 itens com urgência crítica priorizados no topo da fila.',
-    icon: Clock,
-    badge: 'Anti-Reprovação',
+    title: 'Checa Pendentes & Reprovados',
+    category: 'Varredura & Diagnóstico',
+    description: 'Varre as páginas de compliance do cliente identificando documentos faltantes, vencidos ou com recusa.',
+    subtext: 'Extração precisa de motivos de reprovação e prazos de corte.',
+    icon: Search,
+    badge: 'Varredura DOM',
+    platformHint: 'Telas de Compliance',
   },
   {
     id: 3,
-    title: 'Navegação Autônoma com Patchright',
-    subtitle: 'Acesso às plataformas de terceiros',
-    description:
-      'Automação furtiva que acessa as plataformas customizadas de cada cliente ou fornecedor.',
-    detail:
-      'O Patchright (versão reforçada do Playwright) contorna travas de detecção de bots, efetua login seguro e navega pelas árvores de menus específicas de cada portal.',
-    logMessage: '[PATCHRIGHT] Sessão furtiva autenticada no portal de terceiros. Navegando até a tela de homologação...',
-    icon: Cpu,
-    badge: 'Bypass Antidetect',
+    title: 'Salva no Banco de Dados',
+    category: 'Persistência & Histórico',
+    description: 'Grava o status de cada pendência, prazos limites e histórico de reprovação no banco de dados local.',
+    subtext: 'Estruturação de dados para rastreamento de SLA e criticidade.',
+    icon: Database,
+    badge: 'Persistência Relacional',
+    platformHint: 'Banco de Dados',
   },
   {
     id: 4,
-    title: 'Upload, Protocolo & Liquidação',
-    subtitle: 'Redução de 80% comprovada',
-    description:
-      'Envio imediato dos documentos nas áreas correspondentes com captura de protocolo e baixa das pendências.',
-    detail:
-      'Conclui a homologação sem intervenção humana, salva o comprovante de envio e notifica a equipe de que a pendência foi cumprida no prazo.',
-    logMessage: '[SUCCESS] Documentos homologados com sucesso. Protocolo #849202 registrado. Pendência liquidada!',
+    title: 'Dispara Alertas (Email & Teams)',
+    category: 'Comunicação Automática',
+    description: 'Notifica o DP com relatórios ordenados por urgência e criticidade para que a equipe priorize o que vence antes.',
+    subtext: 'Elimina a sobrecarga e foca a equipe apenas nas pendências reais.',
+    icon: Bell,
+    badge: 'Email / Teams Webhooks',
+    platformHint: 'Outlook & MS Teams',
+  },
+  {
+    id: 5,
+    title: 'Aguarda no Repositório Interno',
+    category: 'Monitoramento de Pastas',
+    description: 'Monitora as pastas da empresa no repositório corporativo aguardando a chegada dos documentos assinados.',
+    subtext: 'Suporta a transição tecnológica: inicialmente SharePoint e depois FactorialHR.',
+    icon: FolderTree,
+    badge: 'SharePoint & FactorialHR',
+    platformHint: 'Repositório da Empresa',
+  },
+  {
+    id: 6,
+    title: 'Match Inteligente com o Banco',
+    category: 'Algoritmo de Cruzamento',
+    description: 'Identifica a estrutura da árvore de pastas e cruza automaticamente cada arquivo com a pendência certa do banco.',
+    subtext: 'Garante que o colaborador e o documento correto sejam pareados sem erro humano.',
+    icon: Sparkles,
+    badge: 'Fuzzy Matching & Regex',
+    platformHint: 'Motor de Mapeamento',
+  },
+  {
+    id: 7,
+    title: 'Envia para a Plataforma',
+    category: 'Homologação Final',
+    description: 'Realiza o upload autônomo na plataforma do cliente, valida o envio e registra o comprovante de homologação.',
+    subtext: 'Redução comprovada de 80% nos atrasos e reprovações do setor.',
     icon: UploadCloud,
     badge: '-80% de Atrasos',
+    platformHint: 'Upload Concluído',
   },
 ]
 
@@ -87,27 +113,27 @@ export default function AutomationFlowDemo({
   onClose,
   onContactClick,
 }: AutomationFlowDemoProps) {
-  const [activeStep, setActiveStep] = useState(1)
+  const [activeNode, setActiveNode] = useState(1)
   const [isPlaying, setIsPlaying] = useState(true)
 
-  // Auto-advance step every 3.8s when playing
+  // Auto-advance step every 3.2s when playing
   useEffect(() => {
     if (!isOpen || !isPlaying) return
 
     const timer = setInterval(() => {
-      setActiveStep((prev) => (prev >= FLOW_STEPS.length ? 1 : prev + 1))
-    }, 4200)
+      setActiveNode((prev) => (prev >= FLOW_NODES.length ? 1 : prev + 1))
+    }, 3400)
 
     return () => clearInterval(timer)
   }, [isOpen, isPlaying])
 
   if (!isOpen) return null
 
-  const current = FLOW_STEPS[activeStep - 1]
+  const currentNode = FLOW_NODES[activeNode - 1]
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-y-auto">
         {/* Backdrop overlay */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -117,31 +143,31 @@ export default function AutomationFlowDemo({
           className="fixed inset-0 bg-black/85 backdrop-blur-md"
         />
 
-        {/* Modal Window in Ancient Folio & Mahogany Aesthetic */}
+        {/* Modal Container */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.94, y: 20 }}
+          initial={{ opacity: 0, scale: 0.95, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.94, y: 20 }}
-          transition={{ duration: 0.3, ease: 'easeOut' }}
-          className="relative w-full max-w-4xl rounded-lg border-2 border-[#d4a738]/50 p-6 sm:p-8 overflow-hidden z-10 my-auto text-[#f6efe2]"
+          exit={{ opacity: 0, scale: 0.95, y: 15 }}
+          transition={{ duration: 0.28, ease: 'easeOut' }}
+          className="relative w-full max-w-5xl rounded-lg border-2 border-[#d4a738]/50 p-5 sm:p-7 md:p-8 overflow-hidden z-10 my-auto text-[#f6efe2]"
           style={{
             background:
-              'linear-gradient(135deg, #1f1117 0%, #170d13 50%, #0f070b 100%)',
+              'linear-gradient(135deg, #1d0f15 0%, #150a0f 60%, #0d060a 100%)',
             boxShadow:
               '0 30px 80px rgba(0, 0, 0, 0.95), inset 0 0 50px rgba(128, 27, 43, 0.25), 0 0 40px rgba(212, 167, 56, 0.15)',
           }}
         >
           {/* 4 Brass Corners */}
-          <BrassCorner position="tl" size={34} />
-          <BrassCorner position="tr" size={34} />
-          <BrassCorner position="bl" size={34} />
-          <BrassCorner position="br" size={34} />
+          <BrassCorner position="tl" size={32} />
+          <BrassCorner position="tr" size={32} />
+          <BrassCorner position="bl" size={32} />
+          <BrassCorner position="br" size={32} />
 
           {/* Close Button */}
           <button
             onClick={onClose}
             className="absolute top-4 right-4 z-20 p-2 rounded border border-[#d4a738]/40 text-[#c7b8a5] hover:text-[#ffd778] hover:border-[#ffd778] hover:bg-[#801b2b]/30 transition-all cursor-pointer"
-            aria-label="Fechar Demonstração"
+            aria-label="Fechar Fluxograma"
           >
             <X size={18} />
           </button>
@@ -153,168 +179,266 @@ export default function AutomationFlowDemo({
                 className="px-2.5 py-0.5 rounded border border-[#d4a738]/40 bg-[#3a1520] text-[#ffd778] text-[10px] font-bold tracking-widest uppercase"
                 style={{ fontFamily: '"Cinzel", serif' }}
               >
-                Demonstração de Fluxo Interativo
+                Fluxograma Animado do Sistema
               </span>
 
               <span className="flex items-center gap-1 px-2.5 py-0.5 rounded border border-amber-600/30 bg-amber-950/40 text-amber-300 text-[10px] font-semibold">
                 <Lock size={11} className="text-amber-400" />
                 <span>Projeto sob Sigilo Empresarial (NDA)</span>
               </span>
-            </div>
 
-            <h2
-              className="text-2xl sm:text-3xl font-bold text-[#f6efe2] tracking-wide"
-              style={{ fontFamily: '"Cinzel", serif' }}
-            >
-              Automação de Documentos do Departamento Pessoal
-            </h2>
-
-            <p className="text-xs sm:text-sm text-[#c7b8a5] mt-1.5 font-sans leading-relaxed">
-              Orquestração autônoma desenvolvida com <strong>Python</strong> e <strong>Patchright</strong> para eliminar o gargalo operacional no envio de documentações a clientes externos.
-            </p>
-          </div>
-
-          {/* Key Metric Highlights Card */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-            <div className="flex items-center gap-3 p-3 rounded border border-[#d4a738]/30 bg-[#160a0f]/80">
-              <div className="w-10 h-10 rounded flex items-center justify-center bg-[#6e1624] text-[#ffd778] border border-[#d4a738]/40">
-                <TrendingDown size={20} />
-              </div>
-              <div>
-                <span className="block text-base sm:text-lg font-bold text-[#ffd778]" style={{ fontFamily: '"Cinzel", serif' }}>
-                  80% de Redução
-                </span>
-                <span className="text-[11px] text-[#c7b8a5]">Em atrasos e reprovações de documentos</span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 p-3 rounded border border-[#d4a738]/30 bg-[#160a0f]/80">
-              <div className="w-10 h-10 rounded flex items-center justify-center bg-[#6e1624] text-[#ffd778] border border-[#d4a738]/40">
-                <Clock size={20} />
-              </div>
-              <div>
-                <span className="block text-base sm:text-lg font-bold text-[#ffd778]" style={{ fontFamily: '"Cinzel", serif' }}>
-                  De 45 min para ~12s
-                </span>
-                <span className="text-[11px] text-[#c7b8a5]">Agilidade no fluxo de homologação</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Interactive Stepper Navigation Bar */}
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold text-[#ffd778] uppercase tracking-wider" style={{ fontFamily: '"Cinzel", serif' }}>
-                Etapas do Ciclo Automatizado
+              <span className="flex items-center gap-1 px-2.5 py-0.5 rounded border border-[#ffd778]/30 bg-[#6e1624]/60 text-[#ffd778] text-[10px] font-bold">
+                <TrendingDown size={11} />
+                <span>-80% de Atrasos & Reprovações</span>
               </span>
+            </div>
 
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <h2
+                className="text-2xl sm:text-3xl font-bold text-[#f6efe2] tracking-wide"
+                style={{ fontFamily: '"Cinzel", serif' }}
+              >
+                Automação de Documentos do DP
+              </h2>
+
+              {/* Play / Pause toggle */}
               <button
                 onClick={() => setIsPlaying(!isPlaying)}
-                className="inline-flex items-center gap-1.5 text-xs text-[#c7b8a5] hover:text-[#ffd778] cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-[#d4a738]/40 bg-[#160a0f] text-xs font-semibold text-[#ffd778] hover:border-[#ffd778] transition-colors cursor-pointer self-start sm:self-auto"
+                style={{ fontFamily: '"Cinzel", serif' }}
               >
                 {isPlaying ? (
                   <>
-                    <Pause size={13} /> <span>Pausar Ciclo</span>
+                    <Pause size={12} /> <span>Pausar Fluxo</span>
                   </>
                 ) : (
                   <>
-                    <Play size={13} /> <span>Continuar Ciclo</span>
+                    <Play size={12} className="fill-[#ffd778]" /> <span>Reproduzir Fluxo</span>
                   </>
                 )}
               </button>
             </div>
+          </div>
 
-            <div className="grid grid-cols-4 gap-2">
-              {FLOW_STEPS.map((s) => {
-                const isSelected = activeStep === s.id
+          {/* ANIMATED FLOWCHART (DIAGRAMA INTERATIVO COM SETINHAS) */}
+          <div className="mb-6 p-4 rounded border border-[#d4a738]/30 bg-[#12070c]/80 relative overflow-hidden">
+            {/* Background subtle grid lines */}
+            <div
+              className="absolute inset-0 opacity-10 pointer-events-none"
+              style={{
+                backgroundImage:
+                  'radial-gradient(rgba(212, 167, 56, 0.4) 1px, transparent 1px)',
+                backgroundSize: '16px 16px',
+              }}
+            />
+
+            {/* Top row: Steps 1 to 4 */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 relative z-10">
+              {FLOW_NODES.slice(0, 4).map((node, index) => {
+                const isActive = activeNode === node.id
                 return (
-                  <button
-                    key={s.id}
-                    onClick={() => {
-                      setActiveStep(s.id)
-                      setIsPlaying(false)
-                    }}
-                    className={`p-2.5 rounded border text-left transition-all cursor-pointer relative overflow-hidden ${
-                      isSelected
-                        ? 'border-[#ffd778] bg-[#6e1624]/70 shadow-lg shadow-[#801b2b]/30'
-                        : 'border-[#d4a738]/20 bg-[#14090e]/70 hover:border-[#d4a738]/50'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-[10px] font-bold text-[#d4a738] font-mono">
-                        ETAPA 0{s.id}
+                  <div key={node.id} className="relative flex flex-col">
+                    <button
+                      onClick={() => {
+                        setActiveNode(node.id)
+                        setIsPlaying(false)
+                      }}
+                      className={`w-full p-3 rounded border text-left transition-all duration-200 cursor-pointer relative overflow-hidden h-full flex flex-col justify-between ${
+                        isActive
+                          ? 'border-[#ffd778] bg-[#6e1624]/80 shadow-lg shadow-[#801b2b]/40 scale-[1.02]'
+                          : 'border-[#d4a738]/25 bg-[#170a10]/80 hover:border-[#d4a738]/60 hover:bg-[#200f16]'
+                      }`}
+                    >
+                      {/* Top bar with Step Number & Status Orb */}
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-[10px] font-bold text-[#ffd778] font-mono tracking-wider">
+                          0{node.id}
+                        </span>
+                        <div
+                          className={`w-2 h-2 rounded-full ${
+                            isActive
+                              ? 'bg-[#ffd778] shadow-[0_0_8px_#ffd778] animate-ping'
+                              : 'bg-[#8c5e14]/50'
+                          }`}
+                        />
+                      </div>
+
+                      {/* Icon & Title */}
+                      <div className="flex items-start gap-2 mb-2">
+                        <div
+                          className={`p-1.5 rounded border shrink-0 ${
+                            isActive
+                              ? 'bg-[#8a192b] border-[#ffd778] text-[#ffd778]'
+                              : 'bg-[#220d15] border-[#d4a738]/30 text-[#e5ba48]'
+                          }`}
+                        >
+                          <node.icon size={15} />
+                        </div>
+                        <h4
+                          className="text-xs font-bold text-[#f6efe2] leading-tight line-clamp-2"
+                          style={{ fontFamily: '"Cinzel", serif' }}
+                        >
+                          {node.title}
+                        </h4>
+                      </div>
+
+                      {/* Bottom Hint */}
+                      <span className="text-[9px] text-[#c7b8a5] block truncate font-mono">
+                        {node.platformHint}
                       </span>
-                      {isSelected && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#ffd778] animate-pulse" />
-                      )}
-                    </div>
-                    <span className="block text-xs font-bold text-[#f6efe2] truncate" style={{ fontFamily: '"Cinzel", serif' }}>
-                      {s.title}
-                    </span>
-                  </button>
+                    </button>
+
+                    {/* Horizontal Animated Connector Arrow (Desktop, steps 1, 2, 3) */}
+                    {index < 3 && (
+                      <div className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-20 pointer-events-none items-center justify-center">
+                        <motion.div
+                          animate={{ x: [0, 3, 0] }}
+                          transition={{ repeat: Infinity, duration: 1.2, ease: 'easeInOut' }}
+                          className="text-[#ffd778] drop-shadow-[0_0_4px_rgba(212,167,56,0.8)]"
+                        >
+                          <ChevronRight size={14} />
+                        </motion.div>
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Transition Conduit from Row 1 to Row 2 */}
+            <div className="flex items-center justify-end my-3 px-6 relative z-10">
+              <div className="flex items-center gap-2 text-xs font-bold text-[#ffd778] tracking-widest uppercase">
+                <span className="text-[10px] text-[#c7b8a5] font-mono">Fluxo Contínuo</span>
+                <motion.div
+                  animate={{ y: [0, 4, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.2, ease: 'easeInOut' }}
+                >
+                  <span className="text-[#ffd778] text-sm">↴</span>
+                </motion.div>
+              </div>
+            </div>
+
+            {/* Bottom row: Steps 5 to 7 */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 relative z-10">
+              {FLOW_NODES.slice(4, 7).map((node, index) => {
+                const isActive = activeNode === node.id
+                return (
+                  <div key={node.id} className="relative flex flex-col">
+                    <button
+                      onClick={() => {
+                        setActiveNode(node.id)
+                        setIsPlaying(false)
+                      }}
+                      className={`w-full p-3 rounded border text-left transition-all duration-200 cursor-pointer relative overflow-hidden h-full flex flex-col justify-between ${
+                        isActive
+                          ? 'border-[#ffd778] bg-[#6e1624]/80 shadow-lg shadow-[#801b2b]/40 scale-[1.02]'
+                          : 'border-[#d4a738]/25 bg-[#170a10]/80 hover:border-[#d4a738]/60 hover:bg-[#200f16]'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-[10px] font-bold text-[#ffd778] font-mono tracking-wider">
+                          0{node.id}
+                        </span>
+                        <div
+                          className={`w-2 h-2 rounded-full ${
+                            isActive
+                              ? 'bg-[#ffd778] shadow-[0_0_8px_#ffd778] animate-ping'
+                              : 'bg-[#8c5e14]/50'
+                          }`}
+                        />
+                      </div>
+
+                      <div className="flex items-start gap-2 mb-2">
+                        <div
+                          className={`p-1.5 rounded border shrink-0 ${
+                            isActive
+                              ? 'bg-[#8a192b] border-[#ffd778] text-[#ffd778]'
+                              : 'bg-[#220d15] border-[#d4a738]/30 text-[#e5ba48]'
+                          }`}
+                        >
+                          <node.icon size={15} />
+                        </div>
+                        <h4
+                          className="text-xs font-bold text-[#f6efe2] leading-tight"
+                          style={{ fontFamily: '"Cinzel", serif' }}
+                        >
+                          {node.title}
+                        </h4>
+                      </div>
+
+                      <span className="text-[9px] text-[#c7b8a5] block truncate font-mono">
+                        {node.platformHint}
+                      </span>
+                    </button>
+
+                    {/* Horizontal Animated Connector Arrow */}
+                    {index < 2 && (
+                      <div className="hidden sm:flex absolute -right-3 top-1/2 -translate-y-1/2 z-20 pointer-events-none items-center justify-center">
+                        <motion.div
+                          animate={{ x: [0, 3, 0] }}
+                          transition={{ repeat: Infinity, duration: 1.2, ease: 'easeInOut' }}
+                          className="text-[#ffd778] drop-shadow-[0_0_4px_rgba(212,167,56,0.8)]"
+                        >
+                          <ChevronRight size={14} />
+                        </motion.div>
+                      </div>
+                    )}
+                  </div>
                 )
               })}
             </div>
           </div>
 
-          {/* Active Step Showcase Card */}
+          {/* ACTIVE STEP DETAILS CARD (ESTILO LIVRO MÁGICO / GRIMÓRIO) */}
           <div
-            className="p-5 rounded border border-[#d4a738]/35 mb-6 relative overflow-hidden"
+            className="p-4 sm:p-5 rounded border border-[#d4a738]/40 mb-6 relative overflow-hidden"
             style={{
-              background: 'linear-gradient(180deg, #180c12 0%, #10060a 100%)',
+              background:
+                'linear-gradient(180deg, #1f0f16 0%, #12070c 100%)',
+              boxShadow: 'inset 0 0 25px rgba(128, 27, 43, 0.25)',
             }}
           >
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded border border-[#d4a738]/40 bg-[#54121d] text-[#ffd778]">
-                <current.icon size={26} />
+            <div className="flex items-start gap-3 sm:gap-4">
+              <div className="p-3 rounded border border-[#d4a738]/40 bg-[#54121d] text-[#ffd778] shrink-0 shadow-md">
+                <currentNode.icon size={24} />
               </div>
 
               <div className="flex-1">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-[10px] px-2 py-0.5 rounded border border-[#d4a738]/40 bg-[#3a1520] text-[#ffd778] uppercase font-bold" style={{ fontFamily: '"Cinzel", serif' }}>
-                    {current.badge}
+                <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                  <span
+                    className="text-[10px] px-2 py-0.5 rounded border border-[#d4a738]/40 bg-[#3a1520] text-[#ffd778] uppercase font-bold tracking-wider"
+                    style={{ fontFamily: '"Cinzel", serif' }}
+                  >
+                    Etapa 0{currentNode.id} · {currentNode.category}
                   </span>
-                  <span className="text-xs text-[#c7b8a5] font-sans">
-                    {current.subtitle}
+
+                  <span className="text-[10px] px-2 py-0.5 rounded border border-white/10 bg-white/5 text-[#c7b8a5] font-mono">
+                    {currentNode.badge}
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-[#f6efe2] mb-1" style={{ fontFamily: '"Cinzel", serif' }}>
-                  {current.title}
+                <h3
+                  className="text-base sm:text-lg font-bold text-[#f6efe2] mb-1"
+                  style={{ fontFamily: '"Cinzel", serif' }}
+                >
+                  {currentNode.title}
                 </h3>
 
-                <p className="text-xs text-[#f6efe2] font-sans leading-relaxed mb-2">
-                  {current.description}
+                <p className="text-xs sm:text-sm text-[#f6efe2] font-sans leading-relaxed mb-2">
+                  {currentNode.description}
                 </p>
 
-                <p className="text-xs text-[#c7b8a5] font-sans leading-relaxed bg-[#0c0508] p-3 rounded border border-white/5">
-                  ✦ {current.detail}
+                <p className="text-xs text-[#c7b8a5] font-sans leading-relaxed bg-[#0c0508]/80 p-2.5 rounded border border-white/5">
+                  ✦ <strong>Funcionamento:</strong> {currentNode.subtext}
                 </p>
               </div>
             </div>
-          </div>
-
-          {/* Simulated Terminal Execution Output */}
-          <div className="rounded border border-[#d4a738]/25 bg-[#090406] p-3.5 mb-6 font-mono text-[11px] text-[#ffd778]">
-            <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/10 text-slate-400 text-[10px]">
-              <span>Console da Automação (Python + Patchright)</span>
-              <span className="flex items-center gap-1.5 text-emerald-400">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                <span>Processo Ativo</span>
-              </span>
-            </div>
-            <p className="text-slate-400 text-[10px]">
-              $ python -m dp_automation.orchestrator --headless --stealth=patchright
-            </p>
-            <p className="mt-1 text-[#ffe8a3]">
-              {current.logMessage}
-            </p>
           </div>
 
           {/* Confidentiality Footer & Contact CTA */}
           <div className="pt-4 border-t border-[#d4a738]/20 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-[11px] text-[#c7b8a5] max-w-lg text-center sm:text-left">
-              🔒 <strong>Código Restrito:</strong> Devido a acordos de sigilo (NDA) da empresa, o repositório permanece privado. Para detalhes de implementação técnica, arquitetura e tratamento de exceções:
+            <p className="text-[11px] text-[#c7b8a5] max-w-lg text-center sm:text-left font-sans">
+              🔒 <strong>Código Restrito sob NDA:</strong> Por compliance corporativo, o repositório é privado. Se quiser entender a fundo o código, tratamento de exceções ou a lógica do Patchright:
             </p>
 
             <button
