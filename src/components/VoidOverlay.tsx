@@ -155,7 +155,7 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
             onClick={onOrbClick}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-            aria-label="Revelar o mapa"
+            aria-label="Entrar no portfólio"
           >
             {/* Orb core */}
             <div
@@ -180,15 +180,15 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
           <motion.p
             className="mt-9 z-10 text-center select-none"
             style={{
-              fontFamily: '"Cormorant Garamond", Georgia, serif',
-              fontSize: '1.2rem',
-              letterSpacing: '0.14em',
+              fontFamily: '"Cinzel", serif',
+              fontSize: '1.15rem',
+              letterSpacing: '0.12em',
               color: 'rgba(215, 178, 105, 0.85)',
             }}
             animate={{ opacity: [0.45, 0.95, 0.45] }}
             transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
           >
-            {hovered ? '— toque para revelar —' : 'Clique para revelar'}
+            {hovered ? '— entrar —' : 'Clique no orbe para entrar'}
           </motion.p>
         </motion.div>
       )}
