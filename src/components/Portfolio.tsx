@@ -5,7 +5,8 @@ import AboutSection from './sections/AboutSection'
 import SkillsSection from './sections/SkillsSection'
 import ProjectsSection from './sections/ProjectsSection'
 import ContactSection from './sections/ContactSection'
-import InkTrail from './InkTrail'
+import ScrollFootstepGuide from './ScrollFootstepGuide'
+import InteractiveFootsteps from './InteractiveFootsteps'
 import MapFooter from './MapFooter'
 import MarauderMapBackground from './MarauderMapBackground'
 
@@ -21,7 +22,7 @@ export default function Portfolio({ onHideMap }: PortfolioProps) {
   return (
     <motion.div
       ref={containerRef}
-      className="relative min-h-screen overflow-y-auto overflow-x-hidden"
+      className="relative min-h-screen overflow-y-auto overflow-x-hidden cursor-crosshair"
       style={{
         backgroundColor: '#f1e2c6',
         backgroundImage: `
@@ -35,6 +36,9 @@ export default function Portfolio({ onHideMap }: PortfolioProps) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
+      {/* Interactive click-to-walk footsteps on parchment */}
+      <InteractiveFootsteps />
+
       {/* Physical map fold lines down the page */}
       <div
         className="fixed inset-y-0 left-1/3 w-px pointer-events-none z-10 opacity-20 border-r border-[#5a3d24]"
@@ -55,11 +59,11 @@ export default function Portfolio({ onHideMap }: PortfolioProps) {
         aria-hidden="true"
       />
 
-      {/* Authentic Marauder's Map Castle Blueprint Corridors in Background */}
+      {/* Architectural corridors background */}
       <MarauderMapBackground />
 
-      {/* Center ink trail */}
-      <InkTrail scrollYProgress={scrollYProgress} />
+      {/* Animated footsteps corridor guide syncing with scroll */}
+      <ScrollFootstepGuide scrollYProgress={scrollYProgress} />
 
       {/* Main content */}
       <motion.main style={{ opacity: bgOpacity }} className="relative z-20">
