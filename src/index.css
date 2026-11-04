@@ -24,11 +24,14 @@
   --font-inter: "Inter", sans-serif;
 }
 
-/* Warm magical library ambient vignette */
+/* Warm magical library ambient vignette with dark mahogany shelf grain */
 .library-vignette {
+  background-color: #0d070a;
   background-image: 
-    radial-gradient(ellipse at 50% 0%, rgba(128, 27, 43, 0.14) 0%, transparent 65%),
-    radial-gradient(ellipse at 50% 100%, rgba(212, 167, 56, 0.08) 0%, transparent 60%);
+    radial-gradient(ellipse at 50% 0%, rgba(140, 25, 42, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(212, 167, 56, 0.12) 0%, transparent 65%),
+    linear-gradient(90deg, rgba(20, 10, 14, 0.8) 0%, rgba(13, 7, 10, 0.95) 50%, rgba(20, 10, 14, 0.8) 100%),
+    repeating-linear-gradient(90deg, transparent, transparent 200px, rgba(0, 0, 0, 0.45) 200px, rgba(0, 0, 0, 0.45) 201px);
 }
 
 /* Antique brass double border effect */

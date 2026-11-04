@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
-import { Mail, ArrowRight } from 'lucide-react'
+import { Mail, ArrowRight, Feather } from 'lucide-react'
 import { OWNER } from '../../data'
+import { BrassCorner, WaxSeal } from '../ui/BookOrnaments'
 
 interface ContactViewProps {
   onNavigate: (tab: 'sobre' | 'projetos' | 'habilidades') => void
@@ -25,28 +26,31 @@ function LinkedinIcon({ size = 18 }: { size?: number }) {
 export default function ContactView({ onNavigate }: ContactViewProps) {
   const contactLinks = [
     {
-      title: 'Correspondência Direta',
-      subtitle: 'Para propostas, projetos e oportunidades',
+      title: 'Carta Direta (E-mail)',
+      subtitle: 'Propostas de engenharia, contratação e projetos',
       value: OWNER.email,
       href: `mailto:${OWNER.email}`,
-      icon: <Mail size={18} className="text-[#e5ba48]" />,
-      action: 'Enviar Mensagem',
+      icon: <Mail size={18} className="text-[#ffd778]" />,
+      action: 'Escrever Mensagem',
+      sealInitial: 'M',
     },
     {
-      title: 'Perfil no LinkedIn',
-      subtitle: 'Conexão profissional e histórico de carreira',
+      title: 'Registro no LinkedIn',
+      subtitle: 'Histórico profissional e conexões de mercado',
       value: 'linkedin.com/in/...',
       href: OWNER.linkedin,
       icon: <LinkedinIcon size={18} />,
       action: 'Acessar LinkedIn',
+      sealInitial: 'in',
     },
     {
-      title: 'Repositório GitHub',
-      subtitle: 'Códigos-fonte, arquitetura e contribuições',
+      title: 'Grimório GitHub',
+      subtitle: 'Repositórios, contribuições e arquitetura',
       value: 'github.com/...',
       href: OWNER.github,
       icon: <GithubIcon size={18} />,
       action: 'Ver Repositórios',
+      sealInitial: 'git',
     },
   ]
 
@@ -56,64 +60,74 @@ export default function ContactView({ onNavigate }: ContactViewProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.35 }}
-      className="max-w-4xl mx-auto w-full pt-24 pb-16 px-4"
+      className="max-w-4xl mx-auto w-full pt-28 pb-16 px-4"
     >
       {/* Header */}
       <div className="text-center mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded border border-[#d4a738]/30 bg-[#4a0e18]/40 text-[#e5ba48] text-xs font-semibold tracking-widest uppercase mb-3">
-          <span>✦</span>
-          <span style={{ fontFamily: '"Cinzel", serif' }}>Mesa de Correspondência</span>
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded border border-[#d4a738]/40 bg-[#3d0d16]/60 text-[#ffd778] text-xs font-bold tracking-widest uppercase mb-2 shadow-md">
+          <Feather size={12} className="text-[#e5ba48]" />
+          <span style={{ fontFamily: '"Cinzel", serif' }}>Mesa de Correspondência & Escriba</span>
         </div>
         <h2
           className="text-3xl md:text-4xl font-bold text-[#f6efe2] tracking-wide"
-          style={{ fontFamily: '"Cinzel", serif' }}
+          style={{
+            fontFamily: '"Cinzel", serif',
+            textShadow: '0 2px 8px rgba(0,0,0,0.8)',
+          }}
         >
           Contato & Oportunidades
         </h2>
-        <p className="text-sm text-[#c7b8a5] max-w-lg mx-auto mt-2">
-          Disponível para novos desafios técnicos, consultoria de arquitetura e projetos de engenharia de software.
+        <p className="text-sm text-[#c7b8a5] max-w-lg mx-auto mt-2 font-sans">
+          Envie sua mensagem para discutir novas oportunidades, posições de liderança técnica ou novos projetos.
         </p>
       </div>
 
-      {/* Contact Cards in Antique Wood & Brass Folio */}
-      <div className="grid md:grid-cols-3 gap-5">
+      {/* 3 Sealed Letter Folios */}
+      <div className="grid md:grid-cols-3 gap-6">
         {contactLinks.map((item) => (
           <div
             key={item.title}
-            className="rounded-lg p-6 border border-[#d4a738]/25 relative overflow-hidden transition-all hover:border-[#d4a738]/50 hover:shadow-2xl hover:shadow-[#801b2b]/25 flex flex-col justify-between"
+            className="group relative rounded-lg border-2 border-[#d4a738]/30 overflow-hidden flex flex-col justify-between transition-all duration-300 hover:border-[#ffd778]/60 hover:-translate-y-1 p-6"
             style={{
-              backgroundColor: 'rgba(23, 15, 19, 0.94)',
+              background:
+                'linear-gradient(135deg, #24131b 0%, #170d13 60%, #10070c 100%)',
               boxShadow:
-                '0 15px 35px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(128, 27, 43, 0.1)',
+                '0 15px 35px rgba(0, 0, 0, 0.75), inset 0 0 25px rgba(80, 15, 25, 0.2)',
             }}
           >
-            {/* Top corner brackets */}
-            <span className="absolute top-1.5 left-1.5 text-[9px] text-[#d4a738]/40 font-serif select-none pointer-events-none">⌜</span>
-            <span className="absolute top-1.5 right-1.5 text-[9px] text-[#d4a738]/40 font-serif select-none pointer-events-none">⌝</span>
+            {/* Brass Corners */}
+            <BrassCorner position="tl" size={24} />
+            <BrassCorner position="tr" size={24} />
+
+            {/* Wax Seal Stamp in Top Right */}
+            <div className="absolute top-3 right-3 z-10">
+              <WaxSeal size={38} initial={item.sealInitial} />
+            </div>
 
             <div>
               <div
-                className="w-10 h-10 rounded-md border border-[#d4a738]/35 flex items-center justify-center mb-4 text-[#e5ba48]"
+                className="w-10 h-10 rounded-md border border-[#d4a738]/40 flex items-center justify-center mb-4 text-[#ffd778]"
                 style={{
-                  backgroundColor: 'rgba(74, 14, 24, 0.65)',
-                  boxShadow: '0 0 15px rgba(128, 27, 43, 0.4)',
+                  background:
+                    'linear-gradient(180deg, #5c1421 0%, #300810 100%)',
+                  boxShadow: '0 0 15px rgba(128, 27, 43, 0.5)',
                 }}
               >
                 {item.icon}
               </div>
 
               <h3
-                className="font-bold text-base text-[#f6efe2] mb-1"
+                className="font-bold text-base text-[#f6efe2] mb-1 pr-8"
                 style={{ fontFamily: '"Cinzel", serif' }}
               >
                 {item.title}
               </h3>
 
-              <p className="text-xs text-[#c7b8a5] mb-4">
+              <p className="text-xs text-[#c7b8a5] mb-4 font-sans">
                 {item.subtitle}
               </p>
 
-              <p className="text-xs font-mono text-[#ffd778] mb-6 truncate bg-[#100a0d] p-2 rounded border border-white/5">
+              <p className="text-xs font-mono text-[#ffd778] mb-6 truncate bg-[#0d0609] p-2.5 rounded border border-[#d4a738]/20">
                 {item.value}
               </p>
             </div>
@@ -122,9 +136,12 @@ export default function ContactView({ onNavigate }: ContactViewProps) {
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full text-center py-2.5 px-4 rounded border border-[#d4a738]/40 text-xs font-semibold tracking-wider text-[#f6efe2] transition-all hover:border-[#e5ba48] hover:shadow-lg hover:shadow-[#801b2b]/30"
+              className="w-full text-center py-2.5 px-4 rounded border border-[#d4a738] text-xs font-bold tracking-widest uppercase text-[#ffe8a3] transition-all hover:border-[#ffd778] hover:shadow-xl hover:shadow-[#801b2b]/40"
               style={{
-                backgroundColor: '#6e1624',
+                background:
+                  'linear-gradient(180deg, #7a1626 0%, #4a0d17 100%)',
+                boxShadow:
+                  '0 3px 8px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,225,140,0.3)',
                 fontFamily: '"Cinzel", serif',
               }}
             >
@@ -134,14 +151,14 @@ export default function ContactView({ onNavigate }: ContactViewProps) {
         ))}
       </div>
 
-      {/* Footer Return CTA */}
+      {/* Return to Ledger CTA */}
       <div className="text-center mt-12">
         <button
           onClick={() => onNavigate('sobre')}
-          className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-[#e5ba48] hover:text-[#ffd778] transition-colors cursor-pointer"
+          className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#e5ba48] hover:text-[#ffd778] transition-colors cursor-pointer"
           style={{ fontFamily: '"Cinzel", serif' }}
         >
-          <span>Retornar ao Início do Tomo</span>
+          <span>Retornar ao Registro Inicial</span>
           <ArrowRight size={13} />
         </button>
       </div>

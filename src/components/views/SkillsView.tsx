@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Layers } from 'lucide-react'
 import { SKILL_GROUPS } from '../../data'
+import { BrassCorner } from '../ui/BookOrnaments'
 
 interface SkillsViewProps {
   onNavigate: (tab: 'sobre' | 'projetos' | 'contato') => void
@@ -13,54 +14,72 @@ export default function SkillsView({ onNavigate }: SkillsViewProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.35 }}
-      className="max-w-5xl mx-auto w-full pt-24 pb-16 px-4"
+      className="max-w-5xl mx-auto w-full pt-28 pb-16 px-4"
     >
       {/* Header */}
       <div className="text-center mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded border border-[#d4a738]/30 bg-[#4a0e18]/40 text-[#e5ba48] text-xs font-semibold tracking-widest uppercase mb-3">
-          <span>✦</span>
-          <span style={{ fontFamily: '"Cinzel", serif' }}>Compêndio de Especialidades</span>
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded border border-[#d4a738]/40 bg-[#3d0d16]/60 text-[#ffd778] text-xs font-bold tracking-widest uppercase mb-2 shadow-md">
+          <Layers size={12} className="text-[#e5ba48]" />
+          <span style={{ fontFamily: '"Cinzel", serif' }}>Estantes do Conhecimento Arcana</span>
         </div>
         <h2
           className="text-3xl md:text-4xl font-bold text-[#f6efe2] tracking-wide"
-          style={{ fontFamily: '"Cinzel", serif' }}
+          style={{
+            fontFamily: '"Cinzel", serif',
+            textShadow: '0 2px 8px rgba(0,0,0,0.8)',
+          }}
         >
-          Habilidades & Conhecimento
+          Compêndio de Especialidades
         </h2>
         <p className="text-sm text-[#c7b8a5] max-w-lg mx-auto mt-2">
-          Tecnologias e metodologias dominadas na construção de sistemas modernos e escaláveis.
+          Volumes e disciplinas dominadas na arquitetura e desenvolvimento de software resiliente.
         </p>
       </div>
 
-      {/* Library Shelves / Bookplate Panels */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {/* Library Shelves Grid */}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {SKILL_GROUPS.map((group) => (
           <div
             key={group.category}
-            className="rounded-lg p-5 border border-[#d4a738]/25 relative overflow-hidden transition-all hover:border-[#d4a738]/50 hover:shadow-xl hover:shadow-[#801b2b]/20 flex flex-col justify-between"
+            className="group relative rounded-lg border-2 border-[#d4a738]/30 overflow-hidden flex flex-col justify-between transition-all duration-300 hover:border-[#ffd778]/60 hover:-translate-y-1"
             style={{
-              backgroundColor: 'rgba(23, 15, 19, 0.94)',
+              background:
+                'linear-gradient(180deg, #221219 0%, #170d13 50%, #0e060a 100%)',
               boxShadow:
-                '0 12px 30px rgba(0, 0, 0, 0.65), inset 0 0 20px rgba(128, 27, 43, 0.08)',
+                '0 12px 30px rgba(0, 0, 0, 0.75), inset 0 0 25px rgba(80, 15, 25, 0.2)',
             }}
           >
-            {/* Top corner accents */}
-            <span className="absolute top-1.5 left-1.5 text-[9px] text-[#d4a738]/40 font-serif select-none pointer-events-none">⌜</span>
-            <span className="absolute top-1.5 right-1.5 text-[9px] text-[#d4a738]/40 font-serif select-none pointer-events-none">⌝</span>
+            {/* Brass corner brackets */}
+            <BrassCorner position="tl" size={24} />
+            <BrassCorner position="tr" size={24} />
 
-            <div>
-              {/* Category Header */}
-              <div className="flex items-center gap-2.5 pb-3 mb-4 border-b border-[#d4a738]/20">
-                <span className="text-lg">{group.icon}</span>
-                <h3
-                  className="font-bold text-sm text-[#f6efe2] tracking-wide"
-                  style={{ fontFamily: '"Cinzel", serif' }}
-                >
-                  {group.category}
-                </h3>
+            <div className="p-5">
+              {/* Brass Card-Catalogue Label Holder Plaque */}
+              <div
+                className="rounded p-2.5 mb-5 border border-[#d4a738]/60 text-center relative"
+                style={{
+                  background:
+                    'linear-gradient(180deg, #381b24 0%, #1e0d13 100%)',
+                  boxShadow:
+                    '0 3px 8px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,220,130,0.3)',
+                }}
+              >
+                {/* 2 Brass Screws */}
+                <div className="absolute left-1.5 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#ffd778] border border-[#7d5612]" />
+                <div className="absolute right-1.5 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#ffd778] border border-[#7d5612]" />
+
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-base">{group.icon}</span>
+                  <h3
+                    className="font-bold text-xs text-[#ffe8a3] tracking-widest uppercase"
+                    style={{ fontFamily: '"Cinzel", serif' }}
+                  >
+                    {group.category}
+                  </h3>
+                </div>
               </div>
 
-              {/* Skills list */}
+              {/* Skills Spines / List */}
               <ul className="space-y-2.5">
                 {group.skills.map((skill) => {
                   const levelLabel =
@@ -73,12 +92,18 @@ export default function SkillsView({ onNavigate }: SkillsViewProps) {
                   return (
                     <li
                       key={skill.name}
-                      className="flex items-center justify-between text-xs py-1 border-b border-white/[0.03]"
+                      className="flex items-center justify-between text-xs py-1.5 px-2 rounded border border-[#d4a738]/15 bg-[#12070c]/80"
                     >
-                      <span className="text-[#f6efe2] font-medium">{skill.name}</span>
+                      <span className="text-[#f6efe2] font-medium font-sans">
+                        {skill.name}
+                      </span>
                       <span
-                        className="text-[10px] px-2 py-0.5 rounded border border-[#d4a738]/30 bg-[#3a1822]/80 text-[#ffd778] font-semibold"
-                        style={{ fontFamily: '"Cinzel", serif' }}
+                        className="text-[9px] px-2 py-0.5 rounded border border-[#ffd778]/30 font-bold uppercase tracking-wider text-[#ffd778]"
+                        style={{
+                          background:
+                            'linear-gradient(180deg, #5c1421 0%, #300810 100%)',
+                          fontFamily: '"Cinzel", serif',
+                        }}
                       >
                         {levelLabel}
                       </span>
@@ -88,22 +113,29 @@ export default function SkillsView({ onNavigate }: SkillsViewProps) {
               </ul>
             </div>
 
-            {/* Subtle bottom filigree accent */}
-            <div className="mt-6 pt-3 border-t border-[#d4a738]/15 text-center">
-              <span className="text-[10px] text-[#d4a738]/50 font-serif">✦ ✦ ✦</span>
+            {/* Shelf Wooden Lintel Bottom Base */}
+            <div
+              className="py-2.5 px-4 border-t border-[#d4a738]/30 flex items-center justify-between text-[10px] text-[#c7b8a5]"
+              style={{
+                background:
+                  'linear-gradient(180deg, #2b141e 0%, #14080e 100%)',
+              }}
+            >
+              <span className="text-[#d4a738] font-serif">✦ Tomo I</span>
+              <span style={{ fontFamily: '"Cinzel", serif' }}>Ateliê</span>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Footer Navigation CTA */}
+      {/* Advance Navigation CTA */}
       <div className="text-center mt-12">
         <button
           onClick={() => onNavigate('contato')}
-          className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-[#e5ba48] hover:text-[#ffd778] transition-colors cursor-pointer"
+          className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#e5ba48] hover:text-[#ffd778] transition-colors cursor-pointer"
           style={{ fontFamily: '"Cinzel", serif' }}
         >
-          <span>Avançar para Correspondência & Contato</span>
+          <span>Ir para a Mesa de Correspondência</span>
           <ArrowRight size={13} />
         </button>
       </div>
