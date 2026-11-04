@@ -133,48 +133,186 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
             transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           />
 
-          {/* The Lumos Orb */}
-          <motion.button
-            className="relative z-10 rounded-full cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-gold/50"
-            style={{ width: 92, height: 92 }}
+          {/* Golden Snitch (Pomo de Ouro) */}
+          <motion.div
+            className="relative z-10 flex items-center justify-center cursor-pointer select-none"
             animate={{
-              boxShadow: hovered
-                ? [
-                    '0 0 35px 12px rgba(223,155,50,0.8), 0 0 90px 35px rgba(255,215,120,0.55)',
-                    '0 0 50px 18px rgba(223,155,50,0.95), 0 0 120px 50px rgba(255,215,120,0.7)',
-                    '0 0 35px 12px rgba(223,155,50,0.8), 0 0 90px 35px rgba(255,215,120,0.55)',
-                  ]
-                : [
-                    '0 0 18px 4px rgba(223,155,50,0.45), 0 0 55px 12px rgba(255,215,120,0.25)',
-                    '0 0 30px 10px rgba(223,155,50,0.7), 0 0 80px 25px rgba(255,215,120,0.45)',
-                    '0 0 18px 4px rgba(223,155,50,0.45), 0 0 55px 12px rgba(255,215,120,0.25)',
-                  ],
-              scale: hovered ? 1.12 : 1,
+              y: hovered ? [-4, 4, -4] : [-8, 8, -8],
+              rotate: hovered ? [-1, 1, -1] : [-2, 2, -2],
             }}
-            transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{
+              duration: hovered ? 1.4 : 2.8,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
             onClick={onOrbClick}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-            aria-label="Entrar no portfólio"
+            role="button"
+            tabIndex={0}
+            aria-label="Capturar o Pomo de Ouro para entrar no portfólio"
           >
-            {/* Orb core */}
-            <div
-              className="w-full h-full rounded-full"
-              style={{
-                background:
-                  'radial-gradient(circle at 38% 38%, #fff4cf 0%, #df9b32 40%, #c59a3f 70%, #6e4e08 100%)',
+            {/* Left Silver Feathered Wing */}
+            <motion.div
+              className="absolute right-[80%] top-1/2 origin-right pointer-events-none"
+              style={{ width: 110, height: 42 }}
+              animate={{
+                rotateZ: hovered ? [-25, 25, -25] : [-16, 16, -16],
+                scaleY: hovered ? [0.85, 1.15, 0.85] : [0.92, 1.08, 0.92],
               }}
-            />
-            {/* Intense light center */}
-            <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
-              style={{
-                width: 24,
-                height: 24,
-                background: 'radial-gradient(circle, rgba(255,255,240,0.95) 0%, transparent 70%)',
+              transition={{
+                duration: hovered ? 0.22 : 0.65,
+                repeat: Infinity,
+                ease: 'easeInOut',
               }}
-            />
-          </motion.button>
+            >
+              <svg
+                viewBox="0 0 120 45"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-full drop-shadow-[0_0_12px_rgba(255,240,190,0.65)]"
+              >
+                <path
+                  d="M120 25 C90 10, 45 0, 5 8 C25 18, 55 24, 75 32 C95 38, 110 32, 120 25 Z"
+                  fill="url(#leftWingGradient)"
+                  stroke="#ffd778"
+                  strokeWidth="1"
+                  strokeOpacity="0.8"
+                />
+                {/* Feathers internal ribs */}
+                <path d="M100 24 C80 16, 50 12, 20 12" stroke="#fff5d1" strokeWidth="0.8" strokeOpacity="0.7" />
+                <path d="M85 27 C68 22, 45 20, 30 22" stroke="#fff5d1" strokeWidth="0.7" strokeOpacity="0.6" />
+                <path d="M110 25 C95 24, 75 28, 60 30" stroke="#fff5d1" strokeWidth="0.7" strokeOpacity="0.6" />
+                <defs>
+                  <linearGradient id="leftWingGradient" x1="120" y1="25" x2="0" y2="10" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#fff8e7" stopOpacity="0.95" />
+                    <stop offset="40%" stopColor="#dfba63" stopOpacity="0.75" />
+                    <stop offset="85%" stopColor="#8c6a28" stopOpacity="0.45" />
+                    <stop offset="100%" stopColor="#ffd778" stopOpacity="0.2" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </motion.div>
+
+            {/* Right Silver Feathered Wing */}
+            <motion.div
+              className="absolute left-[80%] top-1/2 origin-left pointer-events-none"
+              style={{ width: 110, height: 42 }}
+              animate={{
+                rotateZ: hovered ? [25, -25, 25] : [16, -16, 16],
+                scaleY: hovered ? [0.85, 1.15, 0.85] : [0.92, 1.08, 0.92],
+              }}
+              transition={{
+                duration: hovered ? 0.22 : 0.65,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            >
+              <svg
+                viewBox="0 0 120 45"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-full drop-shadow-[0_0_12px_rgba(255,240,190,0.65)]"
+              >
+                <path
+                  d="M0 25 C30 10, 75 0, 115 8 C95 18, 65 24, 45 32 C25 38, 10 32, 0 25 Z"
+                  fill="url(#rightWingGradient)"
+                  stroke="#ffd778"
+                  strokeWidth="1"
+                  strokeOpacity="0.8"
+                />
+                {/* Feathers internal ribs */}
+                <path d="M20 24 C40 16, 70 12, 100 12" stroke="#fff5d1" strokeWidth="0.8" strokeOpacity="0.7" />
+                <path d="M35 27 C52 22, 75 20, 90 22" stroke="#fff5d1" strokeWidth="0.7" strokeOpacity="0.6" />
+                <path d="M10 25 C25 24, 45 28, 60 30" stroke="#fff5d1" strokeWidth="0.7" strokeOpacity="0.6" />
+                <defs>
+                  <linearGradient id="rightWingGradient" x1="0" y1="25" x2="120" y2="10" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#fff8e7" stopOpacity="0.95" />
+                    <stop offset="40%" stopColor="#dfba63" stopOpacity="0.75" />
+                    <stop offset="85%" stopColor="#8c6a28" stopOpacity="0.45" />
+                    <stop offset="100%" stopColor="#ffd778" stopOpacity="0.2" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </motion.div>
+
+            {/* The Golden Snitch Spherical Body */}
+            <motion.div
+              className="relative rounded-full focus:outline-none"
+              style={{ width: 84, height: 84 }}
+              animate={{
+                boxShadow: hovered
+                  ? [
+                      '0 0 35px 12px rgba(235,185,55,0.9), 0 0 95px 35px rgba(255,225,120,0.65)',
+                      '0 0 55px 18px rgba(255,200,60,1), 0 0 130px 50px rgba(255,235,140,0.85)',
+                      '0 0 35px 12px rgba(235,185,55,0.9), 0 0 95px 35px rgba(255,225,120,0.65)',
+                    ]
+                  : [
+                      '0 0 20px 4px rgba(212,167,56,0.6), 0 0 55px 12px rgba(255,215,120,0.3)',
+                      '0 0 32px 10px rgba(235,185,55,0.8), 0 0 80px 22px rgba(255,225,130,0.5)',
+                      '0 0 20px 4px rgba(212,167,56,0.6), 0 0 55px 12px rgba(255,215,120,0.3)',
+                    ],
+                scale: hovered ? 1.08 : 1,
+              }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              {/* Spherical Metallic Body with Engravings */}
+              <div
+                className="w-full h-full rounded-full relative overflow-hidden border border-[#ffeaa8]"
+                style={{
+                  background:
+                    'radial-gradient(circle at 35% 30%, #fffbf0 0%, #ffd86b 22%, #d4a738 52%, #8f6515 82%, #422904 100%)',
+                }}
+              >
+                {/* Ancient Snitch Intricate Seam Engravings */}
+                <svg
+                  viewBox="0 0 100 100"
+                  className="absolute inset-0 w-full h-full pointer-events-none opacity-80"
+                  fill="none"
+                >
+                  <path
+                    d="M15 48 C 30 38, 70 38, 85 48"
+                    stroke="#573804"
+                    strokeWidth="1.5"
+                    strokeOpacity="0.8"
+                  />
+                  <path
+                    d="M15 52 C 30 62, 70 62, 85 52"
+                    stroke="#573804"
+                    strokeWidth="1.5"
+                    strokeOpacity="0.8"
+                  />
+                  <path
+                    d="M48 15 C 38 30, 38 70, 48 85"
+                    stroke="#fff5d1"
+                    strokeWidth="1"
+                    strokeOpacity="0.6"
+                  />
+                  <path
+                    d="M52 15 C 62 30, 62 70, 52 85"
+                    stroke="#fff5d1"
+                    strokeWidth="1"
+                    strokeOpacity="0.6"
+                  />
+                  {/* Central Swirl Emblem */}
+                  <circle cx="50" cy="50" r="14" stroke="#ffe394" strokeWidth="1.2" strokeDasharray="3 2" />
+                  <circle cx="50" cy="50" r="5" fill="#fffbe8" fillOpacity="0.9" />
+                </svg>
+
+                {/* Intense light reflection spot */}
+                <div
+                  className="absolute top-3 left-4 rounded-full pointer-events-none"
+                  style={{
+                    width: 22,
+                    height: 14,
+                    transform: 'rotate(-30deg)',
+                    background:
+                      'radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.4) 50%, transparent 100%)',
+                  }}
+                />
+              </div>
+            </motion.div>
+          </motion.div>
 
           {/* Caption */}
           <motion.p
@@ -188,7 +326,7 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
             animate={{ opacity: [0.45, 0.95, 0.45] }}
             transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
           >
-            {hovered ? '— entrar —' : 'Clique no orbe para entrar'}
+            {hovered ? '— capturar pomo —' : 'Toque no Pomo de Ouro para entrar'}
           </motion.p>
         </motion.div>
       )}

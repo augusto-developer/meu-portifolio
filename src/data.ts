@@ -13,7 +13,7 @@ export const OWNER = {
   email: 'augustolopez2897@outlook.com',
   location: 'Vila Velha / ES, Brasil',
   avatarPlaceholder: '🧙‍♂️',
-  avatarUrl: '/avatar.png',
+  avatarUrl: './avatar.png',
 }
 
 export const SKILL_GROUPS: SkillGroup[] = [
