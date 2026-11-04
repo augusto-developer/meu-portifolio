@@ -3,7 +3,7 @@ import type { Project, SkillGroup } from './types'
 /** ── Customize these with your real information ── */
 
 export const OWNER = {
-  name: 'Caio Augusto',
+  name: 'augusto-developer',
   title: 'Desenvolvedor de Software | Fullstack',
   tagline:
     'Desenvolvimento de software, automações resilientes e extração de dados estruturados com IA.',
