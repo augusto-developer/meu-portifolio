@@ -15,7 +15,7 @@ colors:
   accent-gold: "#d4af37"
   accent-amber: "#df9b32"
   accent-lumos: "#ffd778"
-  smoke-tint: "rgba(180, 200, 230, 0.15)"
+  accent-starlight: "rgba(255, 238, 175, 0.9)"
 typography:
   heading-display:
     fontFamily: "'Cinzel', Georgia, serif"
@@ -65,4 +65,4 @@ A sophisticated developer portfolio combining senior-level professionalism with 
 - Body, UI & Code: Ultra-legible sans-serif (`Inter`) ensuring crystal-clear readability for technical recruiters and clients.
 
 ## Transitions
-- Section changes trigger an organic smoke/mist billow that sweeps across and clears to reveal the target view.
+- Section changes trigger a golden Lumos wand shockwave accompanied by sparkling starlight glints, paired with fluid Framer Motion view cross-dissolves.

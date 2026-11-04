@@ -119,3 +119,4 @@ export default function AboutView({ onNavigate }: AboutViewProps) {
     </motion.div>
   )
 }
+

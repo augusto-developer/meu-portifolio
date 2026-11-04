@@ -125,3 +125,4 @@ export default function ContactView({ onNavigate }: ContactViewProps) {
     </motion.div>
   )
 }
+

@@ -1,7 +1,8 @@
 import { useState, useCallback } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import VoidOverlay from './components/VoidOverlay'
 import AmbientEmbers from './components/AmbientEmbers'
-import MagicalSmoke from './components/MagicalSmoke'
+import LumosTransition from './components/LumosTransition'
 import ProfessionalNavbar, { type SectionTab } from './components/ProfessionalNavbar'
 import AboutView from './components/views/AboutView'
 import ProjectsView from './components/views/ProjectsView'
@@ -13,26 +14,26 @@ export default function App() {
   const [appMode, setAppMode] = useState<'orb' | 'portfolio'>('orb')
   const [activeTab, setActiveTab] = useState<SectionTab>('sobre')
   const [pendingTab, setPendingTab] = useState<SectionTab | null>(null)
-  const [smokeActive, setSmokeActive] = useState(false)
+  const [lumosActive, setLumosActive] = useState(false)
 
-  // Trigger entrance smoke apparition
+  // Trigger entrance Lumos burst
   const handleOrbClick = () => {
     setPendingTab('sobre')
-    setSmokeActive(true)
+    setLumosActive(true)
   }
 
-  // Handle section navigation with magical smoke apparition transition
+  // Handle section navigation with golden Lumos shockwave & starlight sparks
   const handleNavigate = useCallback(
     (tab: SectionTab) => {
-      if (smokeActive || tab === activeTab) return
+      if (lumosActive || tab === activeTab) return
       setPendingTab(tab)
-      setSmokeActive(true)
+      setLumosActive(true)
     },
-    [smokeActive, activeTab]
+    [lumosActive, activeTab]
   )
 
-  // Midpoint of smoke veil: swap the view while screen is obscured
-  const handleSmokeMidpoint = useCallback(() => {
+  // Peak of the golden Lumos wave (~180ms): swap content smoothly
+  const handleLumosMidpoint = useCallback(() => {
     if (appMode === 'orb') {
       setAppMode('portfolio')
     }
@@ -43,17 +44,17 @@ export default function App() {
     }
   }, [appMode, pendingTab])
 
-  // End of smoke animation: veil completely cleared
-  const handleSmokeEnd = useCallback(() => {
-    setSmokeActive(false)
+  // End of Lumos transition (~420ms): clear active flag
+  const handleLumosEnd = useCallback(() => {
+    setLumosActive(false)
   }, [])
 
   // Return to orb entrance screen
   const handleReturnToOrb = () => {
-    setSmokeActive(true)
+    setLumosActive(true)
     setTimeout(() => {
       setAppMode('orb')
-    }, 400)
+    }, 220)
   }
 
   return (
@@ -64,7 +65,7 @@ export default function App() {
         onOrbClick={handleOrbClick}
       />
 
-      {/* 2. Portfolio View with Magical Atmosphere */}
+      {/* 2. Portfolio View with Magical Lumos Atmosphere */}
       {appMode === 'portfolio' && (
         <div className="relative min-h-screen flex flex-col justify-between">
           {/* Ambient Lumos golden floating embers */}
@@ -74,15 +75,17 @@ export default function App() {
           <ProfessionalNavbar
             activeTab={activeTab}
             onSelectTab={handleNavigate}
-            disabled={smokeActive}
+            disabled={lumosActive}
           />
 
-          {/* Active View Content */}
+          {/* Active View Content with Framer Motion transitions */}
           <main className="relative z-10 flex-1 flex flex-col">
-            {activeTab === 'sobre' && <AboutView onNavigate={handleNavigate} />}
-            {activeTab === 'projetos' && <ProjectsView onNavigate={handleNavigate} />}
-            {activeTab === 'habilidades' && <SkillsView onNavigate={handleNavigate} />}
-            {activeTab === 'contato' && <ContactView onNavigate={handleNavigate} />}
+            <AnimatePresence mode="wait">
+              {activeTab === 'sobre' && <AboutView key="sobre" onNavigate={handleNavigate} />}
+              {activeTab === 'projetos' && <ProjectsView key="projetos" onNavigate={handleNavigate} />}
+              {activeTab === 'habilidades' && <SkillsView key="habilidades" onNavigate={handleNavigate} />}
+              {activeTab === 'contato' && <ContactView key="contato" onNavigate={handleNavigate} />}
+            </AnimatePresence>
           </main>
 
           {/* Professional Minimalist Footer */}
@@ -106,11 +109,11 @@ export default function App() {
         </div>
       )}
 
-      {/* 3. Magical Apparition Smoke Transition Canvas */}
-      <MagicalSmoke
-        active={smokeActive}
-        onSmokeMidpoint={handleSmokeMidpoint}
-        onSmokeEnd={handleSmokeEnd}
+      {/* 3. Lumos Wave & Starlight Sparks Transition */}
+      <LumosTransition
+        active={lumosActive}
+        onMidpoint={handleLumosMidpoint}
+        onEnd={handleLumosEnd}
       />
     </div>
   )

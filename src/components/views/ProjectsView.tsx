@@ -120,3 +120,4 @@ export default function ProjectsView({ onNavigate }: ProjectsViewProps) {
     </motion.div>
   )
 }
+

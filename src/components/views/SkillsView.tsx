@@ -77,3 +77,4 @@ export default function SkillsView({ onNavigate }: SkillsViewProps) {
     </motion.div>
   )
 }
+
