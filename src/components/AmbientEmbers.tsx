@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-interface Ember {
+interface CandleMote {
   x: number
   y: number
   r: number
@@ -13,8 +13,8 @@ interface Ember {
 }
 
 /**
- * Ambient Magical Embers:
- * Delicate, floating golden/amber sparks drifting upward through the dark obsidian canvas.
+ * Library Candlelight & Fireplace Motes:
+ * Gentle amber, gold and subtle ruby sparks drifting softly like candlelight in a grand gothic library.
  */
 export default function AmbientEmbers() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -29,51 +29,54 @@ export default function AmbientEmbers() {
     let w = (canvas.width = window.innerWidth)
     let h = (canvas.height = window.innerHeight)
 
-    const count = 55
-    const embers: Ember[] = []
+    const count = 48
+    const motes: CandleMote[] = []
 
     for (let i = 0; i < count; i++) {
-      embers.push({
+      const randType = Math.random()
+      let color = '229, 186, 72' // Candlelight Amber-Gold
+      if (randType < 0.22) {
+        color = '165, 36, 54' // Gryffindor Hearth Ruby
+      } else if (randType > 0.75) {
+        color = '255, 235, 175' // Starlight Spark
+      }
+
+      motes.push({
         x: Math.random() * w,
         y: Math.random() * h,
-        r: Math.random() * 1.5 + 0.6,
-        vy: -(Math.random() * 0.45 + 0.15),
-        vx: (Math.random() - 0.5) * 0.25,
+        r: Math.random() * 1.6 + 0.6,
+        vy: -(Math.random() * 0.35 + 0.12),
+        vx: (Math.random() - 0.5) * 0.22,
         alpha: Math.random(),
-        maxAlpha: Math.random() * 0.65 + 0.25,
-        pulseSpeed: Math.random() * 0.02 + 0.008,
-        color:
-          Math.random() > 0.35
-            ? '223, 175, 55' // Lumos Gold
-            : '255, 230, 160', // Warm Spark
+        maxAlpha: Math.random() * 0.65 + 0.2,
+        pulseSpeed: Math.random() * 0.018 + 0.006,
+        color,
       })
     }
 
     const draw = () => {
       ctx.clearRect(0, 0, w, h)
 
-      for (let i = 0; i < embers.length; i++) {
-        const e = embers[i]
-        e.y += e.vy
-        e.x += e.vx
-        e.alpha += e.pulseSpeed
+      for (let i = 0; i < motes.length; i++) {
+        const m = motes[i]
+        m.y += m.vy
+        m.x += m.vx
+        m.alpha += m.pulseSpeed
 
-        // Wrap around top
-        if (e.y < -10) {
-          e.y = h + 10
-          e.x = Math.random() * w
+        if (m.y < -10) {
+          m.y = h + 10
+          m.x = Math.random() * w
         }
-        if (e.x < -10) e.x = w + 10
-        if (e.x > w + 10) e.x = -10
+        if (m.x < -10) m.x = w + 10
+        if (m.x > w + 10) m.x = -10
 
-        const currentAlpha =
-          (Math.sin(e.alpha) * 0.5 + 0.5) * e.maxAlpha
+        const currentAlpha = (Math.sin(m.alpha) * 0.5 + 0.5) * m.maxAlpha
 
         ctx.beginPath()
-        ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${e.color}, ${currentAlpha.toFixed(2)})`
-        ctx.shadowColor = `rgba(${e.color}, 0.7)`
-        ctx.shadowBlur = 6
+        ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(${m.color}, ${currentAlpha.toFixed(2)})`
+        ctx.shadowColor = `rgba(${m.color}, 0.8)`
+        ctx.shadowBlur = 8
         ctx.fill()
       }
 
@@ -98,9 +101,8 @@ export default function AmbientEmbers() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0 w-full h-full"
-      style={{ opacity: 0.85 }}
+      style={{ opacity: 0.8 }}
       aria-hidden="true"
     />
   )
 }
-

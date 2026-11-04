@@ -26,14 +26,21 @@ export default function ProfessionalNavbar({
   disabled,
 }: ProfessionalNavbarProps) {
   return (
-    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-40 w-full max-w-xl px-4">
+    <header className="fixed top-5 left-1/2 -translate-x-1/2 z-40 w-full max-w-xl px-4">
       <nav
-        className="rounded-full p-1.5 border border-white/10 shadow-2xl backdrop-blur-md flex items-center justify-between"
+        className="relative rounded-lg p-1.5 border border-[#d4a738]/30 backdrop-blur-md flex items-center justify-between"
         style={{
-          backgroundColor: 'rgba(15, 18, 27, 0.75)',
-          boxShadow: '0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.08)',
+          backgroundColor: 'rgba(23, 15, 19, 0.92)',
+          boxShadow:
+            '0 12px 35px rgba(0, 0, 0, 0.75), inset 0 0 15px rgba(128, 27, 43, 0.2), 0 0 20px rgba(212, 167, 56, 0.1)',
         }}
       >
+        {/* Brass corner bracket accents */}
+        <span className="absolute -top-1 -left-1 text-[9px] text-[#d4a738]/60 font-serif select-none pointer-events-none">⌜</span>
+        <span className="absolute -top-1 -right-1 text-[9px] text-[#d4a738]/60 font-serif select-none pointer-events-none">⌝</span>
+        <span className="absolute -bottom-1 -left-1 text-[9px] text-[#d4a738]/60 font-serif select-none pointer-events-none">⌞</span>
+        <span className="absolute -bottom-1 -right-1 text-[9px] text-[#d4a738]/60 font-serif select-none pointer-events-none">⌟</span>
+
         {NAV_ITEMS.map((item) => {
           const isActive = activeTab === item.key
 
@@ -42,27 +49,31 @@ export default function ProfessionalNavbar({
               key={item.key}
               disabled={disabled}
               onClick={() => onSelectTab(item.key)}
-              className={`relative px-4 py-2 rounded-full text-xs font-medium transition-all cursor-pointer ${
+              className={`relative px-4 py-2 rounded-md text-xs font-semibold tracking-wider transition-all cursor-pointer ${
                 isActive
-                  ? 'text-white'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
+                  ? 'text-[#f6efe2]'
+                  : 'text-[#c7b8a5] hover:text-[#f6efe2] hover:bg-[#801b2b]/15'
               } ${disabled ? 'opacity-60 cursor-wait' : ''}`}
-              style={{ fontFamily: '"Inter", sans-serif', letterSpacing: '0.04em' }}
+              style={{ fontFamily: '"Cinzel", serif' }}
             >
-              {/* Active Golden Glow Pill Background */}
+              {/* Active Gryffindor Velvet & Burnished Gold Plaque */}
               {isActive && (
                 <motion.div
-                  layoutId="active-pill"
-                  className="absolute inset-0 rounded-full border border-amber-400/30"
+                  layoutId="active-tab-plaque"
+                  className="absolute inset-0 rounded-md border border-[#d4a738]/60"
                   style={{
-                    backgroundColor: 'rgba(212, 175, 55, 0.15)',
-                    boxShadow: '0 0 15px rgba(212, 175, 55, 0.25)',
+                    backgroundColor: 'rgba(110, 22, 36, 0.85)',
+                    boxShadow:
+                      '0 0 16px rgba(128, 27, 43, 0.6), inset 0 0 8px rgba(212, 167, 56, 0.25)',
                   }}
-                  transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                  transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                 />
               )}
 
-              <span className="relative z-10">{item.label}</span>
+              <span className="relative z-10 flex items-center gap-1.5">
+                {isActive && <span className="text-[#e5ba48] text-[9px]">✦</span>}
+                {item.label}
+              </span>
             </button>
           )
         })}
@@ -70,4 +81,3 @@ export default function ProfessionalNavbar({
     </header>
   )
 }
-

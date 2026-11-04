@@ -1,96 +1,65 @@
 @import "tailwindcss";
 
 @theme {
-  --color-parchment-base: #f4ede0;
-  --color-parchment-light: #fbf8f2;
-  --color-parchment-aged: #e8dcbe;
-  --color-parchment-border: #cfbe9b;
-  --color-ink-primary: #2b2118;
-  --color-ink-secondary: #5c4938;
-  --color-ink-muted: #8c735d;
-  --color-ink-faded: #b8a48e;
-  --color-accent-gold: #c59a3f;
-  --color-accent-amber: #df9b32;
-  --color-accent-glow: #ffd778;
-  --color-void-bg: #0c0d12;
-  --color-void-surface: #14161f;
-  --color-void-border: #232738;
-  --color-wax-seal: #8b2626;
-  --color-wax-seal-hover: #a32e2e;
+  --color-mahogany-dark: #0d090b;
+  --color-mahogany-base: #170f13;
+  --color-mahogany-card: #201318;
+  --color-mahogany-border: #3b222c;
+  
+  --color-gryffindor-crimson: #801b2b;
+  --color-gryffindor-crimson-dark: #4a0e18;
+  --color-gryffindor-crimson-glow: #a62438;
+  --color-gryffindor-gold: #d4a738;
+  --color-gryffindor-amber: #e5ba48;
+  --color-gryffindor-brass: #b88a2a;
+
+  --color-text-parchment: #f6efe2;
+  --color-text-parchment-muted: #c7b8a5;
+  --color-text-leather: #8c7967;
 
   --font-cinzel-dec: "Cinzel Decorative", serif;
   --font-cinzel: "Cinzel", serif;
   --font-cormorant: "Cormorant Garamond", serif;
   --font-garamond: "EB Garamond", serif;
-  --font-script: "Marck Script", cursive;
   --font-inter: "Inter", sans-serif;
 }
 
-/* Custom parchment organic texture layer */
-.bg-parchment-texture {
-  background-color: var(--color-parchment-base);
+/* Warm magical library ambient vignette */
+.library-vignette {
   background-image: 
-    radial-gradient(#2b2118 0.5px, transparent 0.5px),
-    radial-gradient(#8c735d 0.4px, var(--color-parchment-base) 0.4px);
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
+    radial-gradient(ellipse at 50% 0%, rgba(128, 27, 43, 0.14) 0%, transparent 65%),
+    radial-gradient(ellipse at 50% 100%, rgba(212, 167, 56, 0.08) 0%, transparent 60%);
 }
 
-/* Aged vignette effect */
-.parchment-vignette {
-  box-shadow: inset 0 0 100px rgba(92, 73, 56, 0.2), inset 0 0 30px rgba(43, 33, 24, 0.15);
+/* Antique brass double border effect */
+.brass-border {
+  border: 1px solid rgba(212, 167, 56, 0.28);
+  box-shadow: 
+    inset 0 0 15px rgba(128, 27, 43, 0.12),
+    0 12px 35px rgba(0, 0, 0, 0.65);
 }
 
-/* Ornate antique double border */
-.antique-border {
-  border: 1px solid var(--color-parchment-border);
-  position: relative;
+.brass-border:hover {
+  border-color: rgba(235, 186, 68, 0.5);
+  box-shadow: 
+    inset 0 0 20px rgba(128, 27, 43, 0.22),
+    0 16px 40px rgba(0, 0, 0, 0.8),
+    0 0 25px rgba(212, 167, 56, 0.15);
 }
 
-.antique-border::before {
-  content: '';
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  right: 3px;
-  bottom: 3px;
-  border: 1px dashed rgba(92, 73, 56, 0.35);
-  pointer-events: none;
-}
-
-/* Ink bleed text styling */
-.text-ink-bleed {
-  text-shadow: 0 0 1px rgba(43, 33, 24, 0.4);
-}
-
-/* Golden glowing pulse */
-@keyframes lumos-pulse {
-  0%, 100% {
-    box-shadow: 0 0 20px 5px rgba(223, 155, 50, 0.5), 0 0 60px 15px rgba(255, 215, 120, 0.35);
-    transform: scale(1);
-  }
-  50% {
-    box-shadow: 0 0 35px 12px rgba(223, 155, 50, 0.75), 0 0 90px 30px rgba(255, 215, 120, 0.5);
-    transform: scale(1.08);
-  }
-}
-
-.animate-lumos {
-  animation: lumos-pulse 3.5s ease-in-out infinite;
-}
-
-/* Custom scrollbar in sepia */
+/* Custom scrollbar in warm antique mahogany & brass */
 ::-webkit-scrollbar {
-  width: 9px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-parchment-aged);
+  background: #0d090b;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-ink-muted);
+  background: #3a2029;
+  border: 1px solid rgba(212, 167, 56, 0.2);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-ink-secondary);
+  background: #541724;
+  border-color: rgba(212, 167, 56, 0.45);
 }
-

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Mail } from 'lucide-react'
+import { Mail, ArrowRight } from 'lucide-react'
 import { OWNER } from '../../data'
 
 interface ContactViewProps {
@@ -25,25 +25,28 @@ function LinkedinIcon({ size = 18 }: { size?: number }) {
 export default function ContactView({ onNavigate }: ContactViewProps) {
   const contactLinks = [
     {
-      title: 'E-mail Direto',
+      title: 'Correspondência Direta',
+      subtitle: 'Para propostas, projetos e oportunidades',
       value: OWNER.email,
       href: `mailto:${OWNER.email}`,
-      icon: <Mail size={18} className="text-amber-300" />,
+      icon: <Mail size={18} className="text-[#e5ba48]" />,
       action: 'Enviar Mensagem',
     },
     {
-      title: 'LinkedIn',
-      value: 'Conectar profissionalmente',
+      title: 'Perfil no LinkedIn',
+      subtitle: 'Conexão profissional e histórico de carreira',
+      value: 'linkedin.com/in/...',
       href: OWNER.linkedin,
       icon: <LinkedinIcon size={18} />,
-      action: 'Acessar Perfil',
+      action: 'Acessar LinkedIn',
     },
     {
-      title: 'GitHub',
-      value: 'Explorar repositórios e código',
+      title: 'Repositório GitHub',
+      subtitle: 'Códigos-fonte, arquitetura e contribuições',
+      value: 'github.com/...',
       href: OWNER.github,
       icon: <GithubIcon size={18} />,
-      action: 'Acessar Repositórios',
+      action: 'Ver Repositórios',
     },
   ]
 
@@ -52,77 +55,96 @@ export default function ContactView({ onNavigate }: ContactViewProps) {
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.35 }}
       className="max-w-4xl mx-auto w-full pt-24 pb-16 px-4"
     >
-      <div className="rounded-2xl p-8 md:p-12 border border-white/10 bg-[#0f121b]/85 backdrop-blur-xl relative overflow-hidden text-center">
-        {/* Glow */}
-        <div
-          className="absolute -bottom-24 -left-24 w-72 h-72 rounded-full pointer-events-none"
-          style={{
-            background: 'radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%)',
-          }}
-          aria-hidden="true"
-        />
-
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-400/20 bg-amber-400/5 text-amber-300 text-xs font-medium mb-4">
+      {/* Header */}
+      <div className="text-center mb-10">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded border border-[#d4a738]/30 bg-[#4a0e18]/40 text-[#e5ba48] text-xs font-semibold tracking-widest uppercase mb-3">
           <span>✦</span>
-          <span>Vamos Conversar</span>
+          <span style={{ fontFamily: '"Cinzel", serif' }}>Mesa de Correspondência</span>
         </div>
-
-        <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-wide mb-3" style={{ fontFamily: '"Cinzel", serif' }}>
-          Entre em Contato
+        <h2
+          className="text-3xl md:text-4xl font-bold text-[#f6efe2] tracking-wide"
+          style={{ fontFamily: '"Cinzel", serif' }}
+        >
+          Contato & Oportunidades
         </h2>
-
-        <p className="text-sm md:text-base text-slate-300 max-w-lg mx-auto mb-10 leading-relaxed font-normal">
-          Disponível para novos desafios, projetos de engenharia de software e colaborações de alto impacto.
+        <p className="text-sm text-[#c7b8a5] max-w-lg mx-auto mt-2">
+          Disponível para novos desafios técnicos, consultoria de arquitetura e projetos de engenharia de software.
         </p>
+      </div>
 
-        {/* Contact Cards */}
-        <div className="grid sm:grid-cols-3 gap-4 mb-10">
-          {contactLinks.map((item) => (
-            <a
-              key={item.title}
-              href={item.href}
-              target={item.href.startsWith('http') ? '_blank' : undefined}
-              rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="p-5 rounded-xl border border-white/10 bg-white/[0.02] hover:border-amber-400/40 hover:bg-white/[0.04] transition-all flex flex-col items-center justify-between group"
-            >
-              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center mb-3 group-hover:border-amber-400/50 group-hover:bg-amber-400/5 transition-all text-amber-300">
+      {/* Contact Cards in Antique Wood & Brass Folio */}
+      <div className="grid md:grid-cols-3 gap-5">
+        {contactLinks.map((item) => (
+          <div
+            key={item.title}
+            className="rounded-lg p-6 border border-[#d4a738]/25 relative overflow-hidden transition-all hover:border-[#d4a738]/50 hover:shadow-2xl hover:shadow-[#801b2b]/25 flex flex-col justify-between"
+            style={{
+              backgroundColor: 'rgba(23, 15, 19, 0.94)',
+              boxShadow:
+                '0 15px 35px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(128, 27, 43, 0.1)',
+            }}
+          >
+            {/* Top corner brackets */}
+            <span className="absolute top-1.5 left-1.5 text-[9px] text-[#d4a738]/40 font-serif select-none pointer-events-none">⌜</span>
+            <span className="absolute top-1.5 right-1.5 text-[9px] text-[#d4a738]/40 font-serif select-none pointer-events-none">⌝</span>
+
+            <div>
+              <div
+                className="w-10 h-10 rounded-md border border-[#d4a738]/35 flex items-center justify-center mb-4 text-[#e5ba48]"
+                style={{
+                  backgroundColor: 'rgba(74, 14, 24, 0.65)',
+                  boxShadow: '0 0 15px rgba(128, 27, 43, 0.4)',
+                }}
+              >
                 {item.icon}
               </div>
 
-              <h3 className="text-sm font-semibold text-white mb-1" style={{ fontFamily: '"Cinzel", serif' }}>
+              <h3
+                className="font-bold text-base text-[#f6efe2] mb-1"
+                style={{ fontFamily: '"Cinzel", serif' }}
+              >
                 {item.title}
               </h3>
 
-              <p className="text-xs text-slate-400 mb-4">{item.value}</p>
+              <p className="text-xs text-[#c7b8a5] mb-4">
+                {item.subtitle}
+              </p>
 
-              <span className="text-xs font-medium text-amber-300 group-hover:underline">
-                {item.action} ➔
-              </span>
+              <p className="text-xs font-mono text-[#ffd778] mb-6 truncate bg-[#100a0d] p-2 rounded border border-white/5">
+                {item.value}
+              </p>
+            </div>
+
+            <a
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full text-center py-2.5 px-4 rounded border border-[#d4a738]/40 text-xs font-semibold tracking-wider text-[#f6efe2] transition-all hover:border-[#e5ba48] hover:shadow-lg hover:shadow-[#801b2b]/30"
+              style={{
+                backgroundColor: '#6e1624',
+                fontFamily: '"Cinzel", serif',
+              }}
+            >
+              {item.action}
             </a>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
 
-        {/* Primary CTA */}
-        <div className="pt-8 border-t border-white/10 flex flex-wrap justify-between items-center gap-4">
-          <button
-            onClick={() => onNavigate('sobre')}
-            className="text-xs text-slate-400 hover:text-white transition-colors cursor-pointer"
-          >
-            ← Voltar para Sobre Mim
-          </button>
-
-          <a
-            href={`mailto:${OWNER.email}`}
-            className="px-8 py-3 rounded-full text-xs font-semibold tracking-wider text-black bg-gradient-to-r from-amber-300 to-amber-500 hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-amber-500/20"
-          >
-            Enviar E-mail Agora
-          </a>
-        </div>
+      {/* Footer Return CTA */}
+      <div className="text-center mt-12">
+        <button
+          onClick={() => onNavigate('sobre')}
+          className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-[#e5ba48] hover:text-[#ffd778] transition-colors cursor-pointer"
+          style={{ fontFamily: '"Cinzel", serif' }}
+        >
+          <span>Retornar ao Início do Tomo</span>
+          <ArrowRight size={13} />
+        </button>
       </div>
     </motion.div>
   )
 }
-

@@ -58,7 +58,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#07080d] text-slate-100 relative selection:bg-amber-400/20 selection:text-amber-200">
+    <div className="min-h-screen bg-[#0d090b] text-[#f6efe2] library-vignette relative selection:bg-[#801b2b]/50 selection:text-[#ffd778]">
       {/* 1. Lumos Entrance Orb Screen */}
       <VoidOverlay
         visible={appMode === 'orb'}
@@ -68,10 +68,10 @@ export default function App() {
       {/* 2. Portfolio View with Magical Lumos Atmosphere */}
       {appMode === 'portfolio' && (
         <div className="relative min-h-screen flex flex-col justify-between">
-          {/* Ambient Lumos golden floating embers */}
+          {/* Ambient Candlelight & Hearth Motes */}
           <AmbientEmbers />
 
-          {/* Floating Glassmorphic Navigation Bar */}
+          {/* Antique Leather & Brass Navigation Bar */}
           <ProfessionalNavbar
             activeTab={activeTab}
             onSelectTab={handleNavigate}
@@ -88,18 +88,21 @@ export default function App() {
             </AnimatePresence>
           </main>
 
-          {/* Professional Minimalist Footer */}
-          <footer className="relative z-10 py-8 border-t border-white/5 text-center text-xs text-slate-500 backdrop-blur-sm">
+          {/* Archival Library Footer */}
+          <footer className="relative z-10 py-8 border-t border-[#d4a738]/15 text-center text-xs text-[#c7b8a5] backdrop-blur-sm">
             <div className="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <p>
-                © {new Date().getFullYear()} {OWNER.name} · Desenvolvedor Full Stack
+              <p style={{ fontFamily: '"Cinzel", serif' }}>
+                © {new Date().getFullYear()} {OWNER.name} · Engenharia de Software & Arquitetura
               </p>
 
               <div className="flex items-center gap-6">
-                <span className="text-amber-400/60 font-serif">✦ Lumos Portfolio</span>
+                <span className="text-[#e5ba48] font-serif text-[11px] tracking-widest uppercase">
+                  ✦ Bibliotheca Magica
+                </span>
                 <button
                   onClick={handleReturnToOrb}
-                  className="text-slate-400 hover:text-amber-300 transition-colors cursor-pointer text-[11px]"
+                  className="text-[#c7b8a5] hover:text-[#ffd778] transition-colors cursor-pointer text-[11px]"
+                  style={{ fontFamily: '"Cinzel", serif' }}
                 >
                   Entrada do Orbe
                 </button>

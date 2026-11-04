@@ -12,69 +12,101 @@ export default function SkillsView({ onNavigate }: SkillsViewProps) {
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.35 }}
       className="max-w-5xl mx-auto w-full pt-24 pb-16 px-4"
     >
+      {/* Header */}
       <div className="text-center mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-400/20 bg-amber-400/5 text-amber-300 text-xs font-medium mb-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded border border-[#d4a738]/30 bg-[#4a0e18]/40 text-[#e5ba48] text-xs font-semibold tracking-widest uppercase mb-3">
           <span>✦</span>
-          <span>Stack & Ferramentas</span>
+          <span style={{ fontFamily: '"Cinzel", serif' }}>Compêndio de Especialidades</span>
         </div>
-        <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-wide" style={{ fontFamily: '"Cinzel", serif' }}>
-          Habilidades Técnicas
+        <h2
+          className="text-3xl md:text-4xl font-bold text-[#f6efe2] tracking-wide"
+          style={{ fontFamily: '"Cinzel", serif' }}
+        >
+          Habilidades & Conhecimento
         </h2>
-        <p className="text-sm text-slate-400 max-w-lg mx-auto mt-2">
-          Tecnologias dominadas para a criação de sistemas web modernos, escaláveis e resilientes.
+        <p className="text-sm text-[#c7b8a5] max-w-lg mx-auto mt-2">
+          Tecnologias e metodologias dominadas na construção de sistemas modernos e escaláveis.
         </p>
       </div>
 
+      {/* Library Shelves / Bookplate Panels */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {SKILL_GROUPS.map((group) => (
           <div
             key={group.category}
-            className="rounded-xl p-5 border border-white/10 bg-[#0f121b]/80 backdrop-blur-md hover:border-amber-400/30 transition-all flex flex-col justify-between"
+            className="rounded-lg p-5 border border-[#d4a738]/25 relative overflow-hidden transition-all hover:border-[#d4a738]/50 hover:shadow-xl hover:shadow-[#801b2b]/20 flex flex-col justify-between"
+            style={{
+              backgroundColor: 'rgba(23, 15, 19, 0.94)',
+              boxShadow:
+                '0 12px 30px rgba(0, 0, 0, 0.65), inset 0 0 20px rgba(128, 27, 43, 0.08)',
+            }}
           >
+            {/* Top corner accents */}
+            <span className="absolute top-1.5 left-1.5 text-[9px] text-[#d4a738]/40 font-serif select-none pointer-events-none">⌜</span>
+            <span className="absolute top-1.5 right-1.5 text-[9px] text-[#d4a738]/40 font-serif select-none pointer-events-none">⌝</span>
+
             <div>
-              <div className="flex items-center gap-2.5 pb-3 mb-4 border-b border-white/10">
+              {/* Category Header */}
+              <div className="flex items-center gap-2.5 pb-3 mb-4 border-b border-[#d4a738]/20">
                 <span className="text-lg">{group.icon}</span>
-                <h3 className="font-semibold text-sm text-white tracking-wide" style={{ fontFamily: '"Cinzel", serif' }}>
+                <h3
+                  className="font-bold text-sm text-[#f6efe2] tracking-wide"
+                  style={{ fontFamily: '"Cinzel", serif' }}
+                >
                   {group.category}
                 </h3>
               </div>
 
+              {/* Skills list */}
               <ul className="space-y-2.5">
-                {group.skills.map((skill) => (
-                  <li key={skill.name} className="flex items-center justify-between text-xs">
-                    <span className="text-slate-200 font-medium">{skill.name}</span>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full border border-amber-400/20 bg-amber-400/10 text-amber-300 font-semibold">
-                      {skill.level === 'Arcano' ? 'Sênior' : skill.level === 'Proficiente' ? 'Avançado' : 'Prático'}
-                    </span>
-                  </li>
-                ))}
+                {group.skills.map((skill) => {
+                  const levelLabel =
+                    skill.level === 'Arcano'
+                      ? 'Sênior'
+                      : skill.level === 'Proficiente'
+                      ? 'Avançado'
+                      : 'Prático'
+
+                  return (
+                    <li
+                      key={skill.name}
+                      className="flex items-center justify-between text-xs py-1 border-b border-white/[0.03]"
+                    >
+                      <span className="text-[#f6efe2] font-medium">{skill.name}</span>
+                      <span
+                        className="text-[10px] px-2 py-0.5 rounded border border-[#d4a738]/30 bg-[#3a1822]/80 text-[#ffd778] font-semibold"
+                        style={{ fontFamily: '"Cinzel", serif' }}
+                      >
+                        {levelLabel}
+                      </span>
+                    </li>
+                  )
+                })}
               </ul>
+            </div>
+
+            {/* Subtle bottom filigree accent */}
+            <div className="mt-6 pt-3 border-t border-[#d4a738]/15 text-center">
+              <span className="text-[10px] text-[#d4a738]/50 font-serif">✦ ✦ ✦</span>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Navigation Footbar */}
-      <div className="mt-12 flex justify-between items-center flex-wrap gap-4 pt-6 border-t border-white/10">
-        <button
-          onClick={() => onNavigate('projetos')}
-          className="text-xs text-slate-400 hover:text-white transition-colors cursor-pointer"
-        >
-          ← Voltar para Projetos
-        </button>
-
+      {/* Footer Navigation CTA */}
+      <div className="text-center mt-12">
         <button
           onClick={() => onNavigate('contato')}
-          className="px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider text-black bg-gradient-to-r from-amber-300 to-amber-500 hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-amber-500/20 flex items-center gap-2 cursor-pointer"
+          className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-[#e5ba48] hover:text-[#ffd778] transition-colors cursor-pointer"
+          style={{ fontFamily: '"Cinzel", serif' }}
         >
-          <span>Entrar em Contato</span>
-          <ArrowRight size={14} />
+          <span>Avançar para Correspondência & Contato</span>
+          <ArrowRight size={13} />
         </button>
       </div>
     </motion.div>
   )
 }
-
