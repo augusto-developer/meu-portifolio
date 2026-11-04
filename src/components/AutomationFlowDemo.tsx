@@ -13,6 +13,7 @@ import {
   TrendingDown,
   ExternalLink,
   Sparkles,
+  ChevronRight,
 } from 'lucide-react'
 import { BrassCorner } from './ui/BookOrnaments'
 
@@ -107,58 +108,7 @@ const ARCHITECTURE_PILLARS: Pillar[] = [
   },
 ]
 
-/**
- * Animated Magic Wand Connector:
- * Replaces generic arrows with a crafted wand pointing forward with a pulsating starlight burst.
- */
-function MagicWandConnector() {
-  return (
-    <div className="hidden md:flex items-center justify-center -mx-3 z-30 pointer-events-none select-none">
-      <div className="relative flex items-center">
-        {/* Wand SVG */}
-        <svg
-          width="42"
-          height="22"
-          viewBox="0 0 42 22"
-          fill="none"
-          className="drop-shadow-[0_0_8px_rgba(235,186,68,0.7)]"
-        >
-          <defs>
-            <linearGradient id="wandWoodGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#2c140a" />
-              <stop offset="35%" stopColor="#542813" />
-              <stop offset="85%" stopColor="#7a3e1a" />
-              <stop offset="100%" stopColor="#d4a738" />
-            </linearGradient>
-          </defs>
 
-          {/* Tapered Wand Shaft pointing right */}
-          <path
-            d="M3 14 L12 12.5 L34 9.5 L35 8.5 L12 11.5 Z"
-            fill="url(#wandWoodGrad)"
-            stroke="#1a0a05"
-            strokeWidth="0.5"
-          />
-          {/* Wand Handle Ring Accents in Burnished Brass */}
-          <line x1="6" y1="12" x2="7" y2="15" stroke="#ffd778" strokeWidth="1" />
-          <line x1="9" y1="11.5" x2="10" y2="14.5" stroke="#ffd778" strokeWidth="1" />
-          {/* Glowing Wand Tip Core */}
-          <circle cx="35" cy="8.5" r="1.5" fill="#ffffff" />
-          <circle cx="35" cy="8.5" r="3" fill="#ffd778" fillOpacity="0.4" />
-        </svg>
-
-        {/* Pulsating Cast Star Spark */}
-        <motion.span
-          animate={{ scale: [0.8, 1.4, 0.8], opacity: [0.7, 1, 0.7] }}
-          transition={{ repeat: Infinity, duration: 1.1, ease: 'easeInOut' }}
-          className="absolute -right-1 -top-1 text-[#ffd778] text-xs drop-shadow-[0_0_8px_#ffd778]"
-        >
-          ✦
-        </motion.span>
-      </div>
-    </div>
-  )
-}
 
 export default function AutomationFlowDemo({
   isOpen,
@@ -306,8 +256,12 @@ export default function AutomationFlowDemo({
                       </span>
                     </button>
 
-                    {/* Magic Wand Connector between columns */}
-                    {idx < 4 && <MagicWandConnector />}
+                    {/* Normal Clean Directional Arrow */}
+                    {idx < 4 && (
+                      <div className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-20 pointer-events-none items-center justify-center text-[#ffd778] drop-shadow-[0_0_4px_rgba(212,167,56,0.6)]">
+                        <ChevronRight size={16} />
+                      </div>
+                    )}
                   </div>
                 )
               })}

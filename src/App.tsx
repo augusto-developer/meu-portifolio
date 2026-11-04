@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion'
 import VoidOverlay from './components/VoidOverlay'
 import LibraryBackground from './components/LibraryBackground'
 import LumosTransition from './components/LumosTransition'
+import WandCursor from './components/WandCursor'
 import ProfessionalNavbar, { type SectionTab } from './components/ProfessionalNavbar'
 import AboutView from './components/views/AboutView'
 import ProjectsView from './components/views/ProjectsView'
@@ -112,6 +113,9 @@ export default function App() {
         onMidpoint={handleLumosMidpoint}
         onEnd={handleLumosEnd}
       />
+
+      {/* 4. Magical Wand Cursor Trail */}
+      <WandCursor />
     </div>
   )
 }
