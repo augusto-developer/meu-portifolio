@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import VoidOverlay from './components/VoidOverlay'
-import AmbientEmbers from './components/AmbientEmbers'
+import LibraryBackground from './components/LibraryBackground'
 import LumosTransition from './components/LumosTransition'
 import ProfessionalNavbar, { type SectionTab } from './components/ProfessionalNavbar'
 import AboutView from './components/views/AboutView'
@@ -68,8 +68,8 @@ export default function App() {
       {/* 2. Portfolio View with Magical Lumos Atmosphere */}
       {appMode === 'portfolio' && (
         <div className="relative min-h-screen flex flex-col justify-between">
-          {/* Ambient Candlelight & Hearth Motes */}
-          <AmbientEmbers />
+          {/* Clean Wooden Library & Magical Book Background */}
+          <LibraryBackground />
 
           {/* Antique Leather & Brass Navigation Bar */}
           <ProfessionalNavbar

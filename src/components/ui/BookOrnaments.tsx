@@ -128,3 +128,4 @@ export function VintageDivider({ className = '' }: { className?: string }) {
     </div>
   )
 }
+
