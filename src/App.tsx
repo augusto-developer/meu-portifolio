@@ -88,25 +88,19 @@ export default function App() {
             </AnimatePresence>
           </main>
 
-          {/* Archival Library Footer */}
-          <footer className="relative z-10 py-8 border-t border-[#d4a738]/15 text-center text-xs text-[#c7b8a5] backdrop-blur-sm">
-            <div className="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <p style={{ fontFamily: '"Cinzel", serif' }}>
-                © {new Date().getFullYear()} {OWNER.name} · Engenharia de Software & Arquitetura
+          {/* Clean Footer */}
+          <footer className="relative z-10 py-6 border-t border-[#d4a738]/15 text-xs text-[#c7b8a5] font-sans">
+            <div className="max-w-4xl mx-auto px-4 flex items-center justify-between">
+              <p>
+                © {new Date().getFullYear()} {OWNER.name}
               </p>
 
-              <div className="flex items-center gap-6">
-                <span className="text-[#e5ba48] font-serif text-[11px] tracking-widest uppercase">
-                  ✦ Bibliotheca Magica
-                </span>
-                <button
-                  onClick={handleReturnToOrb}
-                  className="text-[#c7b8a5] hover:text-[#ffd778] transition-colors cursor-pointer text-[11px]"
-                  style={{ fontFamily: '"Cinzel", serif' }}
-                >
-                  Entrada do Orbe
-                </button>
-              </div>
+              <button
+                onClick={handleReturnToOrb}
+                className="text-[#c7b8a5] hover:text-[#ffd778] transition-colors cursor-pointer text-xs"
+              >
+                ✦ Entrada do Orbe
+              </button>
             </div>
           </footer>
         </div>

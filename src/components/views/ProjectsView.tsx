@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ExternalLink, ArrowRight, Book, Play, Lock } from 'lucide-react'
+import { ExternalLink, Book, Play, Lock } from 'lucide-react'
 import { PROJECTS } from '../../data'
 import { BrassCorner } from '../ui/BookOrnaments'
 import AutomationFlowDemo from '../AutomationFlowDemo'
@@ -25,152 +25,113 @@ export default function ProjectsView({ onNavigate }: ProjectsViewProps) {
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
-      transition={{ duration: 0.35 }}
-      className="max-w-5xl mx-auto w-full pt-28 pb-16 px-4"
+      transition={{ duration: 0.3 }}
+      className="max-w-5xl mx-auto w-full pt-28 pb-16 px-4 font-sans"
     >
-      {/* Wooden Section Header */}
-      <div className="text-center mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded border border-[#d4a738]/40 bg-[#3d0d16]/60 text-[#ffd778] text-xs font-bold tracking-widest uppercase mb-2 shadow-md">
+      {/* Header */}
+      <div className="text-center mb-8">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded border border-[#d4a738]/35 bg-[#3d0d16]/60 text-[#ffd778] text-xs font-semibold mb-2 shadow-sm">
           <Book size={12} className="text-[#e5ba48]" />
-          <span style={{ fontFamily: '"Cinzel", serif' }}>Biblioteca de Obras & Aplicações</span>
+          <span>Projetos em Destaque</span>
         </div>
-        <h2
-          className="text-3xl md:text-4xl font-bold text-[#f6efe2] tracking-wide"
-          style={{
-            fontFamily: '"Cinzel", serif',
-            textShadow: '0 2px 8px rgba(0,0,0,0.8)',
-          }}
-        >
-          Tomos Encadernados & Projetos
+        <h2 className="text-2xl sm:text-3xl font-bold text-[#f6efe2] tracking-tight">
+          Projetos & Aplicações
         </h2>
-        <p className="text-sm text-[#c7b8a5] max-w-lg mx-auto mt-2">
-          Cada projeto é um tomo de código artesanal com arquitetura resiliente e propósito real.
-        </p>
       </div>
 
-      {/* Grid of Grimoire / Tome Covers */}
-      <div className="grid md:grid-cols-2 gap-8">
+      {/* Grid of Projects */}
+      <div className="grid md:grid-cols-2 gap-6">
         {PROJECTS.map((proj) => (
           <article
             key={proj.id}
-            className="group relative rounded-lg border-2 border-[#d4a738]/35 transition-all duration-300 hover:border-[#ffd778]/70 hover:-translate-y-1 overflow-hidden flex flex-col justify-between"
+            className="group relative rounded-lg border border-[#d4a738]/30 transition-all duration-200 hover:border-[#ffd778]/60 overflow-hidden flex flex-col justify-between"
             style={{
               background:
-                'linear-gradient(135deg, #24131b 0%, #170d13 50%, #10070c 100%)',
+                'linear-gradient(135deg, #22121a 0%, #170d13 50%, #10070c 100%)',
               boxShadow:
-                '0 16px 40px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(80, 15, 25, 0.25)',
+                '0 12px 35px rgba(0, 0, 0, 0.75), inset 0 0 25px rgba(80, 15, 25, 0.2)',
             }}
           >
-            {/* 4 Brass Corners on Book Cover */}
-            <BrassCorner position="tl" size={30} />
-            <BrassCorner position="tr" size={30} />
-            <BrassCorner position="bl" size={30} />
-            <BrassCorner position="br" size={30} />
+            {/* Brass Corners */}
+            <BrassCorner position="tl" size={26} />
+            <BrassCorner position="tr" size={26} />
+            <BrassCorner position="bl" size={26} />
+            <BrassCorner position="br" size={26} />
 
-            {/* Left Embossed Leather Spine Strip */}
-            <div className="absolute left-0 inset-y-0 w-4 bg-gradient-to-r from-[#0c0508] via-[#421926] to-[#12070c] border-r border-[#d4a738]/40">
+            {/* Left Embossed Spine Strip */}
+            <div className="absolute left-0 inset-y-0 w-3 bg-gradient-to-r from-[#0c0508] via-[#421926] to-[#12070c] border-r border-[#d4a738]/30">
               <div className="h-full flex flex-col justify-around py-4">
-                <div className="h-0.5 bg-[#ffd778]/50 shadow-sm" />
-                <div className="h-0.5 bg-[#ffd778]/50 shadow-sm" />
-                <div className="h-0.5 bg-[#ffd778]/50 shadow-sm" />
+                <div className="h-0.5 bg-[#ffd778]/40" />
+                <div className="h-0.5 bg-[#ffd778]/40" />
+                <div className="h-0.5 bg-[#ffd778]/40" />
               </div>
             </div>
 
-            {/* Inset Gold-Tooling Filigree Border */}
-            <div className="absolute inset-2.5 rounded border border-[#d4a738]/25 pointer-events-none" />
-
-            {/* Featured Velvet Bookmark Ribbon */}
+            {/* Featured Bookmark Ribbon */}
             {proj.featured && (
               <div
-                className="absolute top-0 right-6 px-3 pt-1 pb-2 border-x border-b border-[#ffd778]/60 text-[10px] font-bold tracking-widest text-[#ffe8a3] uppercase z-20"
+                className="absolute top-0 right-5 px-3 pt-1 pb-2 border-x border-b border-[#ffd778]/60 text-[10px] font-bold tracking-wider text-[#ffe8a3] uppercase z-20"
                 style={{
-                  background:
-                    'linear-gradient(180deg, #8a192b 0%, #520d18 100%)',
-                  boxShadow: '0 4px 10px rgba(0,0,0,0.6)',
-                  fontFamily: '"Cinzel", serif',
+                  background: 'linear-gradient(180deg, #8a192b 0%, #520d18 100%)',
+                  boxShadow: '0 3px 8px rgba(0,0,0,0.5)',
                   clipPath:
-                    'polygon(0 0, 100% 0, 100% calc(100% - 6px), 50% 100%, 0 calc(100% - 6px))',
+                    'polygon(0 0, 100% 0, 100% calc(100% - 5px), 50% 100%, 0 calc(100% - 5px))',
                 }}
               >
-                ★ Em Destaque
+                ★ Destaque
               </div>
             )}
 
-            {/* Book Body */}
-            <div className="p-6 pl-8 relative z-10">
-              <div className="mb-2 pt-1 flex flex-wrap items-center gap-2">
-                <span
-                  className="text-[10px] font-bold text-[#e5ba48] tracking-widest uppercase bg-[#3a1520]/60 px-2 py-0.5 rounded border border-[#d4a738]/20"
-                  style={{ fontFamily: '"Cinzel", serif' }}
-                >
-                  Tomo de Produção
-                </span>
-
-                {proj.metrics && (
-                  <span
-                    className="text-[10px] font-bold text-[#ffd778] bg-[#6e1624]/60 px-2 py-0.5 rounded border border-[#ffd778]/30"
-                    style={{ fontFamily: '"Cinzel", serif' }}
-                  >
+            {/* Card Content */}
+            <div className="p-6 pl-7 relative z-10">
+              {proj.metrics && (
+                <div className="mb-2">
+                  <span className="text-[11px] font-semibold text-[#ffd778] bg-[#6e1624]/70 px-2.5 py-0.5 rounded border border-[#ffd778]/30">
                     ⚡ {proj.metrics}
                   </span>
-                )}
-              </div>
+                </div>
+              )}
 
-              {/* Stamped Book Title */}
-              <h3
-                className="text-xl font-bold text-[#f6efe2] tracking-wide mb-2 group-hover:text-[#ffd778] transition-colors"
-                style={{
-                  fontFamily: '"Cinzel", serif',
-                  textShadow: '0 2px 4px rgba(0,0,0,0.8)',
-                }}
-              >
+              <h3 className="text-lg font-bold text-[#f6efe2] tracking-tight mb-2 group-hover:text-[#ffd778] transition-colors">
                 {proj.title}
               </h3>
 
-              <p className="text-sm text-[#c7b8a5] leading-relaxed mb-4 font-sans">
+              <p className="text-xs sm:text-sm text-[#c7b8a5] leading-relaxed mb-4">
                 {proj.description}
               </p>
 
-              {/* Confidentiality Notice Banner if applicable */}
+              {/* Confidentiality Pill */}
               {proj.confidentialityNotice && (
-                <div className="mb-5 p-2.5 rounded border border-amber-600/30 bg-amber-950/30 flex items-start gap-2 text-[11px] text-[#ffd778]">
-                  <Lock size={13} className="text-amber-400 shrink-0 mt-0.5" />
-                  <span className="font-sans leading-tight">
-                    {proj.confidentialityNotice}
-                  </span>
+                <div className="mb-4 p-2 rounded border border-amber-600/30 bg-amber-950/30 flex items-center gap-2 text-[11px] text-[#ffd778]">
+                  <Lock size={12} className="text-amber-400 shrink-0" />
+                  <span>{proj.confidentialityNotice}</span>
                 </div>
               )}
             </div>
 
-            {/* Bottom Book Section: Tags & Clasps */}
-            <div className="p-6 pl-8 pt-0 relative z-10">
-              {/* Stamped Leather Spine Tags */}
-              <div className="flex flex-wrap gap-1.5 mb-6">
+            {/* Bottom Actions */}
+            <div className="p-6 pl-7 pt-0 relative z-10">
+              {/* Tags */}
+              <div className="flex flex-wrap gap-1.5 mb-5">
                 {proj.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-[10px] font-semibold px-2 py-1 rounded border border-[#d4a738]/30 bg-[#160a0f] text-[#ffd778] tracking-wider uppercase"
-                    style={{ fontFamily: '"Cinzel", serif' }}
+                    className="text-[10px] font-medium px-2 py-0.5 rounded border border-[#d4a738]/25 bg-[#160a0f] text-[#ffd778]"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
 
-              {/* Brass Book Clasp Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-[#d4a738]/20">
-                {/* 1. If it's an Interactive Animated Flow Demo */}
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-2.5 pt-3 border-t border-[#d4a738]/15">
                 {proj.demoType === 'interactive-flow' ? (
                   <>
                     <button
                       onClick={() => setIsFlowDemoOpen(true)}
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded border border-[#d4a738] text-xs font-bold tracking-wider text-[#ffe8a3] transition-all cursor-pointer hover:border-[#ffd778] hover:shadow-lg hover:shadow-[#801b2b]/40"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded border border-[#d4a738] text-xs font-semibold text-[#ffe8a3] transition-all cursor-pointer hover:border-[#ffd778] hover:shadow-lg hover:shadow-[#801b2b]/40"
                       style={{
-                        background:
-                          'linear-gradient(180deg, #7a1626 0%, #4a0d17 100%)',
-                        boxShadow:
-                          '0 3px 8px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,225,140,0.3)',
-                        fontFamily: '"Cinzel", serif',
+                        background: 'linear-gradient(180deg, #7a1626 0%, #4a0d17 100%)',
                       }}
                     >
                       <Play size={12} className="text-[#ffd778] fill-[#ffd778]" />
@@ -179,9 +140,7 @@ export default function ProjectsView({ onNavigate }: ProjectsViewProps) {
 
                     <button
                       onClick={() => onNavigate('contato')}
-                      className="inline-flex items-center gap-1.5 px-3 py-2 rounded border border-[#d4a738]/30 text-xs font-bold tracking-wider text-[#c7b8a5] hover:text-[#ffd778] hover:bg-[#801b2b]/20 transition-all cursor-pointer"
-                      style={{ fontFamily: '"Cinzel", serif' }}
-                      title="Repositório sob sigilo. Clique para conversar sobre a arquitetura."
+                      className="inline-flex items-center gap-1.5 px-3 py-2 rounded border border-[#d4a738]/30 text-xs font-medium text-[#c7b8a5] hover:text-[#ffd778] hover:bg-[#801b2b]/20 transition-all cursor-pointer"
                     >
                       <Lock size={12} className="text-amber-400" />
                       <span>Repositório sob NDA</span>
@@ -189,22 +148,17 @@ export default function ProjectsView({ onNavigate }: ProjectsViewProps) {
                   </>
                 ) : (
                   <>
-                    {/* Standard Links for other projects */}
                     {proj.liveUrl && (
                       <a
                         href={proj.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded border border-[#d4a738] text-xs font-bold tracking-wider text-[#ffe8a3] transition-all cursor-pointer hover:border-[#ffd778] hover:shadow-lg hover:shadow-[#801b2b]/40"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded border border-[#d4a738] text-xs font-semibold text-[#ffe8a3] transition-all cursor-pointer hover:border-[#ffd778]"
                         style={{
-                          background:
-                            'linear-gradient(180deg, #7a1626 0%, #4a0d17 100%)',
-                          boxShadow:
-                            '0 3px 8px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,225,140,0.3)',
-                          fontFamily: '"Cinzel", serif',
+                          background: 'linear-gradient(180deg, #7a1626 0%, #4a0d17 100%)',
                         }}
                       >
-                        <span>Abrir Tomo (Demo)</span>
+                        <span>Abrir Demo</span>
                         <ExternalLink size={12} className="text-[#ffd778]" />
                       </a>
                     )}
@@ -214,11 +168,10 @@ export default function ProjectsView({ onNavigate }: ProjectsViewProps) {
                         href={proj.repoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded border border-[#d4a738]/35 text-xs font-bold tracking-wider text-[#c7b8a5] hover:text-[#f6efe2] hover:bg-[#801b2b]/25 transition-all cursor-pointer"
-                        style={{ fontFamily: '"Cinzel", serif' }}
+                        className="inline-flex items-center gap-1.5 px-3 py-2 rounded border border-[#d4a738]/30 text-xs font-medium text-[#c7b8a5] hover:text-[#f6efe2] hover:bg-[#801b2b]/20 transition-all cursor-pointer"
                       >
-                        <GithubIcon size={13} />
-                        <span>Pergaminho de Código</span>
+                        <GithubIcon size={12} />
+                        <span>Código Fonte</span>
                       </a>
                     )}
                   </>
@@ -229,19 +182,7 @@ export default function ProjectsView({ onNavigate }: ProjectsViewProps) {
         ))}
       </div>
 
-      {/* Return or Advance Nav CTA */}
-      <div className="text-center mt-12">
-        <button
-          onClick={() => onNavigate('habilidades')}
-          className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#e5ba48] hover:text-[#ffd778] transition-colors cursor-pointer"
-          style={{ fontFamily: '"Cinzel", serif' }}
-        >
-          <span>Examinar o Compêndio de Habilidades</span>
-          <ArrowRight size={13} />
-        </button>
-      </div>
-
-      {/* Interactive Modal Demo */}
+      {/* Interactive Modal */}
       <AutomationFlowDemo
         isOpen={isFlowDemoOpen}
         onClose={() => setIsFlowDemoOpen(false)}

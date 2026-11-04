@@ -96,12 +96,11 @@ export default function ProfessionalNavbar({
 
               {/* Label */}
               <span
-                className={`relative z-10 text-[11px] sm:text-xs font-bold tracking-wider uppercase block text-center mt-1 ${
+                className={`relative z-10 text-[11px] sm:text-xs font-semibold block text-center mt-1 font-sans ${
                   isActive
-                    ? 'text-[#ffe8a3] drop-shadow-[0_1px_4px_rgba(235,186,68,0.6)]'
+                    ? 'text-[#ffe8a3] drop-shadow-[0_1px_3px_rgba(235,186,68,0.5)]'
                     : 'text-[#c2b099] group-hover:text-[#f6efe2]'
                 }`}
-                style={{ fontFamily: '"Cinzel", serif' }}
               >
                 {isActive && <span className="text-[#ffd778] mr-1">✦</span>}
                 {item.label}

@@ -21,25 +21,25 @@ colors:
   text-muted: "#8c7967"
 typography:
   heading-display:
-    fontFamily: "'Cinzel', Georgia, serif"
-    fontSize: 40px
+    fontFamily: "'Inter', system-ui, sans-serif"
+    fontSize: 34px
     fontWeight: 700
-    letterSpacing: 0.05em
+    letterSpacing: -0.02em
   heading-section:
-    fontFamily: "'Cinzel', Georgia, serif"
-    fontSize: 26px
+    fontFamily: "'Inter', system-ui, sans-serif"
+    fontSize: 22px
     fontWeight: 600
-    letterSpacing: 0.04em
+    letterSpacing: -0.01em
   body-primary:
     fontFamily: "'Inter', system-ui, sans-serif"
-    fontSize: 16px
+    fontSize: 15px
     fontWeight: 400
-    lineHeight: 1.65
+    lineHeight: 1.6
   label-tag:
-    fontFamily: "'Cinzel', serif"
+    fontFamily: "'Inter', system-ui, sans-serif"
     fontSize: 11px
     fontWeight: 600
-    letterSpacing: 0.06em
+    letterSpacing: 0.02em
 rounded:
   sm: 4px
   md: 8px
