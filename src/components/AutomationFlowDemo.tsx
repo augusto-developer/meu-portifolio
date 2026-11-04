@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   X,
-  Play,
-  Pause,
   Lock,
   Cpu,
   Database,
@@ -11,9 +9,8 @@ import {
   Trash2,
   Mail,
   TrendingDown,
-  ExternalLink,
-  Sparkles,
   ChevronRight,
+  ExternalLink,
 } from 'lucide-react'
 import { BrassCorner } from './ui/BookOrnaments'
 
@@ -23,124 +20,83 @@ interface AutomationFlowDemoProps {
   onContactClick: () => void
 }
 
-interface Pillar {
+interface FlowStep {
   id: number
   code: string
+  tag: string
   title: string
-  summary: string
-  techBadge: string
+  tech: string
+  description: string
   icon: typeof Cpu
-  workerName: string
-  bulletPoints: string[]
-  magicalLabel: string
 }
 
-const ARCHITECTURE_PILLARS: Pillar[] = [
+const FLOW_STEPS: FlowStep[] = [
   {
     id: 1,
     code: '01',
+    tag: 'Vigilância Contínua',
     title: 'Multiprocessing & Watchdog',
-    summary: 'Processos isolados (AtlasWorker, UploadWorker, NotificationWorker) geridos por um Watchdog com auto-recovery em caso de timeout de rede.',
-    techBadge: 'Python Multiprocessing',
+    tech: 'Python Multiprocessing',
+    description:
+      'Orquestração de workers independentes a operar em paralelo. O sistema watchdog monitoriza a saúde dos processos e reinicia-os automaticamente em caso de falhas críticas ou timeouts de rede, garantindo alta disponibilidade.',
     icon: Cpu,
-    workerName: 'Watchdog Daemon',
-    bulletPoints: [
-      'Execução paralela de rotinas pesadas sem travar a aplicação principal.',
-      'Auto-recovery automático: reinicia workers em falhas de conexão.',
-    ],
-    magicalLabel: 'Vigilância Contínua',
   },
   {
     id: 2,
     code: '02',
+    tag: 'Integridade & Hashes',
     title: 'PostgreSQL & Hashes SHA-256',
-    summary: 'Assinatura digital dos arquivos para envio estrito de versões novas, com controle transacional de status (Pendentes, Atrasados, Reprovados).',
-    techBadge: 'PostgreSQL + SHA-256',
+    tech: 'PostgreSQL + SHA-256',
+    description:
+      'Registo do estado transacional dos documentos numa base de dados relacional (PostgreSQL). O robô calcula o hash criptográfico (SHA-256) de cada ficheiro processado, garantindo que apenas versões novas ou corrigidas avançam no fluxo, evitando envios duplicados.',
     icon: Database,
-    workerName: 'Core Data Engine',
-    bulletPoints: [
-      'Hash SHA-256 impede reenvio desnecessário de arquivos idênticos.',
-      'Mapeamento dinâmico de regras e prazos de validade.',
-    ],
-    magicalLabel: 'Integridade & Hashes',
   },
   {
     id: 3,
     code: '03',
+    tag: 'Árvore Dinâmica',
     title: 'Pastas no SharePoint / Factorial',
-    summary: 'Estruturação automática de diretórios (Ano > Contrato > Empresa/Colaborador > Mês > Documento) cruzando metadados com planilhas de mapeamento.',
-    techBadge: 'SharePoint & FactorialHR',
+    tech: 'SharePoint & FactorialHR',
+    description:
+      'Sincronização bidirecional e criação de hierarquias de armazenamento. O robô lê as pendências no painel, cruza os dados organizacionais do FactorialHR e constrói dinamicamente os diretórios no SharePoint (Ano > Contrato > Empresa/Colaborador > Documento).',
     icon: FolderTree,
-    workerName: 'TreeDirectoryBuilder',
-    bulletPoints: [
-      'Organização hierárquica autônoma sem intervenção do DP.',
-      'Destino exato de cada cobrança definido em tempo real.',
-    ],
-    magicalLabel: 'Árvore Dinâmica',
   },
   {
     id: 4,
     code: '04',
+    tag: 'Expurgo Preventivo',
     title: 'Pré-Limpeza Inteligente (API)',
-    summary: 'Rotina de DELETE via API no SaaS para purgar versões antigas reprovadas antes do novo upload, evitando duplicidades e erros de submissão.',
-    techBadge: 'REST API DELETE + Patchright',
+    tech: 'REST API DELETE + Patchright',
+    description:
+      'Rotina de DELETE via API no SaaS para purgar versões antigas reprovadas antes do novo upload, evitando duplicidades e erros de submissão. Inclui tratamento avançado de exceções HTTP (ex: rate limits, 503) para manter o fluxo contínuo.',
     icon: Trash2,
-    workerName: 'UploadWorker',
-    bulletPoints: [
-      'Expurgo preventivo da versão reprovada antes de novo envio.',
-      'Tratamento de exceções HTTP para manter o fluxo contínuo.',
-    ],
-    magicalLabel: 'Expurgo Preventivo',
   },
   {
     id: 5,
     code: '05',
+    tag: 'Disparo Inteligente',
     title: 'Notificações & Trava Anti-Spam',
-    summary: 'Templates Jinja2 via Graph API/SMTP categorizados por urgência, com controle de estado que impede múltiplos alertas ao mesmo responsável no mesmo dia.',
-    techBadge: 'Jinja2 + Graph API / SMTP',
+    tech: 'Jinja2 + Graph API / SMTP',
+    description:
+      'Motor de comunicação que renderiza alertas em HTML dinâmico (Jinja2) categorizando a urgência das cobranças. Possui uma trava local na base de dados que impede o envio de e-mails duplicados para o mesmo gestor ou colaborador no mesmo dia.',
     icon: Mail,
-    workerName: 'NotificationWorker',
-    bulletPoints: [
-      'E-mails com templates HTML claros e ranking de prioridades.',
-      'Trava anti-spam local evita sobrecarga na caixa de entrada.',
-    ],
-    magicalLabel: 'Disparo Inteligente',
   },
 ]
-
-
 
 export default function AutomationFlowDemo({
   isOpen,
   onClose,
   onContactClick,
 }: AutomationFlowDemoProps) {
-  const [activePillarId, setActivePillarId] = useState(1)
-  const [isPlaying, setIsPlaying] = useState(true)
-
-  // Cycle through steps
-  useEffect(() => {
-    if (!isOpen || !isPlaying) return
-
-    const timer = setInterval(() => {
-      setActivePillarId((prev) =>
-        prev >= ARCHITECTURE_PILLARS.length ? 1 : prev + 1
-      )
-    }, 4000)
-
-    return () => clearInterval(timer)
-  }, [isOpen, isPlaying])
+  const [hoveredStep, setHoveredStep] = useState<number | null>(null)
+  const [activeStep, setActiveStep] = useState<number>(1)
 
   if (!isOpen) return null
-
-  const currentPillar =
-    ARCHITECTURE_PILLARS.find((p) => p.id === activePillarId) ||
-    ARCHITECTURE_PILLARS[0]
 
   return (
     <AnimatePresence>
       <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-6 overflow-y-auto">
-        {/* Backdrop overlay */}
+        {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -149,21 +105,21 @@ export default function AutomationFlowDemo({
           className="fixed inset-0 bg-black/90 backdrop-blur-sm"
         />
 
-        {/* Spacious Clean Folio Modal */}
+        {/* Modal Container */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 15 }}
           transition={{ duration: 0.25, ease: 'easeOut' }}
-          className="relative w-full max-w-5xl rounded-lg border border-[#d4a738]/40 p-6 sm:p-8 overflow-hidden z-10 my-auto text-[#f6efe2] font-sans"
+          className="relative w-full max-w-6xl rounded-lg border border-[#d4a738]/40 p-6 sm:p-8 md:p-9 overflow-hidden z-10 my-auto text-[#f6efe2] font-sans"
           style={{
             background:
-              'linear-gradient(135deg, #1c0e15 0%, #14090f 50%, #0d060a 100%)',
+              'linear-gradient(135deg, #1a0d14 0%, #13080e 50%, #0d050a 100%)',
             boxShadow:
-              '0 25px 80px rgba(0, 0, 0, 0.95), inset 0 0 50px rgba(128, 27, 43, 0.2)',
+              '0 25px 80px rgba(0, 0, 0, 0.95), inset 0 0 50px rgba(128, 27, 43, 0.25)',
           }}
         >
-          {/* Victorian Brass Corner Accents */}
+          {/* Victorian Brass Corners */}
           <BrassCorner position="tl" size={32} />
           <BrassCorner position="tr" size={32} />
           <BrassCorner position="bl" size={32} />
@@ -178,13 +134,13 @@ export default function AutomationFlowDemo({
             <X size={18} />
           </button>
 
-          {/* Clean Header: Simple & Direct */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 mb-6 border-b border-[#d4a738]/20 pr-10">
+          {/* Header */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 mb-7 border-b border-[#d4a738]/20 pr-10">
             <div>
-              <div className="flex items-center gap-2 mb-1.5">
+              <div className="flex flex-wrap items-center gap-2 mb-1.5">
                 <span className="flex items-center gap-1 px-2.5 py-0.5 rounded border border-[#ffd778]/30 bg-[#6e1624]/60 text-[#ffd778] text-[11px] font-semibold">
                   <TrendingDown size={12} />
-                  <span>Redução de 80% nos atrasos</span>
+                  <span>Redução de 80% nos atrasos e reprovações</span>
                 </span>
                 <span className="flex items-center gap-1 text-[11px] text-[#c7b8a5]">
                   <Lock size={11} className="text-amber-400" />
@@ -193,127 +149,127 @@ export default function AutomationFlowDemo({
               </div>
 
               <h2 className="text-xl sm:text-2xl font-bold text-[#f6efe2] tracking-tight">
-                Automação de Documentos do DP
+                Automação de Documentos do DP · Fluxo Sequencial
               </h2>
             </div>
 
-            {/* Play / Pause Cycle Control */}
-            <button
-              onClick={() => setIsPlaying(!isPlaying)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-[#d4a738]/30 bg-[#160a0f] text-xs font-medium text-[#ffd778] hover:border-[#ffd778] transition-colors cursor-pointer self-start sm:self-auto"
-            >
-              {isPlaying ? (
-                <>
-                  <Pause size={12} /> <span>Pausar</span>
-                </>
-              ) : (
-                <>
-                  <Play size={12} className="fill-[#ffd778]" /> <span>Reproduzir</span>
-                </>
-              )}
-            </button>
+            <span className="text-xs text-[#ffd778]/80 font-mono hidden lg:block">
+              Passe o mouse nos cartões para ler os detalhes
+            </span>
           </div>
 
-          {/* FLOW PIPELINE WITH MAGIC WAND CONNECTORS */}
-          <div className="mb-6">
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-3 relative">
-              {ARCHITECTURE_PILLARS.map((pillar, idx) => {
-                const isSelected = activePillarId === pillar.id
+          {/* 5 SEQUENTIAL HORIZONTAL CARDS WITH HOVER REVEAL */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 relative mb-6">
+            {FLOW_STEPS.map((step, idx) => {
+              const isRevealed = hoveredStep === step.id || activeStep === step.id
 
-                return (
-                  <div key={pillar.id} className="relative flex items-center">
-                    <button
-                      onClick={() => {
-                        setActivePillarId(pillar.id)
-                        setIsPlaying(false)
-                      }}
-                      className={`w-full p-3.5 rounded border text-left transition-all duration-200 cursor-pointer relative h-full flex flex-col justify-between ${
-                        isSelected
-                          ? 'border-[#ffd778] bg-[#6e1624]/85 shadow-lg shadow-[#801b2b]/40 z-20'
-                          : 'border-[#d4a738]/20 bg-[#150a0f]/80 hover:border-[#d4a738]/50 hover:bg-[#1d0e15]'
-                      }`}
-                    >
-                      <div>
-                        {/* Step number & Status */}
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-[11px] font-mono font-bold text-[#ffd778]">
-                            0{pillar.id}
-                          </span>
-                          <span className="text-[10px] text-[#e5ba48] font-medium">
-                            {pillar.magicalLabel}
-                          </span>
+              return (
+                <div key={step.id} className="relative flex items-center">
+                  <div
+                    onMouseEnter={() => {
+                      setHoveredStep(step.id)
+                      setActiveStep(step.id)
+                    }}
+                    onMouseLeave={() => setHoveredStep(null)}
+                    onClick={() => setActiveStep(step.id)}
+                    tabIndex={0}
+                    className={`w-full rounded-lg border p-4 transition-all duration-300 relative overflow-hidden flex flex-col justify-between cursor-pointer min-h-[260px] ${
+                      isRevealed
+                        ? 'border-[#ffd778] bg-[#1e0f18] shadow-xl shadow-[#801b2b]/40 scale-[1.02] z-20'
+                        : 'border-[#d4a738]/25 bg-[#14080e]/90 hover:border-[#d4a738]/60'
+                    }`}
+                  >
+                    {/* Top: Step Code & Tag Label */}
+                    <div>
+                      <div className="flex items-center justify-between gap-1 mb-2.5">
+                        <span className="text-[11px] font-mono font-bold text-[#ffd778] tracking-widest">
+                          ETAPA {step.code}
+                        </span>
+
+                        <span
+                          className={`text-[9px] px-2 py-0.5 rounded border font-semibold truncate ${
+                            isRevealed
+                              ? 'border-[#ffd778]/50 bg-[#6e1624] text-[#ffd778]'
+                              : 'border-[#d4a738]/20 bg-[#220d15] text-[#e5ba48]'
+                          }`}
+                        >
+                          {step.tag}
+                        </span>
+                      </div>
+
+                      {/* Icon & Title */}
+                      <div className="flex items-start gap-2.5 mb-2">
+                        <div
+                          className={`p-2 rounded border shrink-0 transition-colors ${
+                            isRevealed
+                              ? 'bg-[#8a192b] border-[#ffd778] text-[#ffd778]'
+                              : 'bg-[#200d15] border-[#d4a738]/30 text-[#e5ba48]'
+                          }`}
+                        >
+                          <step.icon size={16} />
                         </div>
 
-                        {/* Title */}
-                        <h4 className="text-xs sm:text-sm font-semibold text-[#f6efe2] leading-snug mb-1">
-                          {pillar.title}
-                        </h4>
+                        <div>
+                          <h3 className="text-xs sm:text-sm font-bold text-[#f6efe2] leading-tight">
+                            {step.title}
+                          </h3>
+                          <span className="text-[10px] text-[#ffd778] font-mono block mt-0.5">
+                            {step.tech}
+                          </span>
+                        </div>
                       </div>
 
-                      {/* Tech Badge */}
-                      <span className="text-[10px] text-[#c7b8a5] block truncate mt-2 pt-1.5 border-t border-white/5 font-mono">
-                        {pillar.techBadge}
-                      </span>
-                    </button>
-
-                    {/* Normal Clean Directional Arrow */}
-                    {idx < 4 && (
-                      <div className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-20 pointer-events-none items-center justify-center text-[#ffd778] drop-shadow-[0_0_4px_rgba(212,167,56,0.6)]">
-                        <ChevronRight size={16} />
+                      {/* HOVER REVEAL: Detailed Description */}
+                      <div className="mt-3 pt-3 border-t border-[#d4a738]/15">
+                        <AnimatePresence mode="wait">
+                          <motion.div
+                            key={isRevealed ? 'revealed' : 'summary'}
+                            initial={{ opacity: 0, y: 4 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -4 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            {isRevealed ? (
+                              <p className="text-[11px] text-[#f6efe2] leading-relaxed bg-[#0c0508]/80 p-2.5 rounded border border-[#ffd778]/20">
+                                {step.description}
+                              </p>
+                            ) : (
+                              <p className="text-[11px] text-[#c7b8a5] line-clamp-3 leading-relaxed">
+                                {step.description}
+                              </p>
+                            )}
+                          </motion.div>
+                        </AnimatePresence>
                       </div>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-
-          {/* FOCUSED DETAILS CARD: DIRECT & IMPACTFUL */}
-          <div
-            className="p-5 sm:p-6 rounded border border-[#d4a738]/30 mb-6 relative overflow-hidden"
-            style={{
-              background: 'linear-gradient(180deg, #180c12 0%, #10060a 100%)',
-            }}
-          >
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded border border-[#d4a738]/40 bg-[#54121d] text-[#ffd778] shrink-0">
-                <currentPillar.icon size={22} />
-              </div>
-
-              <div className="flex-1 space-y-2.5">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-xs font-semibold text-[#ffd778] font-mono">
-                    Etapa 0{currentPillar.id} · {currentPillar.workerName}
-                  </span>
-                  <span className="text-xs text-[#c7b8a5] font-sans">
-                    ({currentPillar.techBadge})
-                  </span>
-                </div>
-
-                <p className="text-sm text-[#f6efe2] leading-relaxed">
-                  {currentPillar.summary}
-                </p>
-
-                {/* Direct technical bullets */}
-                <div className="grid sm:grid-cols-2 gap-2 pt-1">
-                  {currentPillar.bulletPoints.map((pt, i) => (
-                    <div
-                      key={i}
-                      className="flex items-start gap-2 text-xs text-[#c7b8a5] bg-[#0c0508]/80 p-2.5 rounded border border-white/5"
-                    >
-                      <Sparkles size={12} className="text-[#ffd778] shrink-0 mt-0.5" />
-                      <span>{pt}</span>
                     </div>
-                  ))}
+
+                    {/* Bottom Indicator */}
+                    <div className="pt-2 text-right">
+                      <span
+                        className={`text-[9px] font-mono transition-colors ${
+                          isRevealed ? 'text-[#ffd778]' : 'text-[#c7b8a5]/60'
+                        }`}
+                      >
+                        {isRevealed ? '✦ Detalhe Ativo' : 'Passe o mouse'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Clean Normal Directional Arrow between cards (Desktop) */}
+                  {idx < 4 && (
+                    <div className="hidden lg:flex absolute -right-3 top-1/2 -translate-y-1/2 z-30 pointer-events-none items-center justify-center text-[#ffd778] drop-shadow-[0_0_4px_rgba(212,167,56,0.6)]">
+                      <ChevronRight size={18} />
+                    </div>
+                  )}
                 </div>
-              </div>
-            </div>
+              )
+            })}
           </div>
 
-          {/* MINIMAL FOOTER: ONLY WHAT MATTERS */}
+          {/* Minimal Clean Footer */}
           <div className="pt-4 border-t border-[#d4a738]/20 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
             <span className="text-[#c7b8a5]">
-              Repositório privado por sigilo contratual (NDA).
+              🔒 Repositório privado por sigilo contratual (NDA).
             </span>
 
             <button
