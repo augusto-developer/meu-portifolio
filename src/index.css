@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  --color-parchment-base: #f4ede0;
+  --color-parchment-light: #fbf8f2;
+  --color-parchment-aged: #e8dcbe;
+  --color-parchment-border: #cfbe9b;
+  --color-ink-primary: #2b2118;
+  --color-ink-secondary: #5c4938;
+  --color-ink-muted: #8c735d;
+  --color-ink-faded: #b8a48e;
+  --color-accent-gold: #c59a3f;
+  --color-accent-amber: #df9b32;
+  --color-accent-glow: #ffd778;
+  --color-void-bg: #0c0d12;
+  --color-void-surface: #14161f;
+  --color-void-border: #232738;
+  --color-wax-seal: #8b2626;
+  --color-wax-seal-hover: #a32e2e;
+
+  --font-cinzel-dec: "Cinzel Decorative", serif;
+  --font-cinzel: "Cinzel", serif;
+  --font-cormorant: "Cormorant Garamond", serif;
+  --font-garamond: "EB Garamond", serif;
+  --font-script: "Marck Script", cursive;
+  --font-inter: "Inter", sans-serif;
+}
+
+/* Custom parchment organic texture layer */
+.bg-parchment-texture {
+  background-color: var(--color-parchment-base);
+  background-image: 
+    radial-gradient(#2b2118 0.5px, transparent 0.5px),
+    radial-gradient(#8c735d 0.4px, var(--color-parchment-base) 0.4px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+/* Aged vignette effect */
+.parchment-vignette {
+  box-shadow: inset 0 0 100px rgba(92, 73, 56, 0.2), inset 0 0 30px rgba(43, 33, 24, 0.15);
+}
+
+/* Ornate antique double border */
+.antique-border {
+  border: 1px solid var(--color-parchment-border);
+  position: relative;
+}
+
+.antique-border::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  border: 1px dashed rgba(92, 73, 56, 0.35);
+  pointer-events: none;
+}
+
+/* Ink bleed text styling */
+.text-ink-bleed {
+  text-shadow: 0 0 1px rgba(43, 33, 24, 0.4);
+}
+
+/* Golden glowing pulse */
+@keyframes lumos-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px 5px rgba(223, 155, 50, 0.5), 0 0 60px 15px rgba(255, 215, 120, 0.35);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 35px 12px rgba(223, 155, 50, 0.75), 0 0 90px 30px rgba(255, 215, 120, 0.5);
+    transform: scale(1.08);
+  }
+}
+
+.animate-lumos {
+  animation: lumos-pulse 3.5s ease-in-out infinite;
+}
+
+/* Custom scrollbar in sepia */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-parchment-aged);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink-muted);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-secondary);
+}
+
