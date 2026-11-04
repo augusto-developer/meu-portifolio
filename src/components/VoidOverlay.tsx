@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { magicAudio } from '../utils/audio'
 
 interface VoidOverlayProps {
   visible: boolean
@@ -31,8 +32,15 @@ const PARTICLES = generateParticles(55)
 
 export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
   const [hovered, setHovered] = useState(false)
+  const [muted, setMuted] = useState(false)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animFrameRef = useRef<number>(0)
+
+  const toggleSound = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    const isM = magicAudio.toggleMute()
+    setMuted(isM)
+  }
 
   // Subtle star-field on canvas
   useEffect(() => {
@@ -78,16 +86,38 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
     }
   }, [])
 
+  const handleOrbHover = () => {
+    setHovered(true)
+    magicAudio.playLumosChime()
+  }
+
+  const handleOrbClick = () => {
+    magicAudio.playLumosChime()
+    onOrbClick()
+  }
+
   return (
     <AnimatePresence>
       {visible && (
         <motion.div
           key="void"
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0c0d12] overflow-hidden"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0c0d12] overflow-hidden select-none"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: 'easeInOut' }}
+          transition={{ duration: 0.9, ease: 'easeInOut' }}
         >
+          {/* Sound toggle in top right */}
+          <button
+            onClick={toggleSound}
+            className="absolute top-6 right-6 z-20 text-xs px-3.5 py-1.5 rounded-full border border-accent-gold/20 text-accent-gold/60 hover:text-accent-gold hover:border-accent-gold/50 transition-all font-serif flex items-center gap-2 cursor-pointer"
+            aria-label={muted ? 'Ativar som mágico' : 'Desativar som'}
+          >
+            <span>{muted ? '🔇' : '🔊'}</span>
+            <span style={{ fontFamily: '"Cinzel", serif', fontSize: '0.65rem' }}>
+              {muted ? 'Som Desativado' : 'Som Ativado'}
+            </span>
+          </button>
+
           {/* Star-field canvas */}
           <canvas
             ref={canvasRef}
@@ -136,7 +166,7 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
           {/* The Lumos Orb */}
           <motion.button
             className="relative z-10 rounded-full cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-gold/50"
-            style={{ width: 100, height: 100 }}
+            style={{ width: 96, height: 96 }}
             animate={{
               boxShadow: hovered
                 ? [
@@ -152,8 +182,8 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
               scale: hovered ? 1.15 : 1,
             }}
             transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-            onClick={onOrbClick}
-            onMouseEnter={() => setHovered(true)}
+            onClick={handleOrbClick}
+            onMouseEnter={handleOrbHover}
             onMouseLeave={() => setHovered(false)}
             aria-label="Revelar o portfólio"
           >
@@ -181,9 +211,9 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
             className="mt-10 z-10 text-center select-none"
             style={{
               fontFamily: '"Cormorant Garamond", serif',
-              fontSize: '1.15rem',
-              letterSpacing: '0.12em',
-              color: 'rgba(197,154,63,0.75)',
+              fontSize: '1.25rem',
+              letterSpacing: '0.14em',
+              color: 'rgba(197,154,63,0.85)',
             }}
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
@@ -195,4 +225,3 @@ export default function VoidOverlay({ visible, onOrbClick }: VoidOverlayProps) {
     </AnimatePresence>
   )
 }
-
